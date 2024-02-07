@@ -9,9 +9,9 @@
 }
 
 .title{
-    transform: rotate(180deg) translate(-50%, -50%); /* Rotate and center */
-    color: rgb(70, 68, 68); /* Text color */
-    font-size: 20px; /* Font size */
+    transform: rotate(180deg) translate(-50%, -50%); 
+    color: rgb(70, 68, 68); 
+    font-size: 20px;
     border-radius: 20px;
     width: 300px;
     height: 80px;
