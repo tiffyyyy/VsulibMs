@@ -9,7 +9,7 @@ An electronic equipment inventory that tracks the status of a specific electroni
 ## VM.000.001 Release Notes
 - Initial Login Interface
 
-## VM.010.001 Release Notes
+## VM.010.000 Release Notes
 - Set up SQL Database, Express, and Node.js
 - Creation of Admin Database
 - Implementation of Admin Login Functionality
