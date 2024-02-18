@@ -11,7 +11,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
             if (xhr.status === 200) {
                 // Login successful, redirect to index.hbs
                 console.log("asdasd");
-                window.location.href = 'index';       
+                window.location.href = 'createAccount';       
             } else {
                 // Display an error message
                 alert('Invalid username or password');
