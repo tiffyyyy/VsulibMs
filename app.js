@@ -20,7 +20,7 @@ app.use(express.static(publicDirectory));
 // Add this line to parse JSON request bodies
 app.use(express.json());
 
-app.set('view engine', 'hbs');
+app.use(express.static(path.join(__dirname, 'public')));
 
 db.connect( (error) => {
     if(error) {
@@ -32,14 +32,21 @@ db.connect( (error) => {
 })
 
 app.get("/", (req, res) => {
-    //res.send("<h1>Home Page</h1>")
-    res.render("login")
-})
+    res.sendFile(path.join(__dirname, 'views', 'login.html'));
+});
 
 app.get("/createAccount", (req, res) => {
-    //res.send("<h1>Home Page</h1>")
-    res.render("createAccount")
-})
+    res.sendFile(path.join(__dirname, 'views', 'createAccount.html'));
+});
+
+app.get('/inventory', (req, res) => {
+    const username = req.query.username; // Assuming username is passed as a query parameter
+    res.sendFile(path.join(__dirname, 'views', 'inventory.html'));
+});
+
+app.get('/floorPage', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'floorPage.html'));
+});
 
 app.post('/login', (req, res) => {
     const username = req.body.username; // Change here to access username
@@ -90,6 +97,34 @@ app.post('/createAccount', (req, res) => {
         }
     });
 });
+
+app.post('/inventory', (req, res) => {
+    const floorName = req.body.floorName;
+
+    console.log('Floor name inserted:', floorName);
+    // Your database query to insert the new floor name into the Floor table
+    db.query('INSERT INTO floor (name) VALUES (?)', [floorName], (error, results) => {
+        if (error) {
+            console.error('Error inserting floor name:', error);
+            return res.status(500).send('Error inserting floor name');
+        }
+
+        // Floor name inserted successfully
+        console.log('Floor name inserted:', floorName);
+        res.sendStatus(200); // Send a success response
+    });
+});
+
+app.get('/floors', (req, res) => {
+    db.query('SELECT name FROM floor', (error, results) => {
+      if (error) {
+        console.error('Error fetching floors from database:', error);
+        return res.status(500).send('Error fetching floors');
+      }
+      const floorNames = results.map(result => result.name);
+      res.json(floorNames);
+    });
+  });
 
 app.listen(5001, () => {
     console.log("Server started on Port 5001")
