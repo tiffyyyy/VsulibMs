@@ -116,15 +116,27 @@ app.post('/inventory', (req, res) => {
 });
 
 app.get('/floors', (req, res) => {
-    db.query('SELECT name FROM floor', (error, results) => {
+    db.query('SELECT floorId, name FROM floor', (error, results) => {
+        if (error) {
+            console.error('Error fetching floors from database:', error);
+            return res.status(500).send('Error fetching floors');
+        }
+        const floorsData = results.map(result => ({ floorId: result.floorId, name: result.name }));
+        res.json(floorsData);
+    });
+});
+
+
+  /*app.get('/floors', (req, res) => {
+    db.query('SELECT floorId, name FROM floor', (error, results) => {
       if (error) {
         console.error('Error fetching floors from database:', error);
         return res.status(500).send('Error fetching floors');
       }
-      const floorNames = results.map(result => result.name);
-      res.json(floorNames);
+      res.json(results);
     });
-  });
+});*/
+
 
 app.listen(5001, () => {
     console.log("Server started on Port 5001")

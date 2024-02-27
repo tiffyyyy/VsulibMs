@@ -83,31 +83,32 @@ document.getElementById('submitFloorBtn').addEventListener('click', function() {
 document.addEventListener("DOMContentLoaded", function() {
     // Function to fetch floors and update HTML
     function fetchFloorsAndUpdateHTML() {
-        // Assuming '/floors' endpoint returns an array of floor names
+        // Assuming '/floors' endpoint returns an array of floor objects with floorId and name properties
         fetch('/floors')
             .then(response => response.json())
-            .then(floorNames => {
+            .then(floorsData => {
                 const row2 = document.querySelector('.row2');
                 row2.innerHTML = ''; // Clear existing content
 
-                floorNames.forEach(floorName => {
+                floorsData.forEach(floor => {
                     const p = document.createElement('p');
                     const floorLink = document.createElement('a');
-                    floorLink.textContent = floorName;
-                    floorLink.href = `/floorPage?floorName=${floorName}`; // Set href attribute to floorPage with floorName parameter
+                    floorLink.textContent = floor.name;
+                    floorLink.href = `/floorPage?floorId=${floor.floorId}`; // Set href attribute to floorPage with floorId parameter
                     p.appendChild(floorLink);
                     row2.appendChild(p);
                 });
             })
             .catch(error => {
-                console.error('Error fetching floor names:', error);
-                alert('Error fetching floor names. Please try again.');
+                console.error('Error fetching floor data:', error);
+                alert('Error fetching floor data. Please try again.');
             });
     }
 
     // Call the function after the page loads to initially fetch and display the floors
     fetchFloorsAndUpdateHTML();
 });
+
 
 
 
