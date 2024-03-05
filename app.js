@@ -126,16 +126,35 @@ app.get('/floors', (req, res) => {
     });
 });
 
+app.get('/area', (req, res) => {
+    //const floorId = req.query.floorId; // Get floorId from request query
+    
+    const url = require('url');
+    const referer = req.headers.referer;
 
-  /*app.get('/floors', (req, res) => {
-    db.query('SELECT floorId, name FROM floor', (error, results) => {
-      if (error) {
-        console.error('Error fetching floors from database:', error);
-        return res.status(500).send('Error fetching floors');
-      }
-      res.json(results);
+    // Parse the URL
+    const parsedUrl = url.parse(referer, true);
+
+    // Extract the floorId from the query parameters
+    const floorId = parsedUrl.query.floorId;
+    // Query database to fetch areas for the given floorId
+    db.query('SELECT * FROM areas WHERE floorId = ?', [floorId], (error, results) => {
+        if (error) {
+            console.error('Error fetching areas from database:', error);
+            res.status(500).send('Internal Server Error');
+        } else {
+            if (results.length > 0) {
+                console.log('Areas found:', results);
+            } else {
+                console.log('No areas found for floorId:', floorId);
+                console.log(adres);
+            }
+            res.json(results); // Send areas data as JSON response
+        }
     });
-});*/
+});
+
+
 
 
 app.listen(5001, () => {
