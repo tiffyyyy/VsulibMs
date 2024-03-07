@@ -23,7 +23,7 @@ function displayAreas(areas) {
     areas.forEach(area => {
         const areaLink = document.createElement('a');
         areaLink.textContent = `${area.name}`;
-        areaLink.href = `path/to/new/html/file?areaId=${area.id}`; // Replace with the actual path to the new HTML file and the area ID
+        areaLink.href = `/equipmentPage?areaId=${areas.id}`; // Replace with the actual path to the new HTML file and the area ID
         row2.appendChild(areaLink);
 
         // Add a line break after each link
