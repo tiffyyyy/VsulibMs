@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/VsulibMs/public/createAccountStyle.css">
     <title>Create Account</title>
 </head>
 <body>
-    <h1>Create Account</h1>
-    <div>
-        <label for="user">Username:</label>
-        <input type="pass" id="user" required><br><br>
-        
-        <label for="pass">Password:</label>
-        <input type="pass" id="pass" required><br><br>
-        
-        <button id = "createBtn">Create Account</button>
+    <div class="ellipse1">
+    <div class="createAccContainer">
+        <div>
+            <h1 class="createAccText">CREATE ACCOUNT</h1>
+            <p class="createAccImg"></p>
+        </div>
+        <div class="userContainer">
+            <label for="user"></label>
+            <input type="user" id="user" class="userTxtbox" placeholder="Enter username" required><br><br>
+        </div>
+        <div class="passContainer">
+            <label for="pass"></label>
+            <input type="pass" id="pass" class="passTxtbox" placeholder="Enter password" required><br><br>
+        </div>
+            
+        <div class="createAccBtn">
+            <button id = "createBtn">Create Account</button>
+        </div>
     </div>
     <script src="createAccount.js"></script>
 </body>
