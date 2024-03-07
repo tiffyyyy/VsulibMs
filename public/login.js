@@ -13,7 +13,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
                 document.cookie = `username=${encodeURIComponent(username)}; path=/inventory`;
                 document.cookie = `username=${encodeURIComponent(username)}; path=/floorPage`;
                 document.cookie = `username=${encodeURIComponent(username)}; path=/areaPage`;
-                document.cookie = `username=${encodeURIComponent(username)}; path=/equipment`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/equipmentPage`;
                 console.log(document.cookie);
                 // Redirect to inventory page
                 window.location.href = 'inventory';   

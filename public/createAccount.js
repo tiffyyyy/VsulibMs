@@ -9,7 +9,8 @@ document.getElementById('createBtn').addEventListener('click', function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 // Account creation successful
-                console.log("Account created successfully");       
+                console.log("Account created successfully");
+                alert('Account created successfully');       
             } else if (xhr.status === 409) {
                 // Username already exists
                 alert('Username already exists');
