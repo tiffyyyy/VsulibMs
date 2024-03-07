@@ -34,25 +34,22 @@ document.addEventListener("DOMContentLoaded", function() {
 let currentUsername = localStorage.getItem('username') || '';
 
 function updateWelcomeMessage() {
-    // Get the username from the URL query parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const username = urlParams.get('username');
-
-    if (username) {
-        // Store the username in localStorage
-        localStorage.setItem('username', username);
+    // Get the username from the cookie
+    const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
+    if (usernameCookie) {
+        const usernameValue = usernameCookie.split('=')[1];
+        const username = decodeURIComponent(usernameValue);
 
         // Display the username in the welcome message
-        currentUsername = username; // Assign the username to the currentUsername variable
-        document.getElementById('welcomeMessage').innerText = currentUsername; // Display the username
+        document.getElementById('welcomeMessage').innerText = username;
+    } else {
+        // Handle case where username cookie is not found
+        console.log('Username cookie not found');
     }
-    console.log(currentUsername);
 }
-
 
 // Call the function when the window is fully loaded
 window.addEventListener('load', updateWelcomeMessage);
-
 
 document.getElementById('submitFloorBtn').addEventListener('click', function() {
     var floorName = document.getElementById('floorNameInput').value;

@@ -9,9 +9,14 @@ document.getElementById('loginBtn').addEventListener('click', function() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-                // Login successful, redirect to index.hbs
-                console.log("asdasd");
-                window.location.href = 'inventory?username=' + encodeURIComponent(username);   
+                // Login successful, save the username in a cookie
+                document.cookie = `username=${encodeURIComponent(username)}; path=/inventory`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/floorPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/areaPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/equipment`;
+                console.log(document.cookie);
+                // Redirect to inventory page
+                window.location.href = 'inventory';   
             } else {
                 // Display an error message
                 alert('Invalid username or password');

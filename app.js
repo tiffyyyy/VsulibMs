@@ -3,6 +3,7 @@ const path = require('path');
 const mysql = require("mysql");
 const dotenv = require("dotenv");
 const crypto = require("crypto");
+const cookieParser = require('cookie-parser');
 
 dotenv.config({ path: './.env'})
 
@@ -49,8 +50,7 @@ app.get('/floorPage', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    const username = req.body.username; // Change here to access username
-    const password = req.body.password; // Change here to access password
+    const { username, password } = req.body;
 
     // Query the database to check if the username and password are valid
     db.query('SELECT * FROM admin WHERE name = ? AND password = ?', [username, password], (err, results) => {
@@ -63,6 +63,10 @@ app.post('/login', (req, res) => {
         // Check if the query returned any rows
         if (results.length > 0) {
             // Username and password are correct
+
+            // Set a cookie with the username
+            res.cookie('username', username, { maxAge: 900000, httpOnly: true });
+
             res.status(200).send('Login successful');
         } else {
             // Invalid username or password
@@ -70,6 +74,7 @@ app.post('/login', (req, res) => {
         }
     });
 });
+
 
 app.post('/createAccount', (req, res) => {
     const user = req.body.user; // Change here to access username
@@ -115,6 +120,31 @@ app.post('/inventory', (req, res) => {
     });
 });
 
+app.post('/areaPage', (req, res) => {
+    const areaName = req.body.areaName;
+    const url = require('url');
+    const referer = req.headers.referer;
+
+    // Parse the URL
+    const parsedUrl = url.parse(referer, true);
+
+    // Extract the floorId from the query parameters
+    const floorId = parsedUrl.query.floorId;
+
+    console.log('Area name inserted:', areaName);
+    // Your database query to insert the new floor name into the Floor table
+    db.query('INSERT INTO areas (name, floorId) VALUES (?, ?)', [areaName,floorId], (error, results) => {
+        if (error) {
+            console.error('Error inserting floor name:', error);
+            return res.status(500).send('Error inserting floor name');
+        }
+
+        // Floor name inserted successfully
+        console.log('Floor name inserted:', areaName);
+        res.sendStatus(200); // Send a success response
+    });
+});
+
 app.get('/floors', (req, res) => {
     db.query('SELECT floorId, name FROM floor', (error, results) => {
         if (error) {
@@ -147,7 +177,6 @@ app.get('/area', (req, res) => {
                 console.log('Areas found:', results);
             } else {
                 console.log('No areas found for floorId:', floorId);
-                console.log(adres);
             }
             res.json(results); // Send areas data as JSON response
         }
