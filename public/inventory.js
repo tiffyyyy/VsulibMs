@@ -26,12 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
         modal.style.display = "none";
       }
     }
-
     // Add event listener to the submit button inside the modal
 });
-
-// Retrieve the stored username from localStorage
-let currentUsername = localStorage.getItem('username') || '';
 
 function updateWelcomeMessage() {
     // Get the username from the cookie
