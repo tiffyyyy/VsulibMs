@@ -4,6 +4,8 @@ const mysql = require("mysql");
 const dotenv = require("dotenv");
 const crypto = require("crypto");
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
+const upload = multer({ storage:multer.memoryStorage()}); 
 
 dotenv.config({ path: './.env'})
 
@@ -187,8 +189,53 @@ app.get('/area', (req, res) => {
     });
 });
 
+app.post('/equipment', upload.single('equipPic'), (req, res) => {
+    const equipName = req.body.equipName;
+    const equipNo = req.body.equipNo;
+    const equipPic = req.file.buffer.toString("base64"); // Path to the uploaded file
+    const areaId = req.body.areaId;
+    const equipStatus = req.body.equipStatus;
+  
+    // Insert data into the database
+    const sql = 'INSERT INTO equipment (equip_name, equip_no, equip_pic, areaId, status) VALUES (?, ?, ?, ?, ?)';
+    db.query(sql, [equipName, equipNo, equipPic, areaId, equipStatus], (err, result) => {
+      if (err) {
+        console.error('Error saving equipment data: ' + err.message);
+        res.status(500).send('Error saving equipment data');
+        return;
+      }
+        console.log('Equipment data saved successfully');
+        res.status(200).send('Equipment data saved successfully');
+    });
+});
 
+app.get('/fetchEquipment', (req,res) => {
+    const url = require('url');
+    const referer = req.headers.referer;
 
+    // Parse the URL
+    const parsedUrl = url.parse(referer, true);
+
+    // Extract the floorId from the query parameters
+    const areaId = parsedUrl.query.areaId;
+
+    const sql = 'SELECT * FROM equipment WHERE areaId = ?'; // Adjust the SQL query as needed
+    db.query(sql, [areaId], (err, results) => {
+        if (err) {
+            console.error('Error fetching equipment data:', err);
+            res.status(500).send('Error fetching equipment data');
+            return;
+        }
+        res.json(results); // Send the equipment data as JSON
+    });
+})
+
+app.use((error, req, res, next) => {
+if (error instanceof multer.MulterError) {
+    console.log('This is the rejected field ->', error.field);
+}
+    next(error);
+});
 
 app.listen(5001, () => {
     console.log("Server started on Port 5001")
