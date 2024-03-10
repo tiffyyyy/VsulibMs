@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/public/inventoryStyle.css">
+  <link rel="stylesheet" href="inventoryStyle.css">
   <title>Inventory Page</title>
 </head>
 <body>
@@ -15,14 +15,14 @@
     <div id="nav-div">
       <div class="user-profile">
         <div class="user-profile-image">
-          <img src="/public/images/userIcon.png" alt="Profile Image">
+          <img src="/images/userIcon.png" alt="Profile Image">
         </div>
       </div>
       <div class="user-profile-name">
-        User Profile Name
+        <h2 id = "welcomeMessage"></h2>
       </div>
       <div class="dropdown">
-        <button class="dropbtn"><img src="/public/images/caret-down.png" alt="" style="width: 15px; height:15px"></button>	
+        <button class="dropbtn"><img src="/images/caret-down.png" alt="" style="width: 15px; height:15px"></button>	
         <div class="dropdown-content">
             <a href="#">View Profile</a>
             <a href="#">Logout</a>
@@ -60,10 +60,17 @@
           <button id="addFloorBtn" class="addFloor">
             Add floor
           </button>
-       </div>
-
-        <div id="body-area-div">
-          body area
+        </div>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Floor</h2>
+            <input type="text" id="floorNameInput" placeholder="Enter Floor Name">
+            <button id="submitFloorBtn"; class = "add">Add</button>
+          </div>
+        </div>
+        <div id = "body-area-div">
+          <p>body area</p>
         </div>
       </div>
     </div>
@@ -73,11 +80,6 @@
     </div>
   </div>
 
-
-
-
-
-
-  
+<script src="inventory.js"></script>
 </body>
 </html>

@@ -80,13 +80,14 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch('/floors')
             .then(response => response.json())
             .then(floorsData => {
-                const row2 = document.querySelector('.row2');
+                const row2 = document.getElementById('body-area-div');
                 row2.innerHTML = ''; // Clear existing content
-
+        
                 floorsData.forEach(floor => {
                     const p = document.createElement('p');
                     const floorLink = document.createElement('a');
                     floorLink.textContent = floor.name;
+                    console.log(floor.name);
                     floorLink.href = `/floorPage?floorId=${floor.floorId}`; // Set href attribute to floorPage with floorId parameter
                     p.appendChild(floorLink);
                     row2.appendChild(p);
@@ -97,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 alert('Error fetching floor data. Please try again.');
             });
     }
-
     // Call the function after the page loads to initially fetch and display the floors
     fetchFloorsAndUpdateHTML();
 });
