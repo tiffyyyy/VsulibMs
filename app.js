@@ -55,6 +55,14 @@ app.get('/equipmentPage', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'equipmentPage.html'));
 });
 
+app.get('/partsPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'partsPage.html'));
+})
+
+app.get('/specsPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'specsPage.html'));
+})
+
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
@@ -229,6 +237,344 @@ app.get('/fetchEquipment', (req,res) => {
         res.json(results); // Send the equipment data as JSON
     });
 })
+
+app.post('/saveParts', (req, res) => {
+    const partsName = req.body.partsName;
+    const equipStatus = req.body.equipStatus;
+    const url = require('url');
+    const referer = req.headers.referer;
+
+    // Parse the URL
+    const parsedUrl = url.parse(referer, true);
+
+    // Extract the floorId from the query parameters
+    const equipId = parsedUrl.query.equip_id;
+
+    console.log('Parts name and status inserted:', partsName, equipStatus);
+
+    // Your database query to insert the new parts name and status into the Parts table
+    db.query('INSERT INTO part (name, status, equipId) VALUES (?, ?, ?)', [partsName, equipStatus, equipId], (error, results) => {
+        if (error) {
+            console.error('Error inserting parts name and status:', error);
+            return res.status(500).send('Error inserting parts name and status');
+        }
+
+        // Parts name and status inserted successfully
+        console.log('Parts name and status inserted:', partsName, equipStatus);
+        res.sendStatus(200); // Send a success response
+    });
+});
+
+app.get('/getParts', (req, res) => {  
+    const url = require('url');
+    const referer = req.headers.referer;
+
+    // Parse the URL
+    const parsedUrl = url.parse(referer, true);
+
+    // Extract the equipId from the query parameters
+    const equipId = parsedUrl.query.equip_id;
+    console.log(equipId);
+
+    // Check if equipId is provided
+    if (!equipId) {
+        return res.status(400).send('Missing equip_id parameter');
+    }
+
+    // Execute the query with the equipId parameter
+    db.query('SELECT * FROM part WHERE equipId = ?', [equipId], (error, results) => {
+        if (error) {
+            console.error('Error fetching parts:', error);
+            return res.status(500).send('Error fetching parts');
+        }
+
+        // Send the parts data as JSON
+        res.json(results);
+    });
+});
+
+app.post('/saveSpecs', (req, res) => {
+    const specsName = req.body.specsName;
+    const url = require('url');
+    const referer = req.headers.referer;
+
+    // Parse the URL
+    const parsedUrl = url.parse(referer, true);
+
+    // Extract the equipId from the query parameters
+    const equipId = parsedUrl.query.equip_id;
+
+    // Assuming you have a database connection set up as `db`
+    const query = 'INSERT INTO specs (name, equipId) VALUES (?, ?)';
+    db.query(query, [specsName, equipId], (error, results) => {
+        if (error) {
+            console.error('Error inserting specs:', error);
+            return res.status(500).send('Error inserting specs');
+        }
+        console.log('Specs inserted successfully');
+        res.sendStatus(200); // Send a success response
+    });
+});
+
+app.get('/getSpecs', (req, res) => {
+
+    const url = require('url');
+    const referer = req.headers.referer;
+
+    // Parse the URL
+    const parsedUrl = url.parse(referer, true);
+
+    // Extract the equipId from the query parameters
+    const equipId = parsedUrl.query.equip_id;
+
+    const query = 'SELECT * FROM specs WHERE equipId = ?';
+    db.query(query, [equipId], (error, results) => {
+        if (error) {
+            console.error('Error fetching specs:', error);
+            return res.status(500).send('Error fetching specs');
+        }
+        res.json(results); // Send the specs data as JSON
+    });
+});
+
+app.post('/updatePart', function(req, res) {
+    console.log('Received updatePart request:', req.body); // Log the request data
+
+    const partId = req.body.id;
+    const updatedPartName = req.body.name;
+    const updatedPartStatus = req.body.status;
+
+    const sql = "UPDATE part SET name = ?, status = ? WHERE id = ?";
+    db.query(sql, [updatedPartName, updatedPartStatus, partId], function(err, result) { // Use 'db' instead of 'connection'
+        if (err) {
+            console.error('Error updating part:', err); // Log the error
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        console.log(result.affectedRows + " record(s) updated");
+        res.send("Part updated successfully");
+    });
+});
+
+app.delete('/deletePart/:id', function(req, res) {
+    const partId = req.params.id;
+
+    const sql = "DELETE FROM part WHERE id = ?";
+    db.query(sql, [partId], function(err, result) {
+        if (err) {
+            console.error('Error deleting part:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        console.log(`Part with ID ${partId} deleted successfully`);
+        res.sendStatus(200); // Send a success status code
+    });
+});
+
+app.post('/updateSpec', function(req, res) {
+    // Extract spec ID and new name from the request body
+    const specId = req.body.id;
+    const newSpecName = req.body.name;
+
+    // Validate request data (e.g., check if specId and newSpecName are provided)
+    if (!specId || !newSpecName) {
+        return res.status(400).send('Missing required fields');
+    }
+
+    // SQL query to update the spec
+    const sql = "UPDATE specs SET name = ? WHERE id = ?";
+
+    // Execute the query with the new spec name and ID
+    db.query(sql, [newSpecName, specId], function(err, result) {
+        if (err) {
+            console.error('Error updating spec:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        console.log(`Spec with ID ${specId} updated successfully`);
+        res.sendStatus(200); // Send a success status code
+    });
+});
+
+app.delete('/deleteSpec/:id', function(req, res) {
+    const specId = req.params.id;
+
+    const sql = "DELETE FROM specs WHERE id = ?";
+    db.query(sql, [specId], function(err, result) {
+        if (err) {
+            console.error('Error deleting spec:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        console.log(`Spec with ID ${specId} deleted successfully`);
+        res.sendStatus(200); // Send a success status code
+    });
+});
+
+app.delete('/deleteEquipment/:id', function(req, res) {
+    const equipId = req.params.id;
+    console.log(equipId);
+
+    // Step 1: Delete the equipment
+    const deleteEquipmentSql = "DELETE FROM equipment WHERE equip_id = ?";
+    db.query(deleteEquipmentSql, [equipId], function(err, result) {
+        if (err) {
+            console.error('Error deleting equipment:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        console.log(`Equipment with ID ${equipId} deleted successfully`);
+        res.sendStatus(200); // Send a success status code
+    });
+});
+
+app.post('/updateEquipment', upload.single('updatedEquipPic'), (req, res) => {
+    const equipId = req.body.equipId;
+    const updatedEquipName = req.body.updatedEquipName;
+    const updatedEquipNo = req.body.updatedEquipNo;
+    const updatedEquipStatus = req.body.updatedEquipStatus;
+    const updatedEquipPic = req.file.buffer.toString("base64"); // Convert the file to base64
+
+    // SQL query to update the equipment
+    const sql = 'UPDATE equipment SET equip_name = ?, equip_no = ?, status = ?, equip_pic = ? WHERE equip_id = ?';
+    db.query(sql, [updatedEquipName, updatedEquipNo, updatedEquipStatus, updatedEquipPic, equipId], (err, result) => {
+        if (err) {
+            console.error('Error updating equipment:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        console.log('Equipment updated successfully');
+        res.status(200).send('Equipment updated successfully');
+    });
+});
+
+app.post('/updateArea', (req, res) => {
+    const areaId = req.body.areaId;
+    const updatedAreaName = req.body.updatedAreaName;
+
+    const sql = 'UPDATE areas SET name = ? WHERE id = ?';
+    db.query(sql, [updatedAreaName, areaId], (err, result) => {
+        if (err) {
+            console.error('Error updating area:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        console.log('Area updated successfully');
+        res.status(200).send('Area updated successfully');
+    });
+});
+
+app.delete('/deleteArea/:id', function(req, res) {
+    const areaId = req.params.id;
+    console.log(`Area ID to delete: ${areaId}`);
+
+    // Step 1: Delete the dependent equipment
+    const deleteEquipmentSql = "DELETE FROM equipment WHERE areaId = ?";
+    db.query(deleteEquipmentSql, [areaId], function(err, result) {
+        if (err) {
+            console.error('Error deleting dependent equipment:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        console.log(`Dependent equipment deleted successfully`);
+
+        // Step 2: Delete the area
+        const deleteAreaSql = "DELETE FROM areas WHERE id = ?";
+        db.query(deleteAreaSql, [areaId], function(err, result) {
+            if (err) {
+                console.error('Error deleting area:', err);
+                return res.status(500).send('Internal Server Error');
+            }
+            console.log(`Area with ID ${areaId} deleted successfully`);
+            res.sendStatus(200); // Send a success status code
+        });
+    });
+});
+
+app.delete('/deleteFloor/:id', function(req, res) {
+    const floorId = req.params.id;
+    console.log(`Floor ID to delete: ${floorId}`);
+
+    // Step 1: Retrieve all area IDs associated with the floor
+    const getAreaIdsSql = "SELECT id FROM areas WHERE floorId = ?";
+    db.query(getAreaIdsSql, [floorId], function(err, result) {
+        if (err) {
+            console.error('Error retrieving area IDs:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        // Extract area IDs from the result
+        const areaIds = result.map(row => row.id);
+
+        // Step 2: Delete the dependent equipment for each area
+        const deleteEquipmentSql = "DELETE FROM equipment WHERE areaId = ?";
+        const deleteEquipmentPromises = areaIds.map(areaId => {
+            return new Promise((resolve, reject) => {
+                db.query(deleteEquipmentSql, [areaId], function(err, result) {
+                    if (err) {
+                        console.error('Error deleting dependent equipment:', err);
+                        reject(err);
+                    } else {
+                        console.log(`Dependent equipment for area ID ${areaId} deleted successfully`);
+                        resolve();
+                    }
+                });
+            });
+        });
+
+        // Step 3: Delete the dependent areas
+        const deleteAreasSql = "DELETE FROM areas WHERE floorId = ?";
+        db.query(deleteAreasSql, [floorId], function(err, result) {
+            if (err) {
+                console.error('Error deleting dependent areas:', err);
+                return res.status(500).send('Internal Server Error');
+            }
+            console.log(`Dependent areas deleted successfully`);
+
+            // Step 4: Delete the floor
+            const deleteFloorSql = "DELETE FROM floor WHERE floorId = ?";
+            db.query(deleteFloorSql, [floorId], function(err, result) {
+                if (err) {
+                    console.error('Error deleting floor:', err);
+                    return res.status(500).send('Internal Server Error');
+                }
+                console.log(`Floor with ID ${floorId} deleted successfully`);
+                res.sendStatus(200); // Send a success status code
+            });
+        });
+
+        // Wait for all equipment deletion promises to resolve before proceeding
+        Promise.all(deleteEquipmentPromises)
+            .then(() => console.log('All dependent equipment deleted successfully'))
+            .catch(err => {
+                console.error('Error deleting dependent equipment:', err);
+                res.status(500).send('Internal Server Error');
+            });
+    });
+});
+
+app.post('/updateFloor', function(req, res) {
+    // Extract floor ID and new name from the request body
+    const floorId = req.body.id;
+    const newFloorName = req.body.name;
+
+    // Validate request data (e.g., check if floorId and newFloorName are provided)
+    if (!floorId || !newFloorName) {
+        return res.status(400).send('Missing required fields');
+    }
+
+    // SQL query to update the floor
+    const sql = "UPDATE floor SET name = ? WHERE floorId = ?";
+
+    // Execute the query with the new floor name and ID
+    db.query(sql, [newFloorName, floorId], function(err, result) {
+        if (err) {
+            console.error('Error updating floor:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        console.log(`Floor with ID ${floorId} updated successfully`);
+        res.sendStatus(200); // Send a success status code
+    });
+});
+
 
 app.use((error, req, res, next) => {
 if (error instanceof multer.MulterError) {

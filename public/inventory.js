@@ -76,21 +76,67 @@ document.getElementById('submitFloorBtn').addEventListener('click', function() {
 document.addEventListener("DOMContentLoaded", function() {
     // Function to fetch floors and update HTML
     function fetchFloorsAndUpdateHTML() {
-        // Assuming '/floors' endpoint returns an array of floor objects with floorId and name properties
         fetch('/floors')
             .then(response => response.json())
             .then(floorsData => {
-                const row2 = document.getElementById('body-area-div');
-                row2.innerHTML = ''; // Clear existing content
-        
+                const bodyAreaDiv = document.getElementById('body-area-div');
+                bodyAreaDiv.innerHTML = ''; // Clear existing content
+
                 floorsData.forEach(floor => {
+                    const floorBox = document.createElement('div');
+                    floorBox.className = 'floorBox';
+
                     const p = document.createElement('p');
                     const floorLink = document.createElement('a');
                     floorLink.textContent = floor.name;
-                    console.log(floor.name);
-                    floorLink.href = `/floorPage?floorId=${floor.floorId}`; // Set href attribute to floorPage with floorId parameter
+                    floorLink.href = `/floorPage?floorId=${floor.floorId}`;
                     p.appendChild(floorLink);
-                    row2.appendChild(p);
+                    floorBox.appendChild(p);
+
+                    // Add Edit Button
+                    const editButton = document.createElement('button');
+                    editButton.textContent = 'Edit';
+                    editButton.className = 'editButton';
+                    // Add an event listener to the edit button for each floor
+                    editButton.addEventListener('click', function() {
+                        // Create a form for editing the floor
+                        const editForm = document.createElement('form');
+                        editForm.id = 'editFloorForm';
+                        editForm.innerHTML = `
+                            <input type="text" id="editFloorName" name="editFloorName" value="${floor.name}" required>
+                            <button type="submit">Save</button>
+                        `;
+
+                        // Replace the floor's display box with the edit form
+                        floorBox.innerHTML = ''; // Clear the floorBox content
+                        floorBox.appendChild(editForm); // Append the edit form to the floorBox
+
+                        // Add an event listener to the form to handle the submission
+                        editForm.addEventListener('submit', function(event) {
+                            event.preventDefault();
+                            const updatedFloorName = document.getElementById('editFloorName').value;
+
+                            // Assuming you have a function to handle updating the floor in the database
+                            // This function should take the floor ID and the updated floor name as parameters
+                            updateFloorInDatabase(floor.floorId, updatedFloorName);
+                            fetchFloorsAndUpdateHTML();// Assuming you have a function to fetch and display floors
+                        });
+                    });
+
+                    
+                    floorBox.appendChild(editButton);
+
+                    // Add Delete Button
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.className = 'deleteButton';
+                    deleteButton.addEventListener('click', function() {
+                        // Assuming you have a function to handle deletion
+                        deleteFloorFromDatabase(floor.floorId);
+                    });
+                    floorBox.appendChild(deleteButton);
+
+                    bodyAreaDiv.appendChild(floorBox);
                 });
             })
             .catch(error => {
@@ -98,15 +144,41 @@ document.addEventListener("DOMContentLoaded", function() {
                 alert('Error fetching floor data. Please try again.');
             });
     }
-    // Call the function after the page loads to initially fetch and display the floors
     fetchFloorsAndUpdateHTML();
 });
 
+function deleteFloorFromDatabase(floorId) {
+    fetch(`/deleteFloor/${floorId}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        console.log('Floor deleted successfully');
+        // Optionally, remove the floor from the UI here
+        // Assuming you have a reference to the floorBox element, you can remove it like this:
+        // floorBox.remove();
+        // However, since we're dynamically creating these elements, you might need to find the specific element to remove.
+        // One approach is to add a unique identifier to each floorBox and use it to find and remove the specific element.
+    })
+    .catch(error => console.error('Error deleting floor:', error));
+}
 
-
-
-
-
-
-
+function updateFloorInDatabase(floorId, updatedFloorName) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/updateFloor', true); // Assuming '/updateFloor' is the endpoint for updating floors
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                console.log("Floor updated successfully");
+                // Optionally, refresh the floors list or update the UI
+            } else {
+                console.error('Error updating floor:', xhr.statusText);
+            }
+        }
+    };
+    xhr.send(JSON.stringify({ id: floorId, name: updatedFloorName }));
+}
 
