@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="partsStyle.css">
+<script src="login.js"></script>
+<title>Equipment Page</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="column1">
+      <div class="c1Row1">
+        <h2 id="welcomeMessage"></h2>
+      </div>
+      <div class="c1Row2">
+        <ul>
+            <li class="active"><a href="/inventory">Inventory</a></li>
+            <li><a href="/createAccount">Create Account</a></li>
+        </ul>
+      </div>    
+    </div>
+    <div class="column2">
+      <div class="row1">
+        <a href="/inventory">Floor</a>
+        <a>Item 2</a>
+      </div>
+      <br>
+      <br>
+      <br>
+        <div class="row2">
+          <div class = "row2c1">
+            <form id="specsForm" action="/saveSpecs" method="POST">
+              <div class="addPartsBox">
+                  <h3>EQUIPMENT SPECIFICATION</h3>
+                  <input type="text" id="specsNameInput" name="specsName" placeholder="Enter Specification" required>
+                  <button type="submit" class="addPart">Add</button>
+              </div>
+            </form>          
+          </div>
+          <div class = "row2c2">
+              <div class = "partsDisplay">
+                <p>display</p>
+              </div>
+          </div>
+        </div>    
+      </div>
+    </div>
+  </div>
+
+<script src="specs.js"></script>
+</body>
+</html>
