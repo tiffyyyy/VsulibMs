@@ -7,6 +7,7 @@ An electronic equipment inventory that tracks the status of a specific electroni
 | VM.010.000            | 2024-02-17 20:40:00 |
 | VM.010.002            | 2024-03-02 15:43:00 |
 | VM.013.006            | 2024-03-09 20:30:00 |
+| VM.020.000            | 2024-03-14 10:00:00 |
 
 ## VM.010.001 Release Notes
 - Initial Login Interface
@@ -35,6 +36,9 @@ An electronic equipment inventory that tracks the status of a specific electroni
 - Username Display Issue Fixed
 - Login and Create Account Initial UI
 - Page does not update after adding a new entity
+
+## VM.020.000
+- Inventory CRUD functionalities now implemented
 
 ## Important Links
 - Design Specs: https://github.com/JakePatolilic/vsulib-ms/tree/main
