@@ -52,6 +52,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
         let areaId = urlParams.get('areaId');
         
+        if (!equipPic.type.startsWith('image/')) {
+            alert('Please select an image file for the equipment picture.');
+            return; // Exit the function if the file is not an image
+        }
+
         // Create FormData object to send file data
         var formData = new FormData();
         formData.append('equipName', equipName);
@@ -66,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
+                    fetchAndDisplayEquipment();
                     console.log('Equipment data saved successfully');
                     modal.style.display = "none"; // Close the modal
                 } else {
@@ -180,7 +186,8 @@ function fetchAndDisplayEquipment() {
                     <input type="text" id="editEquipNo" name="editEquipNo" value="${item.equip_no}" required>
                     <select id="editEquipStatus" name="editEquipStatus" required>
                         <option value="Good" ${item.status === 'Good' ? 'selected' : ''}>Good</option>
-                        <option value="Bad" ${item.status === 'Bad' ? 'selected' : ''}>Bad</option>
+                        <option value="Need Maintenance" ${item.status === 'Need Maintenance' ? 'selected' : ''}>Need Maintenance</option>
+                        <option value="Need Replacement" ${item.status === 'Need Replacement' ? 'selected' : ''}>Need Replacement</option>
                     </select>
                     <input type="file" id="editEquipPic" name="editEquipPic" accept="image/*">
                     <button type="submit">Save</button>
@@ -198,6 +205,10 @@ function fetchAndDisplayEquipment() {
                     const updatedEquipStatus = document.getElementById('editEquipStatus').value;
                     const updatedEquipPic = document.getElementById('editEquipPic').files[0]; // Get the file object
             
+                    if (updatedEquipPic && !updatedEquipPic.type.startsWith('image/')) {
+                        alert('Please select an image file for the equipment picture.');
+                        return; // Exit the function if the file is not an image
+                    }
                     // Create FormData object to send data
                     const formData = new FormData();
                     formData.append('equipId', item.equip_id);

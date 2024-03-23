@@ -261,6 +261,7 @@ a{
   overflow-y: auto;
   gap: 10px;
   padding: 10px;
+  flex-wrap: wrap;
 }
 
 .floorBox{

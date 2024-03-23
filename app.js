@@ -20,7 +20,6 @@ const db = mysql.createConnection({
 const publicDirectory = path.join(__dirname, './public');
 app.use(express.static(publicDirectory));
 
-// Add this line to parse JSON request bodies
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
