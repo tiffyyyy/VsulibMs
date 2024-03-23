@@ -8,6 +8,7 @@ An electronic equipment inventory that tracks the status of a specific electroni
 | VM.010.002            | 2024-03-02 15:43:00 |
 | VM.013.006            | 2024-03-09 20:30:00 |
 | VM.020.000            | 2024-03-14 10:00:00 |
+| VM.020.001            | 2024-03-23 22:29:00 |
 
 ## VM.010.001 Release Notes
 - Initial Login Interface
