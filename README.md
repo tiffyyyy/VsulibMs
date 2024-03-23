@@ -40,5 +40,9 @@ An electronic equipment inventory that tracks the status of a specific electroni
 ## VM.020.000
 - Inventory CRUD functionalities now implemented
 
+## VM.020.001
+- CRUD error handling implemented
+- page refresh bug fixed
+
 ## Important Links
 - Design Specs: https://github.com/JakePatolilic/vsulib-ms/tree/main
