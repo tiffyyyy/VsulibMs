@@ -62,6 +62,14 @@ app.get('/specsPage', (req,res) => {
     res.sendFile(path.join(__dirname, 'views', 'specsPage.html'));
 })
 
+app.get('/scheduleFloorPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'scheduleFloorPage.html'));
+})
+
+app.get('/scheduleAreaPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'scheduleAreaPage.html'));
+})
+
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
