@@ -43,8 +43,6 @@ document.getElementById('specsForm').addEventListener('submit', function(event) 
     console.log("Specs Name:", specsName);
 });
 
-// Function to fetch and display specs
-// Function to fetch and display specs
 function fetchAndDisplaySpecs() {
     fetch('/getSpecs')
         .then(response => response.json())
