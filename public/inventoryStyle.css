@@ -470,6 +470,8 @@ a{
 
 .modal {
   display: none;
+}
+
 li:hover{
   background-color: #B49B44;
   border-radius: 10px;
@@ -597,6 +599,8 @@ a{
   position: absolute;
   top: 2px;
   right: 5px;
+}
+
 #footer-div {
   display: flex;
   flex-direction: row;
@@ -607,5 +611,3 @@ a{
   justify-content: center;
   align-items: center;
 }
-
-
