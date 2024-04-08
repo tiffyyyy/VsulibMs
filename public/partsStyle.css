@@ -1,0 +1,258 @@
+.container {
+    display: flex;
+}
+
+.column1 {
+    flex: 1;
+    max-width: 20%;
+    margin: 0;
+}
+
+body{
+    margin:0;
+    padding: 0;
+}
+
+.addFloor{
+    position: fixed;
+    left: 1282px;
+    top: 75px;
+    border-radius: 5px;
+    background-color: green;
+    padding: 5px;
+}
+
+.addFloor:hover{
+    background-color: blue;
+}
+
+.add{
+    margin-top: 5px;
+    margin-left: 52px;
+    display: block;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 15px;
+}
+
+.add:hover{
+    background-color: black;
+}
+
+.c1Row1{
+    height: 100px;
+    background-color: green;
+    padding: 10px;
+    margin: 0;
+}
+
+.c1Row2{
+    width: 275px;
+    height: 100%;
+    margin: 0;
+    background-color: grey;
+}
+
+.c1Row2 ul li a {
+    display: block; 
+    width: 100%;
+    height: 100%;
+    text-decoration: none; 
+    color: inherit;
+}
+
+li:hover{
+    background-color: yellow;
+}
+
+li{
+    list-style-type: none;
+    padding: 10px;
+    margin: 0;
+    width: 255px;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0;
+}
+
+h3{
+    margin-top: 0px;
+}
+
+.equipText{
+    text-align: center;
+    font-size: large;
+    margin-top: 0px;
+}
+  
+.column2 {
+    flex: 4; /* Column 2 takes up the remaining 80% of the container's width */
+    max-width: 80%;
+    margin: 0;
+    
+
+}
+
+.row1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Add spacing between items */
+    height:5%;
+    padding: 10px;
+    background-color: red;
+}
+
+.row2 {
+    display: flex;
+    flex-direction: row; /* Change this from column to row */
+    width: 1100px;
+    min-height: 650px;
+    border-radius: 20px;
+    border: 10px solid black;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.active{
+    background-color: yellow;
+}
+
+ /* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 640px;
+  top: 150px;
+  width: 28%;
+  height: 50%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.equipBox{
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 240px; 
+    text-align: center; 
+    flex-wrap:wrap;
+    height: 370px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: black;
+}
+.entityNumber{
+    text-align: left;
+}
+
+img {
+    width: 190px; /* Make the image fill the width of the box */
+    height: 140px; /* Adjust the height as needed */
+    object-fit: cover; /* Cover the box without stretching the image */
+    flex-grow:1;
+    flex-basis: 200;
+    border-radius: 10px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Spaces the buttons evenly */
+    width: 100%; /* Ensures the buttons span the full width of the equipBox */
+    margin-top: 10px; /* Adds some space above the buttons */
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.button:hover {
+    background-color: #0056b3; 
+}
+
+.row2c1 {
+    width: 30%;
+    border: 2px solid black;
+}
+
+.row2c2 {
+    width: 65%;
+    height: 50%;
+    border: 2px solid black;
+}
+
+.addPartsBox {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Push the first child to the top and the last child to the bottom */
+    align-items: center; /* Center children horizontally */
+    height: 50%; /* Ensure the container takes up the full height of its parent */
+    padding: 10px; /* Add some padding for better spacing */
+    border: 2px solid black;
+}
+
+.addPart{
+    margin-top: 10px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 15px;
+}
+
+.addPart:hover{
+    background-color: black;
+}
+
+.partsDisplay, .specsDisplay {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+

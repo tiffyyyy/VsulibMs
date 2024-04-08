@@ -1,7 +1,8 @@
 # VSU Library Maintenance Inventory System (VSULib MS)
+
 An electronic equipment inventory that tracks the status of a specific electronic equipment in the library.
 
-| Internal Release Code |    Date Released    |
+| Internal Release Code | Date Released       |
 | --------------------- | ------------------- |
 | VM.000.001            | 2024-02-06 18:00:00 |
 | VM.010.000            | 2024-02-17 20:40:00 |
@@ -9,9 +10,11 @@ An electronic equipment inventory that tracks the status of a specific electroni
 | VM.013.006            | 2024-03-09 20:30:00 |
 
 ## VM.010.001 Release Notes
+
 - Initial Login Interface
 
 ## VM.010.000 Release Notes
+
 - Set up SQL Database, Express, and Node.js
 - Creation of Admin Database
 - Implementation of Admin Login Functionality
@@ -20,6 +23,7 @@ An electronic equipment inventory that tracks the status of a specific electroni
 - No Hashing of Password
 
 ## VM.010.002 Release Notes
+
 - Floor and Area database created in sql
 - Add Floor Function
 - Floor Page Draft
@@ -27,6 +31,7 @@ An electronic equipment inventory that tracks the status of a specific electroni
 - Page does not update after adding a floor entity
 
 ## VM.013.006 Release Notes
+
 - Initial Area Page Created
 - Display of Area Entities
 - Initial Equipment Page Created
@@ -37,4 +42,5 @@ An electronic equipment inventory that tracks the status of a specific electroni
 - Page does not update after adding a new entity
 
 ## Important Links
+
 - Design Specs: https://github.com/JakePatolilic/vsulib-ms/tree/main

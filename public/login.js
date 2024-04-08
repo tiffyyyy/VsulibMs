@@ -14,6 +14,8 @@ document.getElementById('loginBtn').addEventListener('click', function() {
                 document.cookie = `username=${encodeURIComponent(username)}; path=/floorPage`;
                 document.cookie = `username=${encodeURIComponent(username)}; path=/areaPage`;
                 document.cookie = `username=${encodeURIComponent(username)}; path=/equipmentPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/partsPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/specsPage`;
                 console.log(document.cookie);
                 // Redirect to inventory page
                 window.location.href = 'inventory';   

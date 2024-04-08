@@ -14,39 +14,81 @@ function updateWelcomeMessage() {
 }
 
 // Call the function when the window is fully loaded
-window.addEventListener('load', updateWelcomeMessage);
+function displayAreas() {
+    const bodyAreaDiv = document.getElementById('body-area-div');
+    bodyAreaDiv.innerHTML = ''; // Clear existing content
 
-function displayAreas(areas) {
-    const row2 = document.querySelector('.row2');
-    row2.innerHTML = ''; // Clear existing content
-
-    areas.forEach(area => {
-        const areaLink = document.createElement('a');
-        areaLink.textContent = `${area.name}`;
-        areaLink.href = `/equipmentPage?areaId=${areas.id}`; // Replace with the actual path to the new HTML file and the area ID
-        row2.appendChild(areaLink);
-
-        // Add a line break after each link
-        row2.appendChild(document.createElement('br'));
-    });
-}
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const floorId = urlParams.get('floorId');
-    
-    console.log(floorId);
+    // Fetch the areas from the server
     fetch(`/area`)
         .then(response => response.json())
-        .then(results => {
-            displayAreas(results);
-            console.log(results);
+        .then(areas => {
+            areas.forEach(area => {
+                const areaBox = document.createElement('div');
+                areaBox.className = 'floorBox';
+
+                const areaLink = document.createElement('a');
+                areaLink.textContent = `${area.name}`;
+                areaLink.href = `/equipmentPage?areaId=${area.id}`;
+                areaBox.appendChild(areaLink);
+
+                // Create "Edit" button
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.className = 'editButton'; // Add a class for styling
+                editButton.addEventListener('click', function() {
+                    // Create a form for editing the area
+                    const editForm = document.createElement('form');
+                    editForm.id = 'editAreaForm';
+                    editForm.innerHTML = `
+                        <input type="text" id="editAreaName" name="editAreaName" value="${area.name}" required>
+                        <button type="submit">Save</button>
+                    `;
+                
+                    // Replace the area's display box with the edit form
+                    areaBox.innerHTML = '';
+                    areaBox.appendChild(editForm);
+                
+                    // Add an event listener to the form to handle the submission
+                    editForm.addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        const updatedAreaName = document.getElementById('editAreaName').value;
+                
+                        // Send the updated data to the server
+                        updateAreaInDatabase(area.id, updatedAreaName);
+                        displayAreas();
+                    });
+                });
+                
+                areaBox.appendChild(editButton);
+
+                // Create "Delete" button
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'deleteButton'; // Add a class for styling
+                deleteButton.addEventListener('click', function() {
+                    const confirmDelete = window.confirm('Are you sure you want to delete this area?');
+                    if (confirmDelete) {
+                        // User confirmed deletion, proceed with the deletion process
+                        deleteAreaFromDatabase(area.id);
+                        displayAreas();
+                    }
+                });
+                
+                areaBox.appendChild(deleteButton);
+
+                bodyAreaDiv.appendChild(areaBox);
+            });
         })
         .catch(error => {
             console.error('Error fetching areas:', error);
         });
+}
+
+// Call the function when the window is fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+    displayAreas();
 });
+
 
 document.addEventListener("DOMContentLoaded", function() {
     // Get the modal
@@ -83,6 +125,12 @@ document.addEventListener("DOMContentLoaded", function() {
 document.getElementById('submitAreaBtn').addEventListener('click', function() {
     var areaName = document.getElementById('areaNameInput').value;
 
+    if (areaName.trim() === '') {
+        // Display a warning and exit the function
+        alert('Area name cannot be empty. Please enter a valid floor name.');
+        return; // This stops the function from executing further
+    }
+
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/areaPage', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -93,6 +141,7 @@ document.getElementById('submitAreaBtn').addEventListener('click', function() {
                 console.log("Area created successfully");
                 // Display success message
                 alert('Area created successfully');
+                displayAreas();
                 // Close the modal
                 var modal = document.getElementById("myModal");
                 modal.style.display = "none";       
@@ -105,4 +154,54 @@ document.getElementById('submitAreaBtn').addEventListener('click', function() {
     xhr.send(JSON.stringify({ areaName: areaName }));
     console.log("name:", areaName);
 });
+
+function updateAreaInDatabase(areaId, updatedAreaName) {
+    // Prepare the data to send
+    const data = {
+        areaId: areaId,
+        updatedAreaName: updatedAreaName
+    };
+
+    // Convert the data to JSON format
+    const jsonData = JSON.stringify(data);
+
+    // Set up the request options
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: jsonData
+    };
+
+    // Send the request to the server
+    fetch('/updateArea', requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Area updated successfully:', data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            // Handle the error, e.g., show an error message to the user
+        });
+}
+
+function deleteAreaFromDatabase(areaId) {
+    fetch(`/deleteArea/${areaId}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        console.log('Area deleted successfully');
+        // Optionally, remove the area from the UI here
+        areaBox.remove();
+    })
+    .catch(error => console.error('Error deleting area:', error));
+}
+
 

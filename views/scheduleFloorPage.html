@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="inventoryStyle.css">
+  <title>Inventory Page</title>
+</head>
+<body>
+  <div id="wrapper-div">
+    <div id="logo-div">
+      Logo
+    </div>
+
+    <div id="nav-div">
+      <div class="user-profile">
+        <div class="user-profile-image">
+          <img src="/images/userIcon.png" alt="Profile Image">
+        </div>
+      </div>
+      <div class="user-profile-name">
+        <h2 id = "welcomeMessage"></h2>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn"><img src="/images/caret-down.png" alt="" style="width: 15px; height:15px"></button>	
+        <div class="dropdown-content">
+            <a href="#">View Profile</a>
+            <a href="/">Logout</a>
+      </div>
+
+    </div>
+</div>
+    </div>
+
+    <div id="main-div">
+      <div id="left-div">
+        <div id="sidebar-div">
+          <div class="sidebar-menu">
+          <ul>
+            <h3>MENU</h3>
+          <li><a href="/inventory">Inventory</a></li>
+          <li class="active"><a href="/scheduleFloorPage">Schedule</a></li>
+          <li><a href="/createAccount">Inspection</a></li>
+          <li><a href="/createAccount">History</a></li>
+          <h3>ADD ACOUNT</h3>
+          <li><a href="/createAccount">Create Account</a></li>
+          </ul>
+        </div>
+        </div>
+      </div>
+
+      <div id="right-div">
+        <div id="header-banner-div">
+            <div class="nav-link">
+              <a href="/inventory" class="nav-link-active">Floor</a>
+            </div>
+        </div>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Floor</h2>
+            <input type="text" id="floorNameInput" placeholder="Enter Floor Name" required>
+            <button id="submitFloorBtn"; class = "add">Add</button>
+          </div>
+        </div>
+        <div id = "body-area-div">
+          <div class = "floorBox">
+            <p>body area</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer-div">
+      Footer
+    </div>
+  </div>
+
+<script src="scheduleFloor.js"></script>
+</body>
+</html>
