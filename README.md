@@ -39,7 +39,7 @@ An electronic equipment inventory that tracks the status of a specific electroni
 - Page does not update after adding a new entity
 
 ## VM.020.000
-- Inventory CRUD functionalities has been implemented
+- Inventory CRUD functionalities already now implemented
 
 ## VM.020.001
 - CRUD error handling implemented
