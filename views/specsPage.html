@@ -3,33 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="partsStyle.css">
+<link rel="stylesheet" href="inventoryStyle.css">
 <script src="login.js"></script>
-<title>Equipment Page</title>
+<title>Equipment Specification Page</title>
 </head>
 
 <body>
-  <div class="container">
-    <div class="column1">
-      <div class="c1Row1">
-        <h2 id="welcomeMessage"></h2>
-      </div>
-      <div class="c1Row2">
-        <ul>
-            <li class="active"><a href="/inventory">Inventory</a></li>
-            <li><a href="/createAccount">Create Account</a></li>
-        </ul>
-      </div>    
+  <div id="wrapper-div">
+    <div id="logo-div">
+      Logo
     </div>
-    <div class="column2">
-      <div class="row1">
-        <a href="/inventory">Floor</a>
-        <a>Item 2</a>
+  </div>
+
+  <div id="nav-div">
+    <div class="user-profile">
+      <div class="user-profile-image">
+        <img src="/images/userIcon.png" alt="Profile Image">
       </div>
-      <br>
-      <br>
-      <br>
-        <div class="row2">
+    </div>
+    <div class="user-profile-name">
+      <h2 id = "welcomeMessage"></h2>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn"><img src="/images/caret-down.png" alt="" style="width: 15px; height:15px"></button>	
+        <div class="dropdown-content">
+            <a href="#">View Profile</a>
+            <a href="/">Logout</a>
+        </div>
+    </div>
+  </div>
+  </div>
+
+  <div id="main-div">
+    <div id="left-div">
+      <div id="sidebar-div">
+        <div class="sidebar-menu">
+        <ul>
+          <h3>MENU</h3>
+        <li class="active"><a href="/inventory">Inventory</a></li>
+        <li><a href="/scheduleFloorPage">Schedule</a></li>
+        <li><a href="/createAccount">Inspection</a></li>
+        <li><a href="/createAccount">History</a></li>
+        <h3>ADD ACOUNT</h3>
+        <li><a href="/createAccount">Create Account</a></li>
+        </ul>
+      </div>
+      </div>
+    </div>
+
+    <div id="right-div">
+      <div id="header-banner-div">
+          <div class="nav-link">
+            <a href="/inventory" class="nav-link-active">Floor</a>
+            <a href="/floorPage" class="nav-link-active">Area</a>
+            <a href="/floorPage" class="nav-link-active">Equipment</a>
+            <a href="/floorPage" class="nav-link-active">Specs</a>
+          </div>
+      </div>
+
+      <div id="button-container-div">
+        <button id="addAreaBtn" class="addFloor">
+          Add area
+        </button>
+      </div>
+      
+    <div id="body-area-div">
+      <div class="row1">
           <div class = "row2c1">
             <form id="specsForm" action="/saveSpecs" method="POST">
               <div class="addPartsBox">
@@ -43,11 +82,14 @@
               <div class = "partsDisplay">
                 <p>display</p>
               </div>
-          </div>
-        </div>    
+          </div>   
       </div>
     </div>
+    <div id="footer-div">
+      Footer
+    </div>
   </div>
+  
 
 <script src="specs.js"></script>
 </body>
