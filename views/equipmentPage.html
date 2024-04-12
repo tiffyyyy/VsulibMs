@@ -3,37 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="equipmentStyle.css">
+<link rel="stylesheet" href="inventoryStyle.css">
 <script src="login.js"></script>
 <title>Equipment Page</title>
 </head>
 
 <body>
-  <div class="container">
-    <div class="column1">
-      <div class="c1Row1">
-        <h2 id="welcomeMessage"></h2>
-      </div>
-      <div class="c1Row2">
-        <ul>
-            <li class="active"><a href="/inventory">Inventory</a></li>
-            <li><a href="/createAccount">Create Account</a></li>
-        </ul>
-      </div>    
+  <div id="wrapper-div">
+    <div id="logo-div">
+      Logo
     </div>
-    <div class="column2">
-      <div class="row1">
-        <a href="/inventory">Floor</a>
-        <a>Item 2</a>
+  
+    <div id="nav-div">
+      <div class="user-profile">
+        <div class="user-profile-image">
+          <img src="/images/userIcon.png" alt="Profile Image">
+        </div>
       </div>
-      <br>
-      <br>
-      <br>
-      <button id="addEquipmentBtn" class="addFloor">Add Equipment</button>
-      <div id="myModal" class="modal">
+      <div class="user-profile-name">
+        <h2 id = "welcomeMessage"></h2>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn"><img src="/images/caret-down.png" alt="" style="width: 15px; height:15px"></button>	
+          <div class="dropdown-content">
+              <a href="#">View Profile</a>
+              <a href="/">Logout</a>
+          </div>
+      </div>
+    </div>
+    </div>
+    <div id="main-div">
+      <div id="left-div">
+        <div id="sidebar-div">
+          <div class="sidebar-menu">
+          <ul>
+            <h3>MENU</h3>
+          <li class="active"><a href="/inventory">Inventory</a></li>
+          <li><a href="/scheduleFloorPage">Schedule</a></li>
+          <li><a href="/createAccount">Inspection</a></li>
+          <li><a href="/createAccount">History</a></li>
+          <h3>ADD ACOUNT</h3>
+          <li><a href="/createAccount">Create Account</a></li>
+          </ul>
+        </div>
+        </div>
+      </div>
+
+      <div id="right-div">
+        <div id="header-banner-div">
+            <div class="nav-link">
+              <a href="/inventory" class="nav-link-active">Floor</a>
+              <a href="/floorPage" class="nav-link-active">Area</a>
+              <a href="/equipmentPage" class="nav-link-active">Equipment</a>
+            </div>
+        </div>
+      
+        <div id="button-container-div">
+          <button id="addEquipmentBtn" class="addFloor">
+            Add equipment
+          </button>
+        </div>
+      <div id="myModal" class="modal" style="height: 60%;">
         <div class="modal-content">
           <span class="close">&times;</span>
-          <h2>Add Equipment</h2>
+          <h2 class="label" style="margin-bottom: 65%; position: fixed;" >Add Equipment</h2>
           <form id="equipmentForm" enctype="multipart/form-data">
             <input type="text" id="equipNameInput" placeholder="Equipment Name" required>
             <input type="text" id="equipNoInput" placeholder="Equipment Number" required>
@@ -48,21 +81,27 @@
         </form>               
         </div>
       </div>
-        <div class="row2">
-          <div class="equipBox">
-              <div class="entityNumber">
-                  <h3>1</h3>
-              </div>
-              <p>Equipment Name</p>
-              <img src="image.jpg" alt="Equipment Image">
-              <p>Serial Number: 12345</p>
-              <div class="button-container">
-                  <a href="page1.html" class="button">Button 1</a>
-                  <a href="page2.html" class="button">Button 2</a>
-              </div>
-          </div>
-        </div>    
+      <div id = "body-area-div">
+          <div class="row2">
+            <div class="equipBox">
+                <div class="entityNumber">
+                    <h3>1</h3>
+                </div>
+                <p>Equipment Name</p>
+                <img src="image.jpg" alt="Equipment Image">
+                <p>Serial Number: 12345</p>
+                <div class="button-container">
+                    <a href="page1.html" class="button">Button 1</a>
+                    <a href="page2.html" class="button">Button 2</a>
+                </div>
+            </div>
+          </div>    
       </div>
+        
+      </div>
+    </div>
+    <div id="footer-div">
+      Footer
     </div>
   </div>
 
