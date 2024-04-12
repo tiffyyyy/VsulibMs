@@ -539,16 +539,22 @@ a{
   height: 370px;
   border-radius: 10px;
   border-width: 2px;
-  border-color: black;
   position: relative;
   background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
   backdrop-filter: blur(3.2px);
   border-top: 2px solid rgba(255, 255, 255, 0.568); /* Subtle white border at the top */
   border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Subtle black border at the bottom */
-
 }
+
 .entityNumber{
-  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 200;
+  font-size: 24px;
+}
+
+.numberText {
+  font-size: 24px;
 }
 
 img {
@@ -562,25 +568,20 @@ img {
 
 .button-container {
   display: flex;
-  justify-content: space-between; /* Spaces the buttons evenly */
+  justify-content: center; /* Spaces the buttons evenly */
+  align-items: center;
   width: 100%; /* Ensures the buttons span the full width of the equipBox */
-  margin-top: 10px; /* Adds some space above the buttons */
+  margin-top: 20px; /* Adds some space above the buttons */
+  gap:20px;
 }
 
-.equipBox{
-  border: 1px solid #ccc;
-  padding-left: 10px;
-  padding-right: 10px;
-  width: 240px; 
-  text-align: center; 
-  flex-wrap:wrap;
-  height: 370px;
-  border-radius: 10px;
-  border-width: 2px;
-  border-color: black;
-}
-.entityNumber{
-  text-align: left;
+
+.row2 {
+  display: flex;
+  flex-direction: row; /* Change this from column to row */
+  flex-wrap: wrap;
+  gap: 10px;
+  overflow-y: auto;
 }
 
 img {
@@ -590,13 +591,6 @@ img {
   flex-grow:1;
   flex-basis: 200;
   border-radius: 10px;
-}
-
-.button-container {
-  display: flex;
-  justify-content: space-between; /* Spaces the buttons evenly */
-  width: 100%; /* Ensures the buttons span the full width of the equipBox */
-  margin-top: 10px; /* Adds some space above the buttons */
 }
 
 .button {
