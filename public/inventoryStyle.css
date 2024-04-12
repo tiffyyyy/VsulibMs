@@ -659,3 +659,20 @@ img {
   flex-wrap: wrap;
   gap: 5px;
 }
+
+.schedBtn {
+  position: absolute;
+  top: 1px;
+  right: 10px;
+  background-color: #f44336;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-image:url(images/calendar-silhouette.png);
+  background-repeat:no-repeat;
+	background-size:cover;
+  height: 35px;
+  width: 35px;
+}

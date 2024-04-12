@@ -16,7 +16,7 @@ function updateWelcomeMessage() {
 // Call the function when the window is fully loaded
 function displayAreas() {
     const bodyAreaDiv = document.getElementById('body-area-div');
-    bodyAreaDiv.innerHTML = ''; // Clear existing content
+    bodyAreaDiv.innerHTML = '';
 
     // Fetch the areas from the server
     fetch(`/area`)
@@ -28,7 +28,7 @@ function displayAreas() {
 
                 const areaLink = document.createElement('a');
                 areaLink.textContent = `${area.name}`;
-                areaLink.href = `/equipmentPage?areaId=${area.id}`;
+                areaLink.href = `/scheduleEquipmentPage?areaId=${area.id}`;
                 areaBox.appendChild(areaLink);
                 bodyAreaDiv.appendChild(areaBox);
             });

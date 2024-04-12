@@ -70,6 +70,14 @@ app.get('/scheduleAreaPage', (req,res) => {
     res.sendFile(path.join(__dirname, 'views', 'scheduleAreaPage.html'));
 })
 
+app.get('/scheduleEquipmentPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'scheduleEquipmentPage.html'));
+})
+
+app.get('/calendarPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'calendarPage.html'));
+})
+
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
