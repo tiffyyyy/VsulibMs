@@ -590,6 +590,135 @@ app.post('/updateFloor', function(req, res) {
     });
 });
 
+app.get('/getEquipDetails', (req, res) => {
+    const equipId = req.query.equip_id;
+
+    if (!equipId) {
+        return res.status(400).send('Missing equip_id parameter');
+    }
+
+    const query = 'SELECT * FROM equipment WHERE equip_id = ?';
+    db.query(query, [equipId], (error, results) => {
+        if (error) {
+            console.error('Error fetching equipment details:', error);
+            return res.status(500).send('Error fetching equipment details');
+        }
+        if (results.length === 0) {
+            return res.status(404).send('Equipment not found');
+        }
+        res.json(results[0]); // Send the first (and only) result as JSON
+    });
+});
+
+app.post('/saveSchedule', (req, res) => {
+    const { proposedDate, actualDate } = req.body;
+
+    const url = require('url');
+    const referer = req.headers.referer;
+
+    // Parse the URL
+    const parsedUrl = url.parse(referer, true);
+
+    // Extract the equipId from the query parameters
+    const equipId = parsedUrl.query.equip_id;
+    
+    // Determine which query to use based on which date is being sent
+    let query, params;
+    if (proposedDate) {
+        query = 'INSERT INTO schedule (proposedDate, equip_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE proposedDate = ?';
+        params = [proposedDate, equipId, proposedDate];
+    } else if (actualDate) {
+        query = 'INSERT INTO schedule (actualDate, equip_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE actualDate = ?';
+        params = [actualDate, equipId, actualDate];
+    } else {
+        res.status(400).json({ success: false, message: 'Date is required.' });
+        return;
+    }
+
+    db.query(query, params, (error, results) => {
+        if (error) {
+            console.error('Error saving schedule:', error);
+            res.status(500).json({ success: false });
+            return;
+        }
+        res.json({ success: true });
+    });
+});
+
+app.get('/getProposedDate', (req, res) => {
+    const equipId = req.query.equip_id;
+
+    if (!equipId) {
+        return res.status(400).json({ error: 'equip_id is required' });
+    }
+
+    const query = 'SELECT proposedDate FROM schedule WHERE equip_id = ?';
+    db.query(query, [equipId], (error, results) => {
+        if (error) {
+            console.error('Error fetching proposed date:', error);
+            return res.status(500).json({ error: 'Error fetching proposed date' });
+        }
+
+        if (results.length > 0) {
+            // If a proposed date is found, return it
+            return res.json({ proposedDate: results[0].proposedDate });
+        } else {
+            // If no proposed date is found, return an empty object
+            return res.json({});
+        }
+    });
+    
+});
+
+app.post('/finishMaintenance', (req, res) => {
+    const equipId = req.body.equipId;
+
+    // Insert into history table
+    const insertHistoryQuery = 'INSERT INTO history (proposedDate, equip_id, actualDate) SELECT proposedDate, equip_id, actualDate FROM schedule WHERE equip_id = ?';
+    db.query(insertHistoryQuery, [equipId], (error, results) => {
+        if (error) {
+            console.error('Error inserting into history:', error);
+            res.json({ success: false });
+            return;
+        }
+
+        // Delete from schedule table
+        const deleteScheduleQuery = 'DELETE FROM schedule WHERE equip_id = ?';
+        db.query(deleteScheduleQuery, [equipId], (error, results) => {
+            if (error) {
+                console.error('Error deleting from schedule:', error);
+                res.json({ success: false });
+                return;
+            }
+
+            res.json({ success: true });
+        });
+    });
+});
+
+app.get('/getActualDate', (req, res) => {
+    const equipId = req.query.equip_id;
+
+    if (!equipId) {
+        return res.status(400).json({ error: 'equip_id is required' });
+    }
+
+    const query = 'SELECT actualDate FROM schedule WHERE equip_id = ?';
+    db.query(query, [equipId], (error, results) => {
+        if (error) {
+            console.error('Error fetching actual date:', error);
+            return res.status(500).json({ error: 'Error fetching actual date' });
+        }
+
+        if (results.length > 0) {
+            // If an actual date is found, return it
+            return res.json({ actualDate: results[0].actualDate });
+        } else {
+            // If no actual date is found, return an empty object
+            return res.json({});
+        }
+    });
+});
 
 app.use((error, req, res, next) => {
 if (error instanceof multer.MulterError) {

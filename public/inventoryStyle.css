@@ -670,3 +670,36 @@ img {
   height: 35px;
   width: 35px;
 }
+
+.calendarDisplay {
+  width: 300px;
+  margin: 0 auto;
+}
+
+#calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#calendar div {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+}
+
+#calendar div:hover {
+  background-color: #f4f4f4;
+}
+
+#yearSelect {
+  width: 200px;
+}
+
+#monthSelect {
+  width: 200px;
+}
+

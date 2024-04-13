@@ -16,6 +16,10 @@ document.getElementById('loginBtn').addEventListener('click', function() {
                 document.cookie = `username=${encodeURIComponent(username)}; path=/equipmentPage`;
                 document.cookie = `username=${encodeURIComponent(username)}; path=/partsPage`;
                 document.cookie = `username=${encodeURIComponent(username)}; path=/specsPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/scheduleFloorPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/scheduleAreaPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/scheduleEquipmentPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/calendarPage`;
                 console.log(document.cookie);
                 // Redirect to inventory page
                 window.location.href = 'inventory';   
