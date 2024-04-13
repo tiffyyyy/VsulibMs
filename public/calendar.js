@@ -15,7 +15,6 @@ function updateWelcomeMessage() {
 window.addEventListener('load', updateWelcomeMessage);
 
 function fetchAndDisplayEquipmentDetails() {
-    // Extract the equipId from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const equipId = urlParams.get('equip_id');
 
@@ -34,13 +33,12 @@ function fetchAndDisplayEquipmentDetails() {
 
 function displayEquipmentDetails(details) {
     const equipBox = document.querySelector('.equipBox');
-    equipBox.innerHTML = ''; // Clear the existing content
+    equipBox.innerHTML = '';
 
-    // Create and append the new content based on the details
     const entityNumberContainer = document.createElement('div');
     entityNumberContainer.className = 'entityNumber';
     const numberP = document.createElement('h3');
-    numberP.textContent = details.entityNumber; // Assuming details contains entityNumber
+    numberP.textContent = details.entityNumber;
     entityNumberContainer.appendChild(numberP);
     equipBox.appendChild(entityNumberContainer);
 
@@ -50,7 +48,7 @@ function displayEquipmentDetails(details) {
     equipBox.appendChild(nameP);
 
     const img = document.createElement('img');
-    img.src = `data:image/jpeg;base64,${details.equip_pic}`; // Adjust the MIME type as necessary
+    img.src = `data:image/jpeg;base64,${details.equip_pic}`;
     img.alt = `${details.equip_name} Image`;
     equipBox.appendChild(img);
 
@@ -73,10 +71,9 @@ document.addEventListener("DOMContentLoaded", function() {
     fetchProposedDate(equipId);
     fetchActualDate(equipId);
 
-    // Also fetch the proposed date when the "Proposed" button is clicked
     document.querySelector('.proposed').addEventListener('click', function() {
         isProposed = true;
-        fetchProposedDate(equipId); // Fetch the proposed date again
+        fetchProposedDate(equipId);
         fetchActualDate(equipId);
     });
 
@@ -89,15 +86,14 @@ for (let year = 2000; year <= 3000; year++) {
     option.value = year;
     option.text = year;
     if (year === currentYear) {
-        option.selected = true; // Set the current year as selected
+        option.selected = true;
     }
     yearSelect.appendChild(option);
 }
 
-// Populate month dropdown
 const monthSelect = document.getElementById('monthSelect');
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const currentMonth = new Date().getMonth() + 1; // getMonth() returns 0-11, so we add 1 to get 1-12
+const currentMonth = new Date().getMonth() + 1;
 months.forEach((month, index) => {
     let option = document.createElement('option');
     option.value = index + 1;
@@ -147,7 +143,6 @@ document.addEventListener('DOMContentLoaded', function() {
     generateCalendar(yearSelect.value, monthSelect.value);
 });
 
-// Declare isProposed at the top level of your script
 let isProposed = true;
 
 // Event listener for the "Proposed" button
@@ -163,7 +158,7 @@ document.querySelector('.actual').addEventListener('click', function() {
 document.getElementById('saveBtn').addEventListener('click', function() {
     const year = yearSelect.value;
     const month = monthSelect.value;
-    const day = chosenDay; // Assuming chosenDay is defined elsewhere in your code
+    const day = chosenDay;
 
     // Convert the month to a zero-based index (January is 0, December is 11)
     const zeroBasedMonth = parseInt(month) - 1;
@@ -176,9 +171,8 @@ document.getElementById('saveBtn').addEventListener('click', function() {
 
     // Determine which date to send based on the flag
     const dateToSend = isProposed ? { proposedDate: formattedDate } : { actualDate: formattedDate };
-    console.log(isProposed); // This should now correctly log the value of isProposed
+    console.log(isProposed);
 
-    // Send the formatted date to the server
     fetch('/saveSchedule', {
         method: 'POST',
         headers: {
@@ -225,12 +219,10 @@ function disableActualButton() {
 }
 
 document.getElementById('finish').addEventListener('click', function() {
-    // Extract equip_id from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const equipId = urlParams.get('equip_id');
 
     if (equipId) {
-        // Send a request to your server-side script
         fetch('/finishMaintenance', {
             method: 'POST',
             headers: {
@@ -241,7 +233,8 @@ document.getElementById('finish').addEventListener('click', function() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert('Schedule saved to history and deleted from schedule.');
+                alert('Schedule saved to history');
+                location.reload();
             } else {
                 alert('An error occurred.');
             }
