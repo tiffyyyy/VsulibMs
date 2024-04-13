@@ -73,11 +73,17 @@
                 <p>Serial Number: 12345</p>
             </div>   
           </div>
-          <div class = "row2c2">
-              <div class = "partsDisplay">
-                <p>display</p>
-              </div>
-          </div>   
+            <div class = "row2c2">
+                <button class = "proposed">Proposed</button>
+                <button class = "actual">Actual</button>
+                <div id="calendarDisplay" class="calendarDisplay">
+                    <select id="yearSelect"></select>
+                    <select id="monthSelect"></select>
+                    <div id="calendar"></div>
+                </div> 
+            </div>
+            <button id = "saveBtn">save</button>
+            <button id = "finish">finish maintenance</button>           
       </div>
     </div>
     <div id="footer-div">
@@ -86,6 +92,6 @@
   </div>
   
 
-<script src="specs.js"></script>
+<script src="calendar.js"></script>
 </body>
 </html>
