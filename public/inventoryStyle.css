@@ -486,7 +486,7 @@ a{
   align-items: center; /* Centers items vertically */
 }
 
-.editButton, .deleteButton {
+.editBtn, .deleteBtn {
   margin-left: 10px; /* Add some space between the buttons */
   padding: 5px 10px;
   border: none;

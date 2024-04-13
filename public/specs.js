@@ -64,7 +64,7 @@ function fetchAndDisplaySpecs() {
                 // Create Edit and Delete buttons
                 const editButton = document.createElement('button');
                 editButton.textContent = 'Edit';
-                editButton.className = 'editButton'; // Add a class for styling
+                editButton.className = 'editBtn'; // Add a class for styling
                 editButton.addEventListener('click', function() {
                     // Create a form for editing the spec
                     const editForm = document.createElement('form');
@@ -91,7 +91,7 @@ function fetchAndDisplaySpecs() {
 
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
-                deleteButton.className = 'deleteButton'; // Add a class for styling
+                deleteButton.className = 'deleteBtn'; // Add a class for styling
                 // Inside the fetchAndDisplaySpecs function, after creating the deleteButton
                 deleteButton.addEventListener('click', function() {
                     // Confirm deletion
