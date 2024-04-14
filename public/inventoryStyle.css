@@ -35,6 +35,11 @@ body {
   align-items: center;
 }
 
+.row1{
+  display: flex;
+  gap: 20%;
+}
+
 #nav-div {
   display: flex;
   flex-direction: row;

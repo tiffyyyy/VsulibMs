@@ -213,6 +213,7 @@ img {
 .row2c1 {
     width: 30%;
     border: 2px solid black;
+    text-align: center;
 }
 
 .row2c2 {
@@ -254,5 +255,10 @@ img {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 5px;
+}
+
+.equipDetails{
+    align-items: center;
+    align-content: center;
 }
 

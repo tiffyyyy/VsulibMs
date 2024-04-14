@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="partsStyle.css">
+<title>Equipment Page</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="column1">
+      <div class="c1Row1">
+        <h2 id="welcomeMessage"></h2>
+      </div>
+      <div class="c1Row2">
+        <ul>
+            <li><a href="/inventory">Inventory</a></li>
+            <li><a href="/scheduleFloorPage">Schedule</a></li>
+            <li class="active"><a href="/inspectionFloorPage">Inspection</a></li>
+        </ul>
+      </div>    
+    </div>
+    <div class="column2">
+      <div class="row1">
+        <a href="/inventory">Floor</a>
+        <a>Item 2</a>
+      </div>
+      <br>
+      <br>
+      <br>
+        <div class="row2">
+          <div class = "row2c1">
+            <div class = "equipDetails">
+                <p id="equipName"></p>
+                <select id="statusSelect">
+                    <option value="Good">Good</option>
+                    <option value="Need Maintenance">Need Maintenance</option>
+                    <option value="Need Replacement">Need Replacement</option>
+                </select>
+                <br>
+                <br>
+                <button id = "updateBtn">Update</button>
+              </div>
+                <div class = "equipStats">
+                    <span id="workingCount">Working: 0</span>
+                    <span id="notWorkingCount">Not Working: 0</span>
+                </div>         
+            </div>
+          <div class = "row2c2">
+              <div class = "partsDisplay">
+                <p>display</p>
+              </div>
+          </div>
+        </div>    
+      </div>
+    </div>
+  </div>
+
+<script src="inspection.js"></script>
+</body>
+</html>

@@ -23,12 +23,13 @@
       </div>
       <div class="dropdown">
         <button class="dropbtn"><img src="/images/caret-down.png" alt="" style="width: 15px; height:15px"></button>	
-          <div class="dropdown-content">
-              <a href="#">View Profile</a>
-              <a href="/">Logout</a>
-          </div>
+        <div class="dropdown-content">
+            <a href="#">View Profile</a>
+            <a href="/">Logout</a>
       </div>
+
     </div>
+</div>
     </div>
 
     <div id="main-div">
@@ -37,9 +38,9 @@
           <div class="sidebar-menu">
           <ul>
             <h3>MENU</h3>
-          <li class="active"><a href="/inventory">Inventory</a></li>
+          <li><a href="/inventory">Inventory</a></li>
           <li><a href="/scheduleFloorPage">Schedule</a></li>
-          <li><a href="/inspectionFloorPage">Inspection</a></li>
+          <li class="active"><a href="/inspectionFloorPage">Inspection</a></li>
           <li><a href="/createAccount">History</a></li>
           <h3>ADD ACOUNT</h3>
           <li><a href="/createAccount">Create Account</a></li>
@@ -54,17 +55,10 @@
               <a href="/inventory" class="nav-link-active">Floor</a>
             </div>
         </div>
-
-        <div id="button-container-div">
-          <button id="addFloorBtn" class="addFloor">
-            Add floor
-          </button>
-        </div>
-
         <div id="myModal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
-            <h2 class="label">Add floor</h2>
+            <h2>Floor</h2>
             <input type="text" id="floorNameInput" placeholder="Enter Floor Name" required>
             <button id="submitFloorBtn"; class = "add">Add</button>
           </div>
@@ -82,6 +76,6 @@
     </div>
   </div>
 
-<script src="inventory.js"></script>
+<script src="inspectionFloor.js"></script>
 </body>
 </html>
