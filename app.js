@@ -437,7 +437,7 @@ app.post('/updateArea', (req, res) => {
             return;
         }
         console.log('Area updated successfully');
-        res.status(200).send('Area updated successfully');
+        res.status(200).json('Area updated successfully');
     });
 });
 

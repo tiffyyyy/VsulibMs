@@ -1,14 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Get the modal
     var modal = document.getElementById("myModal");
 
-    // Get the button that opens the modal
     var btn = document.getElementById("addFloorBtn");
 
-    // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
-
-    // Get the submit button inside the modal
 
     // When the user clicks the button, open the modal
     btn.onclick = function() {
@@ -26,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function() {
         modal.style.display = "none";
       }
     }
-    // Add event listener to the submit button inside the modal
 });
 
 function updateWelcomeMessage() {
@@ -39,21 +33,19 @@ function updateWelcomeMessage() {
         // Display the username in the welcome message
         document.getElementById('welcomeMessage').innerText = username;
     } else {
-        // Handle case where username cookie is not found
         console.log('Username cookie not found');
     }
 }
 
-// Call the function when the window is fully loaded
 window.addEventListener('load', updateWelcomeMessage);
 
+// Function that submits the values inside the modal
 document.getElementById('submitFloorBtn').addEventListener('click', function() {
     var floorName = document.getElementById('floorNameInput').value;
 
     if (floorName.trim() === '') {
-        // Display a warning and exit the function
         alert('Floor name cannot be empty. Please enter a valid floor name.');
-        return; // This stops the function from executing further
+        return;
     }
 
     var xhr = new XMLHttpRequest();
@@ -62,16 +54,12 @@ document.getElementById('submitFloorBtn').addEventListener('click', function() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-                // Floor creation successful
                 console.log("Floor created successfully");
-                // Display success message
                 alert('Floor created successfully');
                 fetchFloorsAndUpdateHTML();
-                // Close the modal
                 var modal = document.getElementById("myModal");
                 modal.style.display = "none";       
             } else {
-                // Display error message
                 alert('Error creating floor');
             }
         }
@@ -80,12 +68,11 @@ document.getElementById('submitFloorBtn').addEventListener('click', function() {
     console.log("name:", floorName);
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Function to fetch floors and update HTML
-    
+document.addEventListener("DOMContentLoaded", function() {  
     fetchFloorsAndUpdateHTML();
 });
 
+// Function that updates the floors being displayed
 function fetchFloorsAndUpdateHTML() {
     fetch('/floors')
         .then(response => response.json())
@@ -108,9 +95,8 @@ function fetchFloorsAndUpdateHTML() {
                 const editButton = document.createElement('button');
                 editButton.textContent = 'Edit';
                 editButton.className = 'editButton';
-                // Add an event listener to the edit button for each floor
                 editButton.addEventListener('click', function() {
-                    // Create a form for editing the floor
+                    // Edit form
                     const editForm = document.createElement('form');
                     editForm.id = 'editFloorForm';
                     editForm.innerHTML = `
@@ -118,19 +104,14 @@ function fetchFloorsAndUpdateHTML() {
                         <button type="submit">Save</button>
                     `;
 
-                    // Replace the floor's display box with the edit form
-                    floorBox.innerHTML = ''; // Clear the floorBox content
-                    floorBox.appendChild(editForm); // Append the edit form to the floorBox
+                    floorBox.innerHTML = '';
+                    floorBox.appendChild(editForm);
 
-                    // Add an event listener to the form to handle the submission
                     editForm.addEventListener('submit', function(event) {
                         event.preventDefault();
                         const updatedFloorName = document.getElementById('editFloorName').value;
-
-                        // Assuming you have a function to handle updating the floor in the database
-                        // This function should take the floor ID and the updated floor name as parameters
                         updateFloorInDatabase(floor.floorId, updatedFloorName);
-                        fetchFloorsAndUpdateHTML();// Assuming you have a function to fetch and display floors
+                        fetchFloorsAndUpdateHTML();
                     });
                 });
 
@@ -144,13 +125,11 @@ function fetchFloorsAndUpdateHTML() {
                 deleteButton.addEventListener('click', function() {
                 const confirmDelete = window.confirm('Are you sure you want to delete this area?');
                     if (confirmDelete) {
-                    // Assuming you have a function to handle deletion
                         deleteFloorFromDatabase(floor.floorId);
                         fetchFloorsAndUpdateHTML();
                     }
                 });
                 floorBox.appendChild(deleteButton);
-
                 bodyAreaDiv.appendChild(floorBox);
             });
         })
@@ -170,24 +149,18 @@ function deleteFloorFromDatabase(floorId) {
         }
         console.log('Floor deleted successfully');
         fetchFloorsAndUpdateHTML();
-        // Optionally, remove the floor from the UI here
-        // Assuming you have a reference to the floorBox element, you can remove it like this:
-        // floorBox.remove();
-        // However, since we're dynamically creating these elements, you might need to find the specific element to remove.
-        // One approach is to add a unique identifier to each floorBox and use it to find and remove the specific element.
     })
     .catch(error => console.error('Error deleting floor:', error));
 }
 
 function updateFloorInDatabase(floorId, updatedFloorName) {
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/updateFloor', true); // Assuming '/updateFloor' is the endpoint for updating floors
+    xhr.open('POST', '/updateFloor', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 console.log("Floor updated successfully");
-                // Optionally, refresh the floors list or update the UI
             } else {
                 console.error('Error updating floor:', xhr.statusText);
             }
