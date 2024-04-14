@@ -78,6 +78,22 @@ app.get('/calendarPage', (req,res) => {
     res.sendFile(path.join(__dirname, 'views', 'calendarPage.html'));
 })
 
+app.get('/inspectionFloorPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'inspectionFloorPage.html'));
+})
+
+app.get('/inspectionAreaPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'inspectionAreaPage.html'));
+})
+
+app.get('/inspectionEquipmentPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'inspectionEquipmentPage.html'));
+})
+
+app.get('/inspectionPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'inspectionPage.html'));
+})
+
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
@@ -567,7 +583,7 @@ app.get('/getEquipDetails', (req, res) => {
 });
 
 app.post('/saveSchedule', (req, res) => {
-    const { proposedDate, actualDate } = req.body;
+    const { proposedDate, actualDate, remarks1, remarks2 } = req.body;
 
     const url = require('url');
     const referer = req.headers.referer;
@@ -578,11 +594,11 @@ app.post('/saveSchedule', (req, res) => {
     
     let query, params;
     if (proposedDate) {
-        query = 'INSERT INTO schedule (proposedDate, equip_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE proposedDate = ?';
-        params = [proposedDate, equipId, proposedDate];
+        query = 'INSERT INTO schedule (proposedDate, remarks1, equip_id) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE proposedDate = ?, remarks1 = ?';
+        params = [proposedDate, remarks1, equipId, proposedDate, remarks1];
     } else if (actualDate) {
-        query = 'INSERT INTO schedule (actualDate, equip_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE actualDate = ?';
-        params = [actualDate, equipId, actualDate];
+        query = 'INSERT INTO schedule (actualDate, remarks2, equip_id) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE actualDate = ?, remarks2 = ?';
+        params = [actualDate, remarks2, equipId, actualDate, remarks2];
     } else {
         res.status(400).json({ success: false, message: 'Date is required.' });
         return;
@@ -625,7 +641,7 @@ app.get('/getProposedDate', (req, res) => {
 app.post('/finishMaintenance', (req, res) => {
     const equipId = req.body.equipId;
 
-    const insertHistoryQuery = 'INSERT INTO history (proposedDate, equip_id, actualDate) SELECT proposedDate, equip_id, actualDate FROM schedule WHERE equip_id = ?';
+    const insertHistoryQuery = 'INSERT INTO history (proposedDate, equip_id, actualDate, remarks1, remarks2) SELECT proposedDate, equip_id, actualDate, remarks1, remarks2 FROM schedule WHERE equip_id = ?';
     db.query(insertHistoryQuery, [equipId], (error, results) => {
         if (error) {
             console.error('Error inserting into history:', error);
@@ -669,6 +685,71 @@ app.get('/getActualDate', (req, res) => {
         }
     });
 });
+
+app.post('/updatePartInspection', function(req, res) {
+    console.log('Received updatePart request:', req.body); // Log the request data
+
+    const partId = req.body.id;
+    const updatedPartStatus = req.body.status;
+
+    const sql = "UPDATE part SET status = ? WHERE id = ?";
+    db.query(sql, [updatedPartStatus, partId], function(err, result) {
+        if (err) {
+            console.error('Error updating part:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        console.log(result.affectedRows + " record(s) updated");
+        res.send("Part updated successfully");
+    });
+});
+
+app.get('/getEquipDetails', (req, res) => {
+    const equipId = req.query.equip_id;
+
+    if (!equipId) {
+        return res.status(400).json({ error: 'equip_id is required' });
+    }
+
+    const query = 'SELECT equip_name, status FROM equipment WHERE equip_id = ?';
+    db.query(query, [equipId], (error, results) => {
+        if (error) {
+            console.error('Error fetching equipment details:', error);
+            return res.status(500).json({ error: 'Error fetching equipment details' });
+        }
+
+        if (results.length > 0) {
+            const equipDetails = results[0];
+            return res.json({ equip_name: equipDetails.equip_name, status: equipDetails.status });
+        } else {
+            return res.status(404).json({ error: 'Equipment not found' });
+        }
+    });
+});
+
+app.post('/updateEquipStatus', (req, res) => {
+    const equipId = req.query.equip_id;
+    const newStatus = req.body.status;
+
+    if (!equipId || !newStatus) {
+        return res.status(400).json({ success: false, message: 'equip_id and status are required' });
+    }
+
+    const query = 'UPDATE equipment SET status = ? WHERE equip_id = ?';
+    db.query(query, [newStatus, equipId], (error, results) => {
+        if (error) {
+            console.error('Error updating equipment status:', error);
+            return res.status(500).json({ success: false });
+        }
+
+        if (results.affectedRows > 0) {
+            return res.json({ success: true });
+        } else {
+            return res.status(404).json({ success: false, message: 'Equipment not found' });
+        }
+    });
+});
+
 
 app.use((error, req, res, next) => {
 if (error instanceof multer.MulterError) {

@@ -20,6 +20,10 @@ document.getElementById('loginBtn').addEventListener('click', function() {
                 document.cookie = `username=${encodeURIComponent(username)}; path=/scheduleAreaPage`;
                 document.cookie = `username=${encodeURIComponent(username)}; path=/scheduleEquipmentPage`;
                 document.cookie = `username=${encodeURIComponent(username)}; path=/calendarPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/inspectionFloorPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/inspectionAreaPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/inspectionEquipmentPage`;
+                document.cookie = `username=${encodeURIComponent(username)}; path=/inspectionPage`;
                 console.log(document.cookie);
                 // Redirect to inventory page
                 window.location.href = 'inventory';   
