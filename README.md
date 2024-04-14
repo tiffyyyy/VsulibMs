@@ -41,6 +41,18 @@ An electronic equipment inventory that tracks the status of a specific electroni
 - Login and Create Account Initial UI
 - Page does not update after adding a new entity
 
+## VM.020.001 Release Notes
+
+- Error Handling for CRUD functionalities implemented
+- Page refresh bug fixed
+
+## VM.021.000 Release Notes
+
+- Initial User Interface for Schedule Method created
+- Schedule and History created in database
+- Add proposed, and actual date function implemented
+- 70% done on user interface inventory page
+
 ## Important Links
 
 - Design Specs: https://github.com/JakePatolilic/vsulib-ms/tree/main
