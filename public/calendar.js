@@ -159,19 +159,14 @@ document.getElementById('saveBtn').addEventListener('click', function() {
     const year = yearSelect.value;
     const month = monthSelect.value;
     const day = chosenDay;
+    const remarks = document.getElementById('remarks').value;
 
-    // Convert the month to a zero-based index (January is 0, December is 11)
     const zeroBasedMonth = parseInt(month) - 1;
-
-    // Create a Date object for the selected date
     const selectedDate = new Date(year, zeroBasedMonth, day+1);
-
-    // Convert the date to a string in the format YYYY-MM-DD
     const formattedDate = selectedDate.toISOString().split('T')[0];
 
     // Determine which date to send based on the flag
-    const dateToSend = isProposed ? { proposedDate: formattedDate } : { actualDate: formattedDate };
-    console.log(isProposed);
+    const dateToSend = isProposed ? { proposedDate: formattedDate, remarks1: remarks } : { actualDate: formattedDate, remarks2: remarks };
 
     fetch('/saveSchedule', {
         method: 'POST',
