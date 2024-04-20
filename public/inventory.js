@@ -106,7 +106,7 @@ function fetchFloorsAndUpdateHTML() {
 
                 // Add Edit Button
                 const editButton = document.createElement('button');
-                editButton.textContent = 'Edit';
+                editButton.textContent = '';
                 editButton.className = 'editButton';
                 // Add an event listener to the edit button for each floor
                 editButton.addEventListener('click', function() {
@@ -139,7 +139,7 @@ function fetchFloorsAndUpdateHTML() {
 
                 // Add Delete Button
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
+                deleteButton.textContent = 'x';
                 deleteButton.className = 'deleteButton';
                 deleteButton.addEventListener('click', function() {
                 const confirmDelete = window.confirm('Are you sure you want to delete this area?');

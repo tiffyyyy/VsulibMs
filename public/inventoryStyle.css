@@ -494,38 +494,56 @@ a{
 }
 
 .editButton {
-  background-color: #4CAF50; /* Green */
+  margin-top: 10px;
+  background-color: #ccc; /* Green */
   color: white;
   position: absolute;
   top: 2px;
-  right: 80px;
-  
+  right: 50px;
+  background-image:url(images/pencil.png);
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+}
+
+.editButton:hover {
+  background-color: #B49B44;
 }
 
 .deleteButton {
-  background-color: #f44336; /* Red */
-  color: white;
   position: absolute;
   top: 2px;
   right: 5px;
   background-image: url(''); 
   background-repeat: no-repeat;
   background-position: center;
+  margin-top: 10px;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 60px;
+  color: #222222;
+  background-color: #ccc;
+}
+
+.deleteButton:hover {
+  background-color: #B49B44;
+  color: #333;
 }
 
 
 
 /*Equipment*/
-
-
-
-
-
-
 .equipText{
   text-align: center;
-  font-size: large;
-  margin-top: 0px;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 0px;
 }
 
 
@@ -550,10 +568,6 @@ a{
   display: flex;
   justify-content: flex-start;
   font-weight: 200;
-  font-size: 24px;
-}
-
-.numberText {
   font-size: 24px;
 }
 
@@ -582,15 +596,6 @@ img {
   flex-wrap: wrap;
   gap: 10px;
   overflow-y: auto;
-}
-
-img {
-  width: 190px; /* Make the image fill the width of the box */
-  height: 140px; /* Adjust the height as needed */
-  object-fit: cover; /* Cover the box without stretching the image */
-  flex-grow:1;
-  flex-basis: 200;
-  border-radius: 10px;
 }
 
 .button {

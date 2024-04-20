@@ -175,7 +175,7 @@ function fetchAndDisplayEquipment() {
             });
 
             const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
+    
             editButton.className = 'editButton'; // Ensure this class has the desired styling
             editButton.addEventListener('click', function() {
                 // Create a form for editing the equipment

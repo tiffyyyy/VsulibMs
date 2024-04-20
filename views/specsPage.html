@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="inventoryStyle.css">
+<link rel="stylesheet" href="partsStyle.css">
 <script src="login.js"></script>
 <title>Equipment Specification Page</title>
 </head>
@@ -70,10 +70,10 @@
     <div id="body-area-div">
       <div class="row1">
           <div class = "row2c1">
-            <form id="specsForm" action="/saveSpecs" method="POST">
+            <form id="specsForm"  action="/saveSpecs" method="POST">
               <div class="addPartsBox">
-                  <h3>EQUIPMENT SPECIFICATION</h3>
-                  <input type="text" id="specsNameInput" name="specsName" placeholder="Enter Specification" required>
+                  <h3 class="specsLabel">Equipment Specification</h3>
+                  <input type="text" class="specsNameInput" id="specsNameInput" name="specsName" placeholder="Enter Specification" required>
                   <button type="submit" class="addPart">Add</button>
               </div>
             </form>          
