@@ -94,6 +94,14 @@ app.get('/inspectionPage', (req,res) => {
     res.sendFile(path.join(__dirname, 'views', 'inspectionPage.html'));
 })
 
+app.get('/historyPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'historyPage.html'));
+})
+
+app.get('/historyDetailPage', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'historyDetailPage.html'));
+})
+
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
@@ -750,6 +758,22 @@ app.post('/updateEquipStatus', (req, res) => {
     });
 });
 
+// Get all history records
+app.get('/api/history', (req, res) => {
+    const query = `
+        SELECT h.id, e.equip_name, e.equip_no, h.saved_at
+        FROM history h
+        JOIN equipment e ON h.equip_id = e.equip_id
+    `;
+    db.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching history:', error);
+            return res.status(500).json({ error: 'Error fetching history' });
+        }
+
+        return res.json(results);
+    });
+});
 
 app.use((error, req, res, next) => {
 if (error instanceof multer.MulterError) {
