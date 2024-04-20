@@ -28,7 +28,7 @@ function displayAreas() {
 
                 const areaLink = document.createElement('a');
                 areaLink.textContent = `${area.name}`;
-                areaLink.href = `/scheduleEquipmentPage?areaId=${area.id}`;
+                areaLink.href = `/inspectionEquipmentPage?areaId=${area.id}`;
                 areaBox.appendChild(areaLink);
                 bodyAreaDiv.appendChild(areaBox);
             });

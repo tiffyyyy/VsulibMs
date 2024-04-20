@@ -35,6 +35,11 @@ body {
   align-items: center;
 }
 
+.row1{
+  display: flex;
+  gap: 20%;
+}
+
 #nav-div {
   display: flex;
   flex-direction: row;
@@ -486,7 +491,7 @@ a{
   align-items: center; /* Centers items vertically */
 }
 
-.editButton, .deleteButton {
+.editBtn, .deleteBtn {
   margin-left: 10px; /* Add some space between the buttons */
   padding: 5px 10px;
   border: none;
@@ -658,3 +663,53 @@ img {
   flex-wrap: wrap;
   gap: 5px;
 }
+
+.schedBtn {
+  position: absolute;
+  top: 1px;
+  right: 10px;
+  background-color: #f44336;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-image:url(images/calendar-silhouette.png);
+  background-repeat:no-repeat;
+	background-size:cover;
+  height: 35px;
+  width: 35px;
+}
+
+.calendarDisplay {
+  width: 300px;
+  margin: 0 auto;
+}
+
+#calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#calendar div {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+}
+
+#calendar div:hover {
+  background-color: #f4f4f4;
+}
+
+#yearSelect {
+  width: 200px;
+}
+
+#monthSelect {
+  width: 200px;
+}
+

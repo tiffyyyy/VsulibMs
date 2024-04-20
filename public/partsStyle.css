@@ -699,3 +699,9 @@ img {
   flex-wrap: wrap;
   gap: 5px;
 }
+
+.equipDetails{
+    align-items: center;
+    align-content: center;
+}
+

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="partsStyle.css">
-<title>Equipment Page</title>
+<link rel="stylesheet" href="inventoryStyle.css">
+<title>Equipment Specification Page</title>
 </head>
 
 <body>
@@ -39,8 +39,8 @@
         <div class="sidebar-menu">
         <ul>
           <h3>MENU</h3>
-        <li class="active"><a href="/inventory">Inventory</a></li>
-        <li><a href="/scheduleFloorPage">Schedule</a></li>
+        <li><a href="/inventory">Inventory</a></li>
+        <li class="active"><a href="/scheduleFloorPage">Schedule</a></li>
         <li><a href="/createAccount">Inspection</a></li>
         <li><a href="/createAccount">History</a></li>
         <h3>ADD ACOUNT</h3>
@@ -56,44 +56,45 @@
             <a href="/inventory" class="nav-link-active">Floor</a>
             <a href="/floorPage" class="nav-link-active">Area</a>
             <a href="/floorPage" class="nav-link-active">Equipment</a>
-            <a href="/floorPage" class="nav-link-active">Specs</a>
+            <a href="/floorPage" class="nav-link-active">Calendar</a>
           </div>
       </div>
-
-      <div id="button-container-div">
-        <button id="addAreaBtn" class="addFloor">
-          Add area
-        </button>
-      </div>
       
-      <div id="body-area-div">
-        <div class="row1">
-            <div class = "row2c1">
-              <form id="partsForm"  action="/saveParts" method="POST">
-                <div class="addPartsBox">
-                    <h3 class="specsLabel">Equipment Parts</h3>
-                    <input type="text" class="specsNameInput" id="partsNameInpute" name="partsName" placeholder="Enter Part Name" required>
-                    <select id="equipStatusInput" name="equipStatus" required>
-                      <option value="">Select Condition</option>
-                      <option value="Working">Working</option>
-                      <option value="Not Working">Not Working</option>
-                  </select>
-                  <button type="submit" class="addPart">Add</button>
-              </div>
-              </form>          
-            </div>
-            <div class = "row2c2">
-                <div class = "partsDisplay">
-                  <p>display</p>
+    <div id="body-area-div">
+      <div class="row1">
+          <div class = "row2c1">
+            <div class="equipBox">
+                <div class="entityNumber">
+                    <h3>1</h3>
                 </div>
+                <p>Equipment Name</p>
+                <img alt="Equipment Image">
+                <p>Serial Number: 12345</p>
             </div>   
-        </div>
-      </div>
-      <div id="footer-div">
-        Footer
+          </div>
+            <div class = "row2c2">
+                <button class = "proposed">Proposed</button>
+                <button class = "actual">Actual</button>
+                <div id="calendarDisplay" class="calendarDisplay">
+                    <select id="yearSelect"></select>
+                    <select id="monthSelect"></select>
+                    <div id="calendar"></div>
+                </div> 
+                <form id="remarksForm">
+                  <label for="remarks">Remarks:</label>
+                  <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+                </form>
+                <button id = "saveBtn">save</button>
+                <button id = "finish">finish maintenance</button>     
+            </div>         
       </div>
     </div>
+    <div id="footer-div">
+      Footer
+    </div>
+  </div>
+  
 
-<script src="parts.js"></script>
+<script src="calendar.js"></script>
 </body>
 </html>

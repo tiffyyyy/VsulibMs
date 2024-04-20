@@ -37,8 +37,8 @@
           <div class="sidebar-menu">
           <ul>
             <h3>MENU</h3>
-          <li class="active"><a href="/inventory">Inventory</a></li>
-          <li><a href="/scheduleFloorPage">Schedule</a></li>
+          <li><a href="/inventory">Inventory</a></li>
+          <li class="active"><a href="/scheduleFloorPage">Schedule</a></li>
           <li><a href="/createAccount">Inspection</a></li>
           <li><a href="/createAccount">History</a></li>
           <h3>ADD ACOUNT</h3>
@@ -56,35 +56,11 @@
               <a href="/equipmentPage" class="nav-link-active">Equipment</a>
             </div>
         </div>
-      
-        <div id="button-container-div">
-          <button id="addEquipmentBtn" class="addFloor">
-            Add equipment
-          </button>
-        </div>
-      <div id="myModal" class="modal" style="height: 60%;">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2 class="label" style="margin-bottom: 65%; position: fixed;" >Add Equipment</h2>
-          <form id="equipmentForm" enctype="multipart/form-data">
-            <input type="text" id="equipNameInput" placeholder="Equipment Name" required>
-            <input type="text" id="equipNoInput" placeholder="Equipment Number" required>
-            <input type="file" id="equipPicInpu" name="equipPicInput" accept="image/*" required>
-            <select id="equipStatusInput" required>
-                <option value="">Select Status</option>
-                <option value="Good">Good</option>
-                <option value="Need Maintenance">Need Maintenance</option>
-                <option value="Need Replacement">Need Replacement</option>
-            </select>
-            <button type="submit" class="add">Add</button>
-        </form>               
-        </div>
-      </div>
       <div id = "body-area-div">
           <div class="row2">
             <div class="equipBox">
                 <div class="entityNumber">
-                    <p>1</p>
+                    <h3>1</h3>
                 </div>
                 <p>Equipment Name</p>
                 <img alt="Equipment Image">
@@ -104,6 +80,6 @@
     </div>
   </div>
 
-<script src="equipment.js"></script>
+<script src="scheduleEquipment.js"></script>
 </body>
 </html>

@@ -20,9 +20,8 @@ document.getElementById('submitFloorBtn').addEventListener('click', function() {
     var floorName = document.getElementById('floorNameInput').value;
 
     if (floorName.trim() === '') {
-        // Display a warning and exit the function
         alert('Floor name cannot be empty. Please enter a valid floor name.');
-        return; // This stops the function from executing further
+        return;
     }
 
     var xhr = new XMLHttpRequest();
@@ -31,16 +30,12 @@ document.getElementById('submitFloorBtn').addEventListener('click', function() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-                // Floor creation successful
                 console.log("Floor created successfully");
-                // Display success message
                 alert('Floor created successfully');
                 fetchFloorsAndUpdateHTML();
-                // Close the modal
                 var modal = document.getElementById("myModal");
                 modal.style.display = "none";       
             } else {
-                // Display error message
                 alert('Error creating floor');
             }
         }
@@ -69,7 +64,7 @@ function fetchFloorsAndUpdateHTML() {
                 const p = document.createElement('p');
                 const floorLink = document.createElement('a');
                 floorLink.textContent = floor.name;
-                floorLink.href = `/scheduleAreaPage?floorId=${floor.floorId}`;
+                floorLink.href = `/inspectionAreaPage?floorId=${floor.floorId}`;
                 p.appendChild(floorLink);
                 floorBox.appendChild(p);
 
