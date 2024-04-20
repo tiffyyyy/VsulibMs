@@ -274,6 +274,21 @@ a{
   border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Subtle black border at the bottom */
 }
 
+#body-area-div-history {
+  width: 100%;
+  min-height: 410px;
+  overflow-y: auto;
+  gap: 20px;
+  padding: 20px;
+  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border-top: 2px solid rgba(231, 231, 231, 0.742); /* Subtle white border at the top */
+  border-right: 2px solid rgba(0, 0, 0, 0.1); /* Subtle white border at the top */
+  border-left: 2px solid rgba(231, 231, 231, 0.742);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Subtle black border at the bottom */
+}
+
 .floorBox{
   display: flex;
   align-items: center;

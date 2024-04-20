@@ -759,7 +759,7 @@ app.post('/updateEquipStatus', (req, res) => {
 });
 
 // Get all history records
-app.get('/api/history', (req, res) => {
+app.get('/history', (req, res) => {
     const query = `
         SELECT h.id, e.equip_name, e.equip_no, h.saved_at
         FROM history h

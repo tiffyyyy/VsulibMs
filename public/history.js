@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to fetch and display all history data
     function fetchAndDisplayAllHistory() {
-        fetch('/api/history')
+        fetch('/history')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
             .then(data => {
+                // Clear the table before adding new rows
                 labelsTable.innerHTML = `
                     <tr>
                         <th>Equipment Name</th>
@@ -42,19 +43,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         <th>Saved Date</th>
                     </tr>
                 `;
-
+    
                 data.forEach(record => {
                     const formattedDate = formatDate(record.saved_at);
                     const row = document.createElement('tr');
-                    row.innerHTML = `
+                    // Wrap the row content in an anchor tag to make it clickable
+                    const link = document.createElement('a');
+                    link.href = `/historyDetailPage?id=${record.id}`; // Assuming 'id' is the unique identifier
+                    link.innerHTML = `
                         <td>${record.equip_name}</td>
                         <td>${record.equip_no}</td>
                         <td>${formattedDate}</td>
                     `;
-                    const link = document.createElement('a');
-                    link.href = `/historyDetailPage?id=${record.id}`;
-                    link.appendChild(row);
-                    labelsTable.appendChild(link);
+                    row.appendChild(link);
+                    labelsTable.appendChild(row);
                     console.log(record.id);
                 });
             })
@@ -62,6 +64,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('There has been a problem with your fetch operation:', error);
             });
     }
-
     fetchAndDisplayAllHistory();
 });
