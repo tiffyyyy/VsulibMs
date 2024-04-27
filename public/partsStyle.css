@@ -1,158 +1,478 @@
-.container {
-    display: flex;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
-.column1 {
-    flex: 1;
-    max-width: 20%;
-    margin: 0;
-}
-
-body{
-    margin:0;
-    padding: 0;
-}
-
-.addFloor{
-    position: fixed;
-    left: 1282px;
-    top: 75px;
-    border-radius: 5px;
-    background-color: green;
-    padding: 5px;
-}
-
-.addFloor:hover{
-    background-color: blue;
-}
-
-.add{
-    margin-top: 5px;
-    margin-left: 52px;
-    display: block;
-    padding: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 15px;
-}
-
-.add:hover{
-    background-color: black;
-}
-
-.c1Row1{
-    height: 100px;
-    background-color: green;
-    padding: 10px;
-    margin: 0;
-}
-
-.c1Row2{
-    width: 275px;
-    height: 100%;
-    margin: 0;
-    background-color: grey;
-}
-
-.c1Row2 ul li a {
-    display: block; 
-    width: 100%;
-    height: 100%;
-    text-decoration: none; 
-    color: inherit;
-}
-
-li:hover{
-    background-color: yellow;
-}
-
-li{
-    list-style-type: none;
-    padding: 10px;
-    margin: 0;
-    width: 255px;
-}
-
-ul{
-    margin: 0;
-    padding: 0;
-}
-
-a{
-    text-decoration: none;
-    font-size: 20px;
-    margin: 0;
-}
-
-h3{
-    margin-top: 0px;
-}
-
-.equipText{
-    text-align: center;
-    font-size: large;
-    margin-top: 0px;
-}
-  
-.column2 {
-    flex: 4; /* Column 2 takes up the remaining 80% of the container's width */
-    max-width: 80%;
-    margin: 0;
-    
+body {
+  display: flex;
+  flex-direction: column;
+  /*background-color: #a6bfaf;*/
 
 }
 
-.row1 {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Add spacing between items */
-    height:5%;
-    padding: 10px;
-    background-color: red;
+#wrapper-div {
+  display:flex;
+  flex-direction:column;
+  width: 100%;
+  min-height: 100px;
+  margin: auto;
 }
 
-.row2 {
-    display: flex;
-    flex-direction: row; /* Change this from column to row */
-    width: 1100px;
-    min-height: 650px;
-    border-radius: 20px;
-    border: 10px solid black;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-    overflow-y: auto;
+#logo-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 50px;
+  background-color: light gray;
+  line-height: 50px;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-bottom: 10px;
+  align-items: center;
+  background-image: url(images/VSU\ MS-Logo\ V1.png);
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
+}
+
+#nav-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  margin-right: 10px;
+  background-color: lightgray;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.user-profile-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.dropdown {
+  margin-top: 5px;
+  position: relative;
+}
+
+.dropbtn {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position it just below the button */
+  right: 0; /* Align it to the right */
+  background-color: #f9f9f9;
+  min-width: 150px;
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 18px;
+  text-decoration: none;
+  display: block;
+  font-size: 18px;
+}
+
+.dropdown-content a:hover {
+  background-color: #abaaa6;
+  border-radius: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+#main-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 500px;
+  justify-content: space-between;
+}
+
+#left-div {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 20%;
+}
+
+
+#right-div {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 80%;
+}
+
+#sidebar-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 510px;
+}
+
+.sidebar-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 510px;
+  background-color: rgb(225, 231, 221); /*E1E7DD*/
+  border-radius: 10px;
+  color: #333;
+}
+
+.sidebar-menu a{
+  color: black;
 }
 
 .active{
-    background-color: yellow;
+  background-color: #B49B44;
+  border-radius: 10px;
 }
 
- /* Modal styles */
+h3{
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 25px;
+}
+
+li{
+  list-style-type: none;
+  padding: 10px;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+li:hover{
+  background-color: #B49B44;
+  border-radius: 10px;
+}
+
+ul{
+  width: 100%;
+}
+
+a{
+  text-decoration: none;
+  font-size: 20px;
+  color: #fffffe;
+  padding-top: 2px;
+  position: relative;
+}
+
+#header-banner-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 50px;
+  background-color: #617969;
+  border-radius: 10px;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.nav-link {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Add spacing between items */
+  height:28px;
+  background-color: rgb(97, 121, 105);
+  border-radius: 10px;
+  width:100%;
+}
+
+.nav-link-active {
+  border-radius: 10px;
+}
+
+.nav-link a.nav-link-active::after {
+  content: ''; /* Add empty content */
+  position: absolute; /* Position the line relative to the link */
+  left: 0;
+  bottom: -2px; /* Adjust as needed */
+  width: 100%; /* Full width of the link */
+  height: 2px; /* Height of the line */
+  background-color: #fffffe; /* Color of the line */
+}
+
+#button-container-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 50px;
+  align-items: center;
+}
+
+.addFloor{
+  border-radius: 10px;
+  background-color: rgb(97, 121, 105);
+  padding: 10px;
+  color: white;
+  border: none;
+  font-size: 18px;
+}
+
+.addFloor:hover {
+  background-color: #B49B44;
+}
+
+#body-area-div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 410px;
+    overflow-y: auto;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+    background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border-top: 2px solid rgba(231, 231, 231, 0.742);
+    border-right: 2px solid rgba(0, 0, 0, 0.1);
+    border-left: 2px solid rgba(231, 231, 231, 0.742);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.floorBox{
+  display: flex;
+  align-items: center;
+  text-align: center; 
+  flex-wrap:wrap;
+  border-radius: 10px;
+  border-width: 2px;
+  position: relative;
+  width: 300px;
+  height: 165px;
+  background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  backdrop-filter: blur(3.2px); /* Adjust the blur for the glass effect */
+  justify-content: center;
+  border-top: 2px solid rgba(255, 255, 255, 0.568); /* Subtle white border at the top */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Subtle black border at the bottom */
+}
+
+.floorBox a{
+  background-repeat: no-repeat;
+  background-color: #617969;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#footer-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100px;
+  background-color: lightgray;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
 .modal {
   display: none;
   position: fixed;
   z-index: 1;
-  left: 640px;
-  top: 150px;
-  width: 28%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 25%;
   height: 50%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  border-radius: 20px;
+  background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(40px);
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
+  background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(3.2px);
+  margin: 0 auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#floorNameInput {
+  width: 90%; /* Set width to 80% of its container */
+  margin: 0 auto; /* Center horizontally */
+  margin-bottom: 10px;
+  border-radius: 10px;
+  height: 6vh; /* Set height to 6% of the viewport height */
+  font-size: 3vh; /* Set font size to 3% of the viewport height */
+  padding: 10px; /* Set padding to 1% of the viewport height */
+  border: 0.1vh solid rgb(44, 44, 44); /* Set border thickness to 0.1% of the viewport height */
+  background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(2vh); /* Set backdrop-filter to 2% of the viewport height */
+  position: absolute;
+  bottom: 40%; /* Position from bottom relative to viewport height */
+}
+
+#floorNameInput::placeholder {
+  color: #999; /* Change placeholder color */
+  /*opacity: 2;  Adjust opacity of placeholder text */
+  font-weight: 300;
+}
+
+#areaNameInput {
+  width: 90%; /* Set width to 80% of its container */
+  margin: 0 auto; /* Center horizontally */
+  margin-bottom: 10px;
+  border-radius: 10px;
+  height: 6vh; /* Set height to 6% of the viewport height */
+  font-size: 3vh; /* Set font size to 3% of the viewport height */
+  padding: 10px; /* Set padding to 1% of the viewport height */
+  border: 0.1vh solid rgb(44, 44, 44); /* Set border thickness to 0.1% of the viewport height */
+  background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(2vh); /* Set backdrop-filter to 2% of the viewport height */
+  position: absolute;
+  bottom: 40%; /* Position from bottom relative to viewport height */
+}
+
+#areaNameInput::placeholder {
+  color: #999; /* Change placeholder color */
+  /*opacity: 2;  Adjust opacity of placeholder text */
+  font-weight: 300;
+}
+
+#equipNameInput {
+  width: 100%; /* Set width to 80% of its container */
+  margin: 0 auto; /* Center horizontally */
+  margin-bottom: 10px;
+  border-radius: 10px;
+  height: 6vh; /* Set height to 6% of the viewport height */
+  font-size: 3vh; /* Set font size to 3% of the viewport height */
+  padding: 10px; /* Set padding to 1% of the viewport height */
+  border: 0.1vh solid rgb(44, 44, 44); /* Set border thickness to 0.1% of the viewport height */
+  background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(2vh); /* Set backdrop-filter to 2% of the viewport height */
+  bottom: 90%; /* Position from bottom relative to viewport height */
+}
+
+
+
+#equipNameInput::placeholder {
+  color: #999; /* Change placeholder color */
+  /*opacity: 2;  Adjust opacity of placeholder text */
+  font-weight: 300;
+}
+
+#equipNoInput {
+  width: 100%; /* Set width to 80% of its container */
+  margin: 0 auto; /* Center horizontally */
+  margin-bottom: 10px;
+  border-radius: 10px;
+  height: 6vh; /* Set height to 6% of the viewport height */
+  font-size: 3vh; /* Set font size to 3% of the viewport height */
+  padding: 10px; /* Set padding to 1% of the viewport height */
+  border: 0.1vh solid rgb(44, 44, 44); /* Set border thickness to 0.1% of the viewport height */
+  background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(2vh); /* Set backdrop-filter to 2% of the viewport height */
+  bottom: 40%; /* Position from bottom relative to viewport height */
+}
+
+#equipNoInput::placeholder {
+  color: #999; /* Change placeholder color */
+  /*opacity: 2;  Adjust opacity of placeholder text */
+  font-weight: 300;
+}
+
+
+
+#equipStatusInput {
+  border: 1px solid rgb(44, 44, 44);
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: 300;
+  font-size: 14px;
+  position: absolute;
+  bottom: 20%;
+  left: 20px;
+}
+
+#equipPicInpu {
+ padding: 10px;
+ position: absolute;
+ bottom: 28.5%;
+ left: 10px;
+}
+
+.label {
+  font-weight: 200;
+  text-align: center;
+  margin-bottom: 50%;
+  font-size: 28px;
+}
+
+.add {
+  position: absolute;
+  bottom: 20px; /* Adjust this value to your desired distance from the bottom edge */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #617969;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+}
+
+.add:hover {
+  background-color: #B49B44;
 }
 
 .close {
+  position: absolute;
+  top: 10px; /* Adjust this value to your desired distance from the top edge */
+  right: 15px; /* Adjust this value to your desired distance from the right edge */
   color: #aaa;
-  float: right;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -163,102 +483,288 @@ h3{
   cursor: pointer;
 }
 
-.equipBox{
-    border: 1px solid #ccc;
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 240px; 
-    text-align: center; 
-    flex-wrap:wrap;
-    height: 370px;
-    border-radius: 10px;
-    border-width: 2px;
-    border-color: black;
+.areaContent {
+  display: flex;
+  justify-content: space-between; /* Aligns items to the left and right */
+  align-items: center; /* Centers items vertically */
 }
+
+.editButton, .deleteButton {
+  margin-left: 10px; /* Add some space between the buttons */
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.editButton {
+  margin-top: 10px;
+  background-color: #ccc; /* Green */
+  color: white;
+  position: absolute;
+  top: 25px;
+  right: 100px;
+  background-image:url(images/pencil.png);
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+}
+
+.editButton:hover {
+  background-color: #B49B44;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 25px;
+  right: 60px;
+  background-image: url(''); 
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 10px;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 60px;
+  color: #464545;
+}
+
+.deleteButton:hover {
+  background-color: #9a9a99;
+  color: #333;
+}
+
+
+
+/*Equipment*/
+.equipText{
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+
+.equipBox{
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 240px; 
+  text-align: center; 
+  flex-wrap:wrap;
+  height: 370px;
+  border-radius: 10px;
+  border-width: 2px;
+  position: relative;
+  background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  backdrop-filter: blur(3.2px);
+  border-top: 2px solid rgba(255, 255, 255, 0.568); /* Subtle white border at the top */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Subtle black border at the bottom */
+}
+
 .entityNumber{
-    text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 200;
+  font-size: 24px;
 }
 
 img {
-    width: 190px; /* Make the image fill the width of the box */
-    height: 140px; /* Adjust the height as needed */
-    object-fit: cover; /* Cover the box without stretching the image */
-    flex-grow:1;
-    flex-basis: 200;
-    border-radius: 10px;
+  width: 190px; /* Make the image fill the width of the box */
+  height: 140px; /* Adjust the height as needed */
+  object-fit: cover; /* Cover the box without stretching the image */
+  flex-grow:1;
+  flex-basis: 200;
+  border-radius: 10px;
 }
 
 .button-container {
-    display: flex;
-    justify-content: space-between; /* Spaces the buttons evenly */
-    width: 100%; /* Ensures the buttons span the full width of the equipBox */
-    margin-top: 10px; /* Adds some space above the buttons */
+  display: flex;
+  justify-content: center; /* Spaces the buttons evenly */
+  align-items: center;
+  width: 100%; /* Ensures the buttons span the full width of the equipBox */
+  margin-top: 20px; /* Adds some space above the buttons */
+  gap:20px;
+}
+
+
+.row2 {
+  display: flex;
+  flex-direction: row; /* Change this from column to row */
+  flex-wrap: wrap;
+  gap: 10px;
+  overflow-y: auto;
 }
 
 .button {
-    display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    background-color: #007bff;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  display: inline-block;
+  padding: 5px 10px;
+  color: #fff;
+  background-color: #617969;
+  text-decoration: none;
+  border-radius: 10px;
+  text-align: center;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
 .button:hover {
-    background-color: #0056b3; 
+  background-color: #B49B44; 
+}
+
+.row1 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 34px;
 }
 
 .row2c1 {
-    width: 30%;
-    border: 2px solid black;
-    text-align: center;
+  width: 30%;
+  border: none;
+  border-radius: 20px;
 }
 
 .row2c2 {
-    width: 65%;
-    height: 50%;
-    border: 2px solid black;
+  padding: 10px;
+  width: 65%;
+  height: 100%;
+  border: 1px solid #617969;
+  overflow-y: auto;
+  border-radius: 20px;
 }
 
 .addPartsBox {
-    display: flex;
-    flex-direction: column; /* Stack children vertically */
-    justify-content: space-between; /* Push the first child to the top and the last child to the bottom */
-    align-items: center; /* Center children horizontally */
-    height: 50%; /* Ensure the container takes up the full height of its parent */
-    padding: 10px; /* Add some padding for better spacing */
-    border: 2px solid black;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  /*height: 50%;  Ensure the container takes up the full height of its parent */
+  padding: 10px; /* Add some padding for better spacing */
+  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border-top: 2px solid rgba(231, 231, 231, 0.742);
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgba(231, 231, 231, 0.742);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.specsLabel {
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 50%;
+    font-size: 20px;
+  }
+
+.specsNameInput {
+    width: 90%; /* Set width to 80% of its container */
+    margin: 0 auto; /* Center horizontally */
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 16px; /* Set font size to 3% of the viewport height */
+    padding: 10px; /* Set padding to 1% of the viewport height */
+    border: 0.1vh solid rgb(44, 44, 44); /* Set border thickness to 0.1% of the viewport height */
+    background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+    backdrop-filter: blur(2vh); /* Set backdrop-filter to 2% of the viewport height */
+    position: absolute;
+    margin-top: 12vh;
 }
 
 .addPart{
-    margin-top: 10px;
-    padding: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 15px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: #617969;
+  color: #fff;
+  font-size: 20px;
 }
 
 .addPart:hover{
-    background-color: black;
+  background-color: #B49B44;
 }
 
 .partsDisplay, .specsDisplay {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    width: 90%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .equipDetails{
-    align-items: center;
-    align-content: center;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  /*height: 50%;  Ensure the container takes up the full height of its parent */
+  padding: 20px; /* Add some padding for better spacing */
+  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border-top: 2px solid rgba(231, 231, 231, 0.742);
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgba(231, 231, 231, 0.742);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
+
+.equipStats {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  /*height: 50%;  Ensure the container takes up the full height of its parent */
+  padding: 10px; /* Add some padding for better spacing */
+  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border-top: 2px solid rgba(231, 231, 231, 0.742);
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgba(231, 231, 231, 0.742);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+#updateBtn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: #617969;
+  color: #fff;
+  font-size: 20px;
+}
+
+#updateBtn:hover{
+background-color: #B49B44;
+}
+
+#statusSelect {
+  border: 1px solid rgb(44, 44, 44);
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: 300;
+  font-size: 14px;
+  position: absolute;
+  bottom: 50%;
+  left: 60px;
+}
+
+#equipName {
+  font-size: 22px;
+  font-weight: 400;
+  padding-bottom: 40px;
+}
+
 

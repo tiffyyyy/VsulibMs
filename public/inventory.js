@@ -93,7 +93,7 @@ function fetchFloorsAndUpdateHTML() {
 
                 // Add Edit Button
                 const editButton = document.createElement('button');
-                editButton.textContent = 'Edit';
+                editButton.textContent = '';
                 editButton.className = 'editButton';
                 editButton.addEventListener('click', function() {
                     // Edit form
@@ -120,7 +120,7 @@ function fetchFloorsAndUpdateHTML() {
 
                 // Add Delete Button
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
+                deleteButton.textContent = '';
                 deleteButton.className = 'deleteButton';
                 deleteButton.addEventListener('click', function() {
                 const confirmDelete = window.confirm('Are you sure you want to delete this area?');

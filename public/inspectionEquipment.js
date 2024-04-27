@@ -58,7 +58,7 @@ function fetchAndDisplayEquipment() {
 
             const button1 = document.createElement('a');
             button1.href = `/inspectionPage?equip_id=${item.equip_id}`;
-            button1.textContent = 'Specs';
+            button1.textContent = 'Parts';
             button1.className = 'button';
             buttonContainer.appendChild(button1);
 
