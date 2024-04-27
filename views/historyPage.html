@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="inventoryStyle.css">
-  <title>Inventory Page</title>
+  <title>History Page</title>
 </head>
 <body>
   <div id="wrapper-div">
@@ -37,10 +37,10 @@
           <div class="sidebar-menu">
           <ul>
             <h3>MENU</h3>
-          <li class="active"><a href="/inventory">Inventory</a></li>
+          <li><a href="/inventory">Inventory</a></li>
           <li><a href="/scheduleFloorPage">Schedule</a></li>
           <li><a href="/inspectionFloorPage">Inspection</a></li>
-          <li><a href="/historyPage">History</a></li>
+          <li class="active"><a href="/historyPage">History</a></li>
           <h3>ADD ACOUNT</h3>
           <li><a href="/createAccount">Create Account</a></li>
           </ul>
@@ -54,24 +54,15 @@
               <a href="/inventory" class="nav-link-active">Floor</a>
             </div>
         </div>
-
-        <div id="button-container-div">
-          <button id="addFloorBtn" class="addFloor">
-            Add floor
-          </button>
-        </div>
-
-        <div id="myModal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 class="label">Add floor</h2>
-            <input type="text" id="floorNameInput" placeholder="Enter Floor Name" required>
-            <button id="submitFloorBtn"; class = "add">Add</button>
-          </div>
-        </div>
         <div id = "body-area-div">
           <div class = "floorBox">
-            <p>body area</p>
+            <table class="labelsTable">
+                <tr>
+                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Date</th>
+                </tr>
+            </table>
           </div>
         </div>
       </div>
@@ -82,6 +73,6 @@
     </div>
   </div>
 
-<script src="inventory.js"></script>
+<script src="history.js"></script>
 </body>
 </html>
