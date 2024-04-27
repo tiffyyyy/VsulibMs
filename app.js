@@ -775,6 +775,38 @@ app.get('/history', (req, res) => {
     });
 });
 
+app.get('/history/:id', (req, res) => {
+    const historyId = req.params.id;
+
+    const historyQuery = `
+        SELECT h.id, e.equip_name, e.equip_no, h.saved_at, h.remarks2, h.actualDate, e.equip_pic, e.status
+        FROM history h
+        JOIN equipment e ON h.equip_id = e.equip_id
+        WHERE h.id = ?
+    `;
+
+    db.query(historyQuery, [historyId], (error, results) => {
+        if (error) {
+            console.error('Error fetching history:', error);
+            return res.status(500).json({ error: 'Error fetching history' });
+        }
+
+        if (results.length > 0) {
+            const historyDetails = results[0];
+            const equipmentDetails = {
+                equip_name: historyDetails.equip_name,
+                equip_no: historyDetails.equip_no,
+                equip_pic: `data:image/jpeg;base64,${historyDetails.equip_pic}`,
+                status: historyDetails.status
+            };
+
+            return res.json({ historyDetails, equipmentDetails });
+        } else {
+            return res.status(404).json({ error: 'History not found' });
+        }
+    });
+});
+
 app.use((error, req, res, next) => {
 if (error instanceof multer.MulterError) {
     console.log('This is the rejected field ->', error.field);
