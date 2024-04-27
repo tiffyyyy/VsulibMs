@@ -120,7 +120,7 @@ function fetchFloorsAndUpdateHTML() {
 
                 // Add Delete Button
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'x';
+                deleteButton.textContent = '';
                 deleteButton.className = 'deleteButton';
                 deleteButton.addEventListener('click', function() {
                 const confirmDelete = window.confirm('Are you sure you want to delete this area?');

@@ -33,6 +33,9 @@ body {
   padding-right: 2%;
   margin-bottom: 10px;
   align-items: center;
+  background-image: url(images/VSU\ MS-Logo\ V1.png);
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
 }
 
 #nav-div {
@@ -701,7 +704,67 @@ img {
 }
 
 .equipDetails{
-    align-items: center;
-    align-content: center;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  /*height: 50%;  Ensure the container takes up the full height of its parent */
+  padding: 20px; /* Add some padding for better spacing */
+  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border-top: 2px solid rgba(231, 231, 231, 0.742);
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgba(231, 231, 231, 0.742);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
+
+.equipStats {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  /*height: 50%;  Ensure the container takes up the full height of its parent */
+  padding: 10px; /* Add some padding for better spacing */
+  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border-top: 2px solid rgba(231, 231, 231, 0.742);
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgba(231, 231, 231, 0.742);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+#updateBtn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: #617969;
+  color: #fff;
+  font-size: 20px;
+}
+
+#updateBtn:hover{
+background-color: #B49B44;
+}
+
+#statusSelect {
+  border: 1px solid rgb(44, 44, 44);
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: 300;
+  font-size: 14px;
+  position: absolute;
+  bottom: 50%;
+  left: 60px;
+}
+
+#equipName {
+  font-size: 22px;
+  font-weight: 400;
+  padding-bottom: 40px;
+}
+
 
