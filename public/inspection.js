@@ -28,12 +28,10 @@ function fetchAndDisplayParts() {
                 const partNameElement = document.createElement('p');
                 partNameElement.textContent = `Part Name: ${part.name} Status: ${part.status}`;
 
-                // Create Edit and Delete buttons
                 const editButton = document.createElement('button');
                 editButton.textContent = 'Edit';
-                editButton.className = 'editButton'; // Add a class for styling
+                editButton.className = 'editButton';
                 editButton.addEventListener('click', function() {
-                    // Create a form for editing the part
                     const editForm = document.createElement('form');
                     editForm.id = 'editPartForm';
                     editForm.innerHTML = `
@@ -64,7 +62,6 @@ function fetchAndDisplayParts() {
         .catch(error => console.error('Error fetching parts:', error));
 }
 
-// Function to fetch and display parts
 document.addEventListener('DOMContentLoaded', function() {
     fetchAndDisplayParts();
 });
