@@ -53,7 +53,7 @@ An electronic equipment inventory that tracks the status of a specific electroni
 - Initial User Interface for Schedule Method created
 - Schedule and History created in database
 - Add proposed, and actual date function implemented
-- 70% done on user interface inventory page test1
+- 70% done on user interface inventory page test
 
 ## Important Links
 
