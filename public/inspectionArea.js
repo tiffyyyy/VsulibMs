@@ -13,12 +13,10 @@ function updateWelcomeMessage() {
     }
 }
 
-// Call the function when the window is fully loaded
 function displayAreas() {
     const bodyAreaDiv = document.getElementById('body-area-div');
     bodyAreaDiv.innerHTML = '';
 
-    // Fetch the areas from the server
     fetch(`/area`)
         .then(response => response.json())
         .then(areas => {
@@ -38,7 +36,32 @@ function displayAreas() {
         });
 }
 
-// Call the function when the window is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
     displayAreas();
 });
+
+function checkUserLoggedIn() {
+    const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
+    if (!usernameCookie) {
+        window.location.href = '/';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    checkUserLoggedIn();
+});
+
+function logout() {
+    const cookiePaths = [
+        '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
+        '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
+        '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
+        '/historyPage', '/historyDetailPage'
+    ];
+
+    cookiePaths.forEach(path => {
+        document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
+    });
+
+    window.location.href = '/';
+}
