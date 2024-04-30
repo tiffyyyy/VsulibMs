@@ -17,6 +17,9 @@ function displayAreas() {
     const bodyAreaDiv = document.getElementById('body-area-div');
     bodyAreaDiv.innerHTML = '';
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+
     fetch(`/area`)
         .then(response => response.json())
         .then(areas => {
@@ -26,7 +29,7 @@ function displayAreas() {
 
                 const areaLink = document.createElement('a');
                 areaLink.textContent = `${area.name}`;
-                areaLink.href = `/inspectionEquipmentPage?areaId=${area.id}`;
+                areaLink.href = `/inspectionEquipmentPage?floorId=${floorId}&areaId=${area.id}`;
                 areaBox.appendChild(areaLink);
                 bodyAreaDiv.appendChild(areaBox);
             });
@@ -65,3 +68,14 @@ function logout() {
 
     window.location.href = '/';
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+
+    const floorLink = document.querySelector('.nav-link a[href="/inspectionFloorPage"]');
+    const areaLink = document.querySelector('.nav-link a[href="/inspectionAreaPage"]');
+
+    floorLink.href = `/inspectionFloorPage`;
+    areaLink.href = `/inspectionAreaPage?floorId=${floorId}`;
+});

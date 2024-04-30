@@ -15,6 +15,10 @@ function updateWelcomeMessage() {
 window.addEventListener('load', updateWelcomeMessage);
 
 function fetchAndDisplayEquipment() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+    const areaId = urlParams.get('areaId');
+
     fetch('/fetchEquipment')
     .then(response => response.json())
     .then(data => {
@@ -57,7 +61,7 @@ function fetchAndDisplayEquipment() {
             buttonContainer.className = 'button-container';
 
             const button1 = document.createElement('a');
-            button1.href = `/inspectionPage?equip_id=${item.equip_id}`;
+            button1.href = `/inspectionPage?floorId=${floorId}&areaId=${areaId}&equip_id=${item.equip_id}`;
             button1.textContent = 'Parts';
             button1.className = 'button';
             buttonContainer.appendChild(button1);
@@ -99,3 +103,17 @@ function logout() {
 
     window.location.href = '/';
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+    const areaId = urlParams.get('areaId');
+
+    const floorLink = document.querySelector('.nav-link a[href="/inspectionFloorPage"]');
+    const areaLink = document.querySelector('.nav-link a[href="/inspectionAreaPage"]');
+    const equipmentLink = document.querySelector('.nav-link a[href="/inspectionEquipmentPage"]');
+
+    floorLink.href = `/inspectionFloorPage`;
+    areaLink.href = `/inspectionAreaPage?floorId=${floorId}`;
+    equipmentLink.href = `/inspectionEquipmentPage?floorId=${floorId}&areaId=${areaId}`;
+});

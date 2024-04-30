@@ -226,3 +226,20 @@ function logout() {
 
     window.location.href = '/';
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+    const areaId = urlParams.get('areaId');
+    const equipId = urlParams.get('equip_id');
+
+    const floorLink = document.querySelector('.nav-link a[href="/inspectionFloorPage"]');
+    const areaLink = document.querySelector('.nav-link a[href="/inspectionAreaPage"]');
+    const equipmentLink = document.querySelector('.nav-link a[href="/inspectionEquipmentPage"]');
+    const inspectLink = document.querySelector('.nav-link a[href="/inspectionPage"]');
+
+    floorLink.href = `/inspectionFloorPage`;
+    areaLink.href = `/inspectionAreaPage?floorId=${floorId}`;
+    equipmentLink.href = `/inspectionEquipmentPage?floorId=${floorId}&areaId=${areaId}`;
+    inspectLink.href = `/inspectionPage?floorId=${floorId}&areaId=${areaId}&equip_id=${equipId}`;
+});

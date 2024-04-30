@@ -175,3 +175,20 @@ function logout() {
 
     window.location.href = '/';
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+    const areaId = urlParams.get('areaId');
+    const equipId = urlParams.get('equip_id');
+
+    const floorLink = document.querySelector('.nav-link a[href="/inventory"]');
+    const areaLink = document.querySelector('.nav-link a[href="/areaPage"]');
+    const equipmentLink = document.querySelector('.nav-link a[href="/equipmentPage"]');
+    const specsLink = document.querySelector('.nav-link a[href="/specsPage"]');
+
+    floorLink.href = `/inventory`;
+    areaLink.href = `/floorPage?floorId=${floorId}`;
+    equipmentLink.href = `/equipmentPage?floorId=${floorId}&areaId=${areaId}`;
+    specsLink.href = `/specsPage?floorId=${floorId}&areaId=${areaId}&equip_id=${equipId}`;
+});
