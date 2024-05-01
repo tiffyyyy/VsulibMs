@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="inventoryStyle.css">
-<title>Schedule Page</title>
+<title>Equipment Specification Page</title>
 </head>
 
 <body>
@@ -53,10 +53,10 @@
     <div id="right-div">
       <div id="header-banner-div">
           <div class="nav-link">
-            <a href="/inventory" class="nav-link-active">Floor</a>
-            <a href="/floorPage" class="nav-link-active">Area</a>
-            <a href="/floorPage" class="nav-link-active">Equipment</a>
-            <a href="/floorPage" class="nav-link-active">Calendar</a>
+            <a href="/scheduleFloorPage" class="nav-link-active">Floor</a>
+            <a href="/scheduleAreaPage" class="nav-link-active">Area</a>
+            <a href="/scheduleEquipmentPage" class="nav-link-active">Equipment</a>
+            <a href="/calendarPage" class="nav-link-active">Calendar</a>
           </div>
       </div>
 
@@ -81,7 +81,9 @@
                 <div id="calendarDisplay" class="calendarDisplay">
                   <div class="date-container">
                     <select id="monthSelect"></select>
-                    <div id="calendar"></div> 
+                    <select id="yearSelect"></select>
+                  </div>
+                    <div id="calendar"></div>
                 </div> 
                 <form id="remarksForm">
                   <label for="remarks">Remarks:</label>

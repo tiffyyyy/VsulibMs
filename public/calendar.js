@@ -133,9 +133,9 @@ document.addEventListener('DOMContentLoaded', function() {
             dayDiv.textContent = day;
             dayDiv.addEventListener('click', function() {
                 if (lastClickedDay) {
-                    lastClickedDay.style.backgroundColor = 'white';
+                    lastClickedDay.style.removeProperty('background-color');
                 }
-                this.style.backgroundColor = 'yellow';
+                this.style.backgroundColor = '#B49B44';
                 lastClickedDay = this;
                 chosenDay = day;
                 void this.offsetHeight;
@@ -164,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let isProposed = true;
 
-// Event listener for the "Proposed" button
 document.querySelector('.proposed').addEventListener('click', function() {
     isProposed = true;
     const proposedButton = document.querySelector('.proposed');
@@ -174,7 +173,6 @@ document.querySelector('.proposed').addEventListener('click', function() {
     actualButton.classList.remove('active-button');
 });
 
-// Event listener for the "Actual" button
 document.querySelector('.actual').addEventListener('click', function() {
     isProposed = false;
     const proposedButton = document.querySelector('.proposed');
@@ -234,10 +232,13 @@ function fetchProposedDate(equipId) {
 
 function enableActualButton() {
     document.querySelector('.actual').disabled = false;
+    document.querySelector('.actual').classList.remove('actual-button-disabled');
+    document.querySelector('.actual').style.cursor = 'pointer';
 }
 
 function disableActualButton() {
     document.querySelector('.actual').disabled = true;
+    document.querySelector('.actual').classList.add('actual-button-disabled');
 }
 
 document.getElementById('finish').addEventListener('click', function() {
@@ -287,10 +288,13 @@ function fetchActualDate(equipId) {
 
 function enableFinishButton() {
     document.getElementById('finish').disabled = false;
+    document.getElementById('finish').classList.remove('finish-button-disabled');
+    document.getElementById('finish').style.cursor = 'pointer';
 }
 
 function disableFinishButton() {
     document.getElementById('finish').disabled = true;
+    document.getElementById('finish').classList.add('finish-button-disabled');
 }
 
 function checkUserLoggedIn() {
@@ -318,3 +322,20 @@ function logout() {
 
     window.location.href = '/';
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+    const areaId = urlParams.get('areaId');
+    const equipId = urlParams.get('equip_id');
+
+    const floorLink = document.querySelector('.nav-link a[href="/scheduleFloorPage"]');
+    const areaLink = document.querySelector('.nav-link a[href="/scheduleAreaPage"]');
+    const equipmentLink = document.querySelector('.nav-link a[href="/scheduleEquipmentPage"]');
+    const calendarLink = document.querySelector('.nav-link a[href="/calendarPage"]');
+
+    floorLink.href = `/scheduleFloorPage`;
+    areaLink.href = `/scheduleAreaPage?floorId=${floorId}`;
+    equipmentLink.href = `/scheduleEquipmentPage?floorId=${floorId}&areaId=${areaId}`;
+    calendarLink.href = `/calendarPage?floorId=${floorId}&areaId=${areaId}&equip_id=${equipId}`;
+});
