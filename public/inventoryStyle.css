@@ -637,9 +637,9 @@ img {
 }
 
 .row2c2 {
+  padding: 10px;
   width: 65%;
-  height: 50%;
-  border: 2px solid black;
+  height: 70%;
 }
 
 .addPartsBox {
@@ -681,7 +681,7 @@ img {
   position: absolute;
   top: 1px;
   right: 10px;
-  background-color: #f44336;
+  background-color: black;
   color: black;
   border: none;
   border-radius: 5px;
@@ -690,8 +690,8 @@ img {
   background-image:url(images/calendar-silhouette.png);
   background-repeat:no-repeat;
 	background-size:cover;
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
 }
 
 .calendarDisplay {
@@ -701,8 +701,17 @@ img {
 
 #calendar {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: row; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  /*height: 50%;  Ensure the container takes up the full height of its parent */
+  padding: 10px; /* Add some padding for better spacing */
+  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border-top: 2px solid rgba(231, 231, 231, 0.742);
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgba(231, 231, 231, 0.742);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 #calendar div {
@@ -712,10 +721,11 @@ img {
   text-align: center;
   line-height: 40px;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 #calendar div:hover {
-  background-color: #f4f4f4;
+  background-color: #B49B44;
 }
 
 #yearSelect {
@@ -726,3 +736,88 @@ img {
   width: 200px;
 }
 
+.proposed{
+  border-radius: 10px;
+  background-color: rgb(97, 121, 105);
+  padding: 10px;
+  color: white;
+  border: none;
+  font-size: 18px;
+}
+
+.proposed:hover {
+  background-color: #B49B44;
+}
+
+.actual{
+  border-radius: 10px;
+  background-color: rgb(97, 121, 105);
+  padding: 10px;
+  color: white;
+  border: none;
+  font-size: 18px;
+}
+
+.actual:hover {
+  background-color: #B49B44;
+}
+
+#monthSelect, #yearSelect {
+  border-radius: 10px;
+  padding: 10px;
+  color: black;
+  border: none;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+ }
+
+.date-container{
+  display: flex;
+  justify-content: center; /* Aligns items horizontally */
+  align-items: center; /* Aligns items vertically */
+  width: 300px;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  gap: 10px;
+}
+
+#saveBtn{
+  border-radius: 10px;
+  background-color: rgb(97, 121, 105);
+  padding: 10px;
+  color: white;
+  border: none;
+  font-size: 18px;
+}
+
+#saveBtn:hover {
+  background-color: #B49B44;
+}
+
+#finish{
+  border-radius: 10px;
+  background-color: rgb(97, 121, 105);
+  padding: 10px;
+  color: white;
+  border: none;
+  font-size: 18px;
+}
+
+#finish:hover {
+  background-color: #B49B44;
+}
+
+.setBtnContainer {
+  display: flex;
+  justify-content: center; /* Aligns items horizontally */
+  align-items: center; /* Aligns items vertically */
+  width: 300px;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  gap: 10px;
+}
+
+#remarks {
+  border-radius: 10px;
+}
