@@ -29,7 +29,6 @@ function fetchAndDisplayParts() {
                 partNameElement.textContent = `Part Name: ${part.name} Status: ${part.status}`;
 
                 const editButton = document.createElement('button');
-                editButton.textContent = 'Edit';
                 editButton.className = 'editButton';
                 editButton.addEventListener('click', function() {
                     const editForm = document.createElement('form');

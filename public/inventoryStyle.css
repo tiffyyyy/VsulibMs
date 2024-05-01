@@ -33,6 +33,11 @@ body {
   padding-right: 2%;
   margin-bottom: 10px;
   align-items: center;
+  background-image: url(images/VSU\ MS-Logo\ V1.png);
+  background-repeat: no-repeat;
+  background-size: 50px 50px; 
+  margin-left: 1%;
+  margin-top: 1%;
 }
 
 .row1{
@@ -695,14 +700,14 @@ img {
 }
 
 .calendarDisplay {
-  width: 300px;
+  width: 340px;
   margin: 0 auto;
 }
 
 #calendar {
   display: flex;
-  flex-direction: row; /* Stack children vertically */
-  align-items: center; /* Center children horizontally */
+  flex-wrap: wrap;
+  justify-content: space-around;
   /*height: 50%;  Ensure the container takes up the full height of its parent */
   padding: 10px; /* Add some padding for better spacing */
   background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
@@ -747,6 +752,7 @@ img {
 
 .proposed:hover {
   background-color: #B49B44;
+  cursor: pointer;
 }
 
 .actual{
@@ -821,9 +827,18 @@ img {
 #remarks {
   border-radius: 10px;
 }.active-button {
-  background-color: yellow;
+  background-color: #B49B44;
 }
 
 .notActive-button {
   background-color:white;
+}
+
+.actual-button-disabled {
+  cursor: not-allowed;
+}
+
+.finish-button-disabled {
+  background-color: #f0f0f0;  
+  cursor: not-allowed;
 }

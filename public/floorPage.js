@@ -33,7 +33,6 @@ function displayAreas() {
                 areaBox.appendChild(areaLink);
 
                 const editButton = document.createElement('button');
-                editButton.textContent = 'Edit';
                 editButton.className = 'editButton';
                 editButton.addEventListener('click', function() {
 
@@ -59,7 +58,6 @@ function displayAreas() {
                 areaBox.appendChild(editButton);
 
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
                 deleteButton.className = 'deleteButton';
                 deleteButton.addEventListener('click', function() {
                     const confirmDelete = window.confirm('Are you sure you want to delete this area?');

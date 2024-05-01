@@ -13,6 +13,8 @@ function updateWelcomeMessage() {
     }
 }
 
+window.addEventListener('load', updateWelcomeMessage);
+
 function displayAreas() {
     const bodyAreaDiv = document.getElementById('body-area-div');
     bodyAreaDiv.innerHTML = '';

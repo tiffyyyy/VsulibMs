@@ -36,6 +36,8 @@ body {
   background-image: url(images/VSU\ MS-Logo\ V1.png);
   background-repeat: no-repeat;
   background-size: 50px 50px;
+  margin-left: 1%;
+  margin-top: 1%;
 }
 
 #nav-div {
@@ -514,7 +516,7 @@ a{
 }
 
 .deleteButton {
-  background-image: url(''); 
+  background-image: url(images/cross-circle.png); 
   background-repeat: no-repeat;
   background-position: center;
   margin-top: 10px;

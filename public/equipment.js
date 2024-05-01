@@ -139,7 +139,6 @@ function fetchAndDisplayEquipment() {
             equipBox.appendChild(buttonContainer);
 
             const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'X';
             deleteButton.className = 'deleteButton';
             deleteButton.addEventListener('click', function() {
                 if (!confirm('Are you sure you want to delete this equipment?')) {
@@ -150,7 +149,6 @@ function fetchAndDisplayEquipment() {
             });
 
             const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
             editButton.className = 'editButton';
             editButton.addEventListener('click', function() {
                 const editForm = document.createElement('form');
