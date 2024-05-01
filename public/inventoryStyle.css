@@ -726,3 +726,10 @@ img {
   width: 200px;
 }
 
+.active-button {
+  background-color: yellow;
+}
+
+.notActive-button {
+  background-color:white;
+}

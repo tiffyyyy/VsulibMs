@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     let equipId = urlParams.get('equip_id');
 
-    // Fetch the proposed date when the page loads
     fetchProposedDate(equipId);
     fetchActualDate(equipId);
 
@@ -77,6 +76,11 @@ document.addEventListener("DOMContentLoaded", function() {
         fetchActualDate(equipId);
     });
 
+    const proposedButton = document.querySelector('.proposed');
+    const actualButton = document.querySelector('.actual');
+
+    proposedButton.classList.add('active-button');
+    actualButton.classList.remove('active-button');
 });
 
 const yearSelect = document.getElementById('yearSelect');
@@ -105,32 +109,48 @@ months.forEach((month, index) => {
 });
 
 let chosenDay = 1;
+let lastClickedDay = null;
 document.addEventListener('DOMContentLoaded', function() {
     function generateCalendar(year, month) {
-        const calendar = document.getElementById('calendar');
-        calendar.innerHTML = '';
-    
         const date = new Date(year, month - 1, 1);
         const daysInMonth = new Date(year, month, 0).getDate();
-    
-        // Fill in days of the week
+        
+        const weekLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        weekLabels.forEach(label => {
+            let labelDiv = document.createElement('div');
+            labelDiv.textContent = label;
+            calendar.appendChild(labelDiv);
+        });
+
         for (let i = 0; i < date.getDay(); i++) {
             let day = document.createElement('div');
             calendar.appendChild(day);
         }
     
-        // Fill in days of the month
+        // Days of the month
         for (let day = 1; day <= daysInMonth; day++) {
             let dayDiv = document.createElement('div');
             dayDiv.textContent = day;
             dayDiv.addEventListener('click', function() {
+                if (lastClickedDay) {
+                    lastClickedDay.style.backgroundColor = 'white';
+                }
+                this.style.backgroundColor = 'yellow';
+                lastClickedDay = this;
                 chosenDay = day;
+                void this.offsetHeight;
             });
             calendar.appendChild(dayDiv);
         }
+
+        const lastWeekDays = 7 - (new Date(year, month, 0).getDay() + 1);
+        for (let i = 0; i < lastWeekDays; i++) {
+        let dayDiv = document.createElement('div');
+        dayDiv.textContent = '';
+        calendar.appendChild(dayDiv);
+    }
     }
     
-    // Update calendar on dropdown change
     yearSelect.addEventListener('change', function() {
         generateCalendar(this.value, monthSelect.value);
     });
@@ -139,7 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
         generateCalendar(yearSelect.value, this.value);
     });
     
-    // Generate initial calendar
     generateCalendar(yearSelect.value, monthSelect.value);
 });
 
@@ -148,11 +167,20 @@ let isProposed = true;
 // Event listener for the "Proposed" button
 document.querySelector('.proposed').addEventListener('click', function() {
     isProposed = true;
+    const proposedButton = document.querySelector('.proposed');
+    const actualButton = document.querySelector('.actual');
+
+    proposedButton.classList.add('active-button');
+    actualButton.classList.remove('active-button');
 });
 
 // Event listener for the "Actual" button
 document.querySelector('.actual').addEventListener('click', function() {
     isProposed = false;
+    const proposedButton = document.querySelector('.proposed');
+    const actualButton = document.querySelector('.actual');
+    actualButton.classList.add('active-button');
+    proposedButton.classList.remove('active-button');
 });
 
 document.getElementById('saveBtn').addEventListener('click', function() {
@@ -165,7 +193,6 @@ document.getElementById('saveBtn').addEventListener('click', function() {
     const selectedDate = new Date(year, zeroBasedMonth, day+1);
     const formattedDate = selectedDate.toISOString().split('T')[0];
 
-    // Determine which date to send based on the flag
     const dateToSend = isProposed ? { proposedDate: formattedDate, remarks1: remarks } : { actualDate: formattedDate, remarks2: remarks };
 
     fetch('/saveSchedule', {
