@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
             .then(data => {
-                // Clear the table before adding new rows
                 labelsTable.innerHTML = `
                     <tr>
                         <th>Equipment Name</th>
@@ -47,9 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 data.forEach(record => {
                     const formattedDate = formatDate(record.saved_at);
                     const row = document.createElement('tr');
-                    // Wrap the row content in an anchor tag to make it clickable
                     const link = document.createElement('a');
-                    link.href = `/historyDetailPage?id=${record.id}`; // Assuming 'id' is the unique identifier
+                    link.href = `/historyDetailPage?id=${record.id}`;
                     link.innerHTML = `
                         <td>${record.equip_name}</td>
                         <td>${record.equip_no}</td>
@@ -66,3 +64,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     fetchAndDisplayAllHistory();
 });
+
+function checkUserLoggedIn() {
+    const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
+    if (!usernameCookie) {
+        window.location.href = '/';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    checkUserLoggedIn();
+});
+
+function logout() {
+    const cookiePaths = [
+        '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
+        '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
+        '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
+        '/historyPage', '/historyDetailPage'
+    ];
+
+    cookiePaths.forEach(path => {
+        document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
+    });
+
+    window.location.href = '/';
+}

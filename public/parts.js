@@ -52,12 +52,12 @@ function fetchAndDisplayParts() {
                 const partNameElement = document.createElement('p');
                 partNameElement.textContent = `Part Name: ${part.name} Status: ${part.status}`;
 
-                // Create Edit and Delete buttons
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.className = 'divStyle'
+
                 const editButton = document.createElement('button');
-                editButton.textContent = 'Edit';
-                editButton.className = 'editButton'; // Add a class for styling
+                editButton.className = 'editButton';
                 editButton.addEventListener('click', function() {
-                    // Create a form for editing the part
                     const editForm = document.createElement('form');
                     editForm.id = 'editPartForm';
                     editForm.innerHTML = `
@@ -68,22 +68,21 @@ function fetchAndDisplayParts() {
                         </select>
                         <button type="submit">Save</button>
                     `;
-                
+
                     partsDisplayBox.innerHTML = '';
                     partsDisplayBox.appendChild(editForm);
-                
+
                     editForm.addEventListener('submit', function(event) {
                         event.preventDefault();
                         const updatedPartName = document.getElementById('editPartName').value;
                         const updatedPartStatus = document.getElementById('editPartStatus').value;
-                
+
                         updatePartInDatabase(part.id, updatedPartName, updatedPartStatus);
                         fetchAndDisplayParts();
                     });
-                });                    
+                });
 
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
                 deleteButton.className = 'deleteButton';
                 deleteButton.addEventListener('click', function() {
                     const confirmDelete = confirm("Are you sure you want to delete this part?");
@@ -101,12 +100,13 @@ function fetchAndDisplayParts() {
                             console.error('Error deleting part:', error);
                         });
                     }
-                });                                   
+                });
+
+                buttonsContainer.appendChild(editButton);
+                buttonsContainer.appendChild(deleteButton);
 
                 partsDisplayBox.appendChild(partNameElement);
-
-                partsDisplayBox.appendChild(editButton);
-                partsDisplayBox.appendChild(deleteButton);
+                partsDisplayBox.appendChild(buttonsContainer);
 
                 partsDisplayContainer.appendChild(partsDisplayBox);
             });
@@ -114,7 +114,6 @@ function fetchAndDisplayParts() {
         .catch(error => console.error('Error fetching parts:', error));
 }
 
-// Function to fetch and display parts
 document.addEventListener('DOMContentLoaded', function() {
     fetchAndDisplayParts();
 });
@@ -135,5 +134,45 @@ function updatePartInDatabase(partId, updatedPartName, updatedPartStatus) {
     xhr.send(JSON.stringify({ id: partId, name: updatedPartName, status: updatedPartStatus }));
 }
 
+function checkUserLoggedIn() {
+    const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
+    if (!usernameCookie) {
+        window.location.href = '/';
+    }
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+    checkUserLoggedIn();
+});
 
+function logout() {
+    const cookiePaths = [
+        '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
+        '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
+        '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
+        '/historyPage', '/historyDetailPage'
+    ];
+
+    cookiePaths.forEach(path => {
+        document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
+    });
+
+    window.location.href = '/';
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+    const areaId = urlParams.get('areaId');
+    const equipId = urlParams.get('equip_id');
+
+    const floorLink = document.querySelector('.nav-link a[href="/inventory"]');
+    const areaLink = document.querySelector('.nav-link a[href="/areaPage"]');
+    const equipmentLink = document.querySelector('.nav-link a[href="/equipmentPage"]');
+    const specsLink = document.querySelector('.nav-link a[href="/partsPage"]');
+
+    floorLink.href = `/inventory`;
+    areaLink.href = `/floorPage?floorId=${floorId}`;
+    equipmentLink.href = `/equipmentPage?floorId=${floorId}&areaId=${areaId}`;
+    specsLink.href = `/partsPage?floorId=${floorId}&areaId=${areaId}&equip_id=${equipId}`;
+});

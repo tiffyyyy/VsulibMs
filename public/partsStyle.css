@@ -500,9 +500,6 @@ a{
   margin-top: 10px;
   background-color: #ccc; /* Green */
   color: white;
-  position: absolute;
-  top: 25px;
-  right: 100px;
   background-image:url(images/pencil.png);
   background-repeat: no-repeat;
   background-size: 18px 18px;
@@ -517,9 +514,6 @@ a{
 }
 
 .deleteButton {
-  position: absolute;
-  top: 25px;
-  right: 60px;
   background-image: url(''); 
   background-repeat: no-repeat;
   background-position: center;
@@ -701,6 +695,9 @@ img {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5px;
+  display: flex; /* Use Flexbox */
+  justify-content: space-between; /* Align items to the left and right */
+  align-items: center;
 }
 
 .equipDetails{
@@ -765,6 +762,12 @@ background-color: #B49B44;
   font-size: 22px;
   font-weight: 400;
   padding-bottom: 40px;
+}
+
+.divStyle {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 

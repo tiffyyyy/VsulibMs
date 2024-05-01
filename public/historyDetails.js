@@ -8,39 +8,37 @@ function updateWelcomeMessage() {
         // Display the username in the welcome message
         document.getElementById('welcomeMessage').innerText = username;
     } else {
-        // Handle case where username cookie is not found
         console.log('Username cookie not found');
     }
 }
+window.addEventListener('load', updateWelcomeMessage);
 
-function displayAreas() {
-    const bodyAreaDiv = document.getElementById('body-area-div');
-    bodyAreaDiv.innerHTML = '';
-
+document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const floorId = urlParams.get('floorId');
+    const historyId = urlParams.get('id');
 
-    fetch(`/area`)
-        .then(response => response.json())
-        .then(areas => {
-            areas.forEach(area => {
-                const areaBox = document.createElement('div');
-                areaBox.className = 'floorBox';
+    if (historyId) {
+        fetch(`/history/${historyId}`)
+            .then(response => response.json())
+            .then(data => {
+                const { historyDetails, equipmentDetails } = data;
 
-                const areaLink = document.createElement('a');
-                areaLink.textContent = `${area.name}`;
-                areaLink.href = `/inspectionEquipmentPage?floorId=${floorId}&areaId=${area.id}`;
-                areaBox.appendChild(areaLink);
-                bodyAreaDiv.appendChild(areaBox);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching areas:', error);
-        });
-}
+                const actualDate = new Date(historyDetails.actualDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-document.addEventListener("DOMContentLoaded", function() {
-    displayAreas();
+                document.querySelector('.row2c1').innerHTML = `
+                    <h3>${equipmentDetails.equip_name}</h3>
+                    <img src="${equipmentDetails.equip_pic}" alt="Equipment Picture">
+                    <p>Status: ${equipmentDetails.status}</p>
+                    <p>Equipment Number: ${equipmentDetails.equip_no}</p>
+                `;
+
+                document.querySelector('.row2c2').innerHTML = `
+                    <p>Remarks: ${historyDetails.remarks2}</p>
+                    <p>Actual Date: ${actualDate}</p>
+                `;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
 });
 
 function checkUserLoggedIn() {
@@ -68,14 +66,3 @@ function logout() {
 
     window.location.href = '/';
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const floorId = urlParams.get('floorId');
-
-    const floorLink = document.querySelector('.nav-link a[href="/inspectionFloorPage"]');
-    const areaLink = document.querySelector('.nav-link a[href="/inspectionAreaPage"]');
-
-    floorLink.href = `/inspectionFloorPage`;
-    areaLink.href = `/inspectionAreaPage?floorId=${floorId}`;
-});

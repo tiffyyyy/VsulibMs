@@ -28,12 +28,10 @@ function fetchAndDisplayParts() {
                 const partNameElement = document.createElement('p');
                 partNameElement.textContent = `Part Name: ${part.name} Status: ${part.status}`;
 
-                // Create Edit and Delete buttons
                 const editButton = document.createElement('button');
                 editButton.textContent = 'Edit';
-                editButton.className = 'editButton'; // Add a class for styling
+                editButton.className = 'editButton';
                 editButton.addEventListener('click', function() {
-                    // Create a form for editing the part
                     const editForm = document.createElement('form');
                     editForm.id = 'editPartForm';
                     editForm.innerHTML = `
@@ -64,7 +62,6 @@ function fetchAndDisplayParts() {
         .catch(error => console.error('Error fetching parts:', error));
 }
 
-// Function to fetch and display parts
 document.addEventListener('DOMContentLoaded', function() {
     fetchAndDisplayParts();
 });
@@ -201,4 +198,48 @@ document.addEventListener('DOMContentLoaded', function equipStats() {
             document.getElementById('notWorkingCount').textContent = `Not Working: ${notWorkingCount}`;
         })
         .catch(error => console.error('Error fetching parts:', error));
+});
+
+
+function checkUserLoggedIn() {
+    const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
+    if (!usernameCookie) {
+        window.location.href = '/';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    checkUserLoggedIn();
+});
+
+function logout() {
+    const cookiePaths = [
+        '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
+        '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
+        '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
+        '/historyPage', '/historyDetailPage'
+    ];
+
+    cookiePaths.forEach(path => {
+        document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
+    });
+
+    window.location.href = '/';
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+    const areaId = urlParams.get('areaId');
+    const equipId = urlParams.get('equip_id');
+
+    const floorLink = document.querySelector('.nav-link a[href="/inspectionFloorPage"]');
+    const areaLink = document.querySelector('.nav-link a[href="/inspectionAreaPage"]');
+    const equipmentLink = document.querySelector('.nav-link a[href="/inspectionEquipmentPage"]');
+    const inspectLink = document.querySelector('.nav-link a[href="/inspectionPage"]');
+
+    floorLink.href = `/inspectionFloorPage`;
+    areaLink.href = `/inspectionAreaPage?floorId=${floorId}`;
+    equipmentLink.href = `/inspectionEquipmentPage?floorId=${floorId}&areaId=${areaId}`;
+    inspectLink.href = `/inspectionPage?floorId=${floorId}&areaId=${areaId}&equip_id=${equipId}`;
 });

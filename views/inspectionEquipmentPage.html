@@ -26,7 +26,7 @@
         <button class="dropbtn"><img src="/images/caret-down.png" alt="" style="width: 15px; height:15px"></button>	
           <div class="dropdown-content">
               <a href="#">View Profile</a>
-              <a href="/">Logout</a>
+              <a onclick = "logout()">Logout</a>
           </div>
       </div>
     </div>
@@ -37,12 +37,12 @@
           <div class="sidebar-menu">
           <ul>
             <h3>MENU</h3>
-          <li><a href="/inventory">Inventory</a></li>
-          <li><a href="/scheduleFloorPage">Schedule</a></li>
-          <li class="active"><a href="/inspectionFloorPage">Inspection</a></li>
-          <li><a href="/createAccount">History</a></li>
-          <h3>ADD ACOUNT</h3>
-          <li><a href="/createAccount">Create Account</a></li>
+            <li><a href="/inventory">Inventory</a></li>
+            <li><a href="/scheduleFloorPage">Schedule</a></li>
+            <li class="active"><a href="/inspectionFloorPage">Inspection</a></li>
+            <li><a href="/historyPage">History</a></li>
+            <h3>ADD ACOUNT</h3>
+            <li><a href="/createAccount">Create Account</a></li>
           </ul>
         </div>
         </div>
@@ -51,9 +51,9 @@
       <div id="right-div">
         <div id="header-banner-div">
             <div class="nav-link">
-              <a href="/inventory" class="nav-link-active">Floor</a>
-              <a href="/floorPage" class="nav-link-active">Area</a>
-              <a href="/equipmentPage" class="nav-link-active">Equipment</a>
+              <a href="/inspectionFloorPage" class="nav-link-active">Floor</a>
+              <a href="/inspectionAreaPage" class="nav-link-active">Area</a>
+              <a href="/inspectionEquipmentPage" class="nav-link-active">Equipment</a>
             </div>
         </div>
       <div id = "body-area-div">

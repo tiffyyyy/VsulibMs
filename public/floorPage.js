@@ -17,6 +17,9 @@ function displayAreas() {
     const bodyAreaDiv = document.getElementById('body-area-div');
     bodyAreaDiv.innerHTML = ''; // Clear existing content
 
+    const urlParams = new URLSearchParams(window.location.search);
+    let floorId = urlParams.get('floorId');
+    console.log(floorId);
     fetch(`/area`)
         .then(response => response.json())
         .then(areas => {
@@ -26,7 +29,7 @@ function displayAreas() {
 
                 const areaLink = document.createElement('a');
                 areaLink.textContent = `${area.name}`;
-                areaLink.href = `/equipmentPage?areaId=${area.id}`;
+                areaLink.href = `/equipmentPage?floorId=${floorId}&areaId=${area.id}`;
                 areaBox.appendChild(areaLink);
 
                 const editButton = document.createElement('button');
@@ -110,7 +113,6 @@ document.getElementById('submitAreaBtn').addEventListener('click', function() {
     var areaName = document.getElementById('areaNameInput').value;
 
     if (areaName.trim() === '') {
-        // Display a warning and exit the function
         alert('Area name cannot be empty. Please enter a valid floor name.');
         return;
     }
@@ -121,16 +123,12 @@ document.getElementById('submitAreaBtn').addEventListener('click', function() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-                // Floor creation successful
                 console.log("Area created successfully");
-                // Display success message
                 alert('Area created successfully');
                 displayAreas();
-                // Close the modal
                 var modal = document.getElementById("myModal");
                 modal.style.display = "none";       
             } else {
-                // Display error message
                 alert('Error creating Area');
             }
         }
@@ -181,4 +179,39 @@ function deleteAreaFromDatabase(areaId) {
     .catch(error => console.error('Error deleting area:', error));
 }
 
+function checkUserLoggedIn() {
+    const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
+    if (!usernameCookie) {
+        window.location.href = '/';
+    }
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+    checkUserLoggedIn();
+});
+
+function logout() {
+    const cookiePaths = [
+        '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
+        '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
+        '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
+        '/historyPage', '/historyDetailPage'
+    ];
+
+    cookiePaths.forEach(path => {
+        document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
+    });
+
+    window.location.href = '/';
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+
+    const floorLink = document.querySelector('.nav-link a[href="/inventory"]');
+    const areaLink = document.querySelector('.nav-link a[href="/floorPage"]');
+
+    floorLink.href = `/inventory`;
+    areaLink.href = `/floorPage?floorId=${floorId}`;
+});

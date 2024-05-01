@@ -79,6 +79,10 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function fetchAndDisplayEquipment() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let areaId = urlParams.get('areaId');
+    let floorId = urlParams.get('floorId');
+
     fetch('/fetchEquipment') 
     .then(response => response.json())
     .then(data => {
@@ -121,13 +125,13 @@ function fetchAndDisplayEquipment() {
             buttonContainer.className = 'button-container';
 
             const button1 = document.createElement('a');
-            button1.href = `/specsPage?equip_id=${item.equip_id}`;
+            button1.href = `/specsPage?floorId=${areaId}&areaId=${areaId}&equip_id=${item.equip_id}`;
             button1.textContent = 'Specs';
             button1.className = 'button';
             buttonContainer.appendChild(button1);
 
             const button2 = document.createElement('a');
-            button2.href = `/partsPage?equip_id=${item.equip_id}`;
+            button2.href = `/partsPage?floorId=${areaId}&areaId=${areaId}&equip_id=${item.equip_id}`;
             button2.textContent = 'Parts';
             button2.className = 'button';
             buttonContainer.appendChild(button2);
@@ -227,3 +231,42 @@ function deleteEquipment(equipId) {
     .catch(error => console.error('Error deleting equipment:', error));
 }
 
+function checkUserLoggedIn() {
+    const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
+    if (!usernameCookie) {
+        window.location.href = '/';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    checkUserLoggedIn();
+});
+
+function logout() {
+    const cookiePaths = [
+        '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
+        '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
+        '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
+        '/historyPage', '/historyDetailPage'
+    ];
+
+    cookiePaths.forEach(path => {
+        document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
+    });
+
+    window.location.href = '/';
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+    const areaId = urlParams.get('areaId');
+
+    const floorLink = document.querySelector('.nav-link a[href="/inventory"]');
+    const areaLink = document.querySelector('.nav-link a[href="/floorPage"]');
+    const equipmentLink = document.querySelector('.nav-link a[href="/equipmentPage"]');
+
+    floorLink.href = `/inventory`;
+    areaLink.href = `/floorPage?floorId=${floorId}`;
+    equipmentLink.href = `/equipmentPage?floorId=${floorId}&areaId=${areaId}`;
+});
