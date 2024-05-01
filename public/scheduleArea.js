@@ -13,12 +13,15 @@ function updateWelcomeMessage() {
     }
 }
 
-// Call the function when the window is fully loaded
+window.addEventListener('load', updateWelcomeMessage);
+
 function displayAreas() {
     const bodyAreaDiv = document.getElementById('body-area-div');
     bodyAreaDiv.innerHTML = '';
 
-    // Fetch the areas from the server
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+
     fetch(`/area`)
         .then(response => response.json())
         .then(areas => {
@@ -28,7 +31,7 @@ function displayAreas() {
 
                 const areaLink = document.createElement('a');
                 areaLink.textContent = `${area.name}`;
-                areaLink.href = `/scheduleEquipmentPage?areaId=${area.id}`;
+                areaLink.href = `/scheduleEquipmentPage?floorId=${floorId}&areaId=${area.id}`;
                 areaBox.appendChild(areaLink);
                 bodyAreaDiv.appendChild(areaBox);
             });
@@ -38,7 +41,6 @@ function displayAreas() {
         });
 }
 
-// Call the function when the window is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
     displayAreas();
 });
@@ -68,3 +70,14 @@ function logout() {
 
     window.location.href = '/';
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+
+    const floorLink = document.querySelector('.nav-link a[href="/scheduleFloorPage"]');
+    const areaLink = document.querySelector('.nav-link a[href="/scheduleAreaPage"]');
+
+    floorLink.href = `/scheduleFloorPage`;
+    areaLink.href = `/scheduleAreaPage?floorId=${floorId}`;
+});
