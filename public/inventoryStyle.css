@@ -842,3 +842,8 @@ img {
   background-color: #f0f0f0;  
   cursor: not-allowed;
 }
+
+tr{
+  display: flex;
+  width: 300px;
+}
