@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.getElementById('generate-pdf-btn').addEventListener('click', async () => {
-    // Extract the ID from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const historyId = urlParams.get('id');
 
@@ -81,25 +80,20 @@ document.getElementById('generate-pdf-btn').addEventListener('click', async () =
         console.error('ID not found in the URL');
         return;
     }
-
-    // Construct the URL for the PDF generation endpoint
     const pdfUrl = `/pdf/${historyId}`;
 
     try {
-        // Send a request to the server to generate the PDF
         const response = await fetch(pdfUrl, { method: 'GET' });
 
-        // Check if the request was successful
         if (response.ok) {
-            // If successful, prompt the user to download the PDF
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', 'history-details.pdf'); // Or any other desired filename
+            link.setAttribute('download', 'history-details.pdf');
             document.body.appendChild(link);
             link.click();
-            link.parentNode.removeChild(link); // Clean up
+            link.parentNode.removeChild(link);
         } else {
             console.error('Failed to generate PDF.');
         }

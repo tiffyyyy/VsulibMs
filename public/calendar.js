@@ -103,7 +103,7 @@ months.forEach((month, index) => {
     option.value = index + 1;
     option.text = month;
     if (index + 1 === currentMonth) {
-        option.selected = true; // Set the current month as selected
+        option.selected = true;
     }
     monthSelect.appendChild(option);
 });
@@ -152,10 +152,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     yearSelect.addEventListener('change', function() {
+        while(calendar.firstChild) {
+            calendar.removeChild(calendar.firstChild);
+        }
         generateCalendar(this.value, monthSelect.value);
     });
     
     monthSelect.addEventListener('change', function() {
+        while(calendar.firstChild) {
+            calendar.removeChild(calendar.firstChild);
+        }
         generateCalendar(yearSelect.value, this.value);
     });
     
