@@ -5,7 +5,8 @@ const dotenv = require("dotenv");
 const crypto = require("crypto");
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
-const upload = multer({ storage:multer.memoryStorage()}); 
+const upload = multer({ storage:multer.memoryStorage()});
+const puppeteer = require('puppeteer');
 
 dotenv.config({ path: './.env'})
 
@@ -800,6 +801,43 @@ app.get('/history/:id', (req, res) => {
             return res.status(404).json({ error: 'History not found' });
         }
     });
+});
+
+
+app.get('/pdf/:id', async (req, res) => {
+    const { id } = req.params;
+
+    const rawCookies = req.headers.cookie;
+    if (!rawCookies) {
+        return res.status(401).send('No cookies found');
+    }
+
+    const cookies = rawCookies.split(';').map(cookie => {
+        const [name, value] = cookie.trim().split('=');
+        return {
+            name: name.trim(),
+            value: decodeURIComponent(value.trim()),
+            domain: 'localhost',
+            path: '/historyDetailPage',
+        };
+    });
+n
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.setCookie(...cookies);
+
+    console.log(await page.cookies());
+
+    await page.goto(`http://localhost:5001/historyDetailPage?id=${id}`, { waitUntil: 'networkidle2' });
+
+    const pdf = await page.pdf({ format: 'A4' });
+
+    await browser.close();
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename=history-details.pdf');
+    res.send(pdf);
 });
 
 app.use((error, req, res, next) => {

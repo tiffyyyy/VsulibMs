@@ -10,15 +10,15 @@ document.getElementById('loginBtn').addEventListener('click', function() {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 if (response.loginStatus === 'success') {
-                    const authority = response.authority; // This is the authority value from the server response
-                    const paths = ['/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage', '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage', '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage', '/historyPage', '/historyDetailPage'];
+                    const authority = response.authority;
+                    const paths = ['/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage', '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage', '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage', '/historyPage', '/historyDetailPage', '/pdf/:id'];
                     paths.forEach(path => {
                         document.cookie = `username=${encodeURIComponent(username)}; path=${path};`;
                         document.cookie = `authority=${encodeURIComponent(authority)}; path=${path};`;
                     });
                     
                     console.log(document.cookie);
-                    window.location.href = 'inventory';   
+                    window.location.href = 'scheduleFloorPage';   
                 } else {
                     alert('Invalid username or password');
                 }
