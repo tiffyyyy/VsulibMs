@@ -844,6 +844,11 @@ img {
   cursor: not-allowed;
 }
 
+tr{
+  display: flex;
+  width: 300px;
+}
+
 #body-area-div-history {
   display: flex;
   flex-direction: row;

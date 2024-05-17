@@ -42,14 +42,64 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function checkUserLoggedIn() {
-    const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
+    const cookies = document.cookie.split('; ');
+    const usernameCookie = cookies.find(cookie => cookie.startsWith('username='));
+    const authorityCookie = cookies.find(cookie => cookie.startsWith('authority='));
+
+    console.log('Cookies:', document.cookie); // Log all cookies
+    console.log('Username Cookie:', usernameCookie); // Log username cookie
+    console.log('Authority Cookie:', authorityCookie); // Log authority cookie
+
     if (!usernameCookie) {
+        console.log('Username cookie not found');
         window.location.href = '/';
+        return;
+    }
+
+    const authority = authorityCookie ? authorityCookie.split('=')[1] : '0';
+    const inventoryLink = document.getElementById('inv');
+    const addAccountLink = document.getElementById('inv1');
+    const createAccountLink = document.getElementById('inv2');
+
+    if (authority === '1') {
+        inventoryLink.style.display = 'none';
+        addAccountLink.style.display = 'none';
+        createAccountLink.style.display = 'none';
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     checkUserLoggedIn();
+});
+
+document.getElementById('generate-pdf-btn').addEventListener('click', async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const historyId = urlParams.get('id');
+
+    if (!historyId) {
+        console.error('ID not found in the URL');
+        return;
+    }
+    const pdfUrl = `/pdf/${historyId}`;
+
+    try {
+        const response = await fetch(pdfUrl, { method: 'GET' });
+
+        if (response.ok) {
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'history-details.pdf');
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+        } else {
+            console.error('Failed to generate PDF.');
+        }
+    } catch (error) {
+        console.error('Error generating PDF:', error);
+    }
 });
 
 function logout() {

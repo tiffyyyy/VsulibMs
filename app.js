@@ -5,7 +5,8 @@ const dotenv = require("dotenv");
 const crypto = require("crypto");
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
-const upload = multer({ storage:multer.memoryStorage()}); 
+const upload = multer({ storage:multer.memoryStorage()});
+const puppeteer = require('puppeteer');
 
 dotenv.config({ path: './.env'})
 
@@ -105,21 +106,18 @@ app.get('/historyDetailPage', (req,res) => {
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
-    db.query('SELECT * FROM admin WHERE name = ? AND password = ?', [username, password], (err, results) => {
+    db.query('SELECT * FROM admin WHERE name =? AND password =?', [username, password], (err, results) => {
         if (err) {
             console.error('Error executing database query:', err);
-            res.status(500).send('Internal Server Error');
+            res.status(500).send({ error: 'Internal Server Error' });
             return;
         }
-
-        // Check if the query returned any rows
         if (results.length > 0) {
-            // Set a cookie with the username
+            const authority = results[0].authority;
             res.cookie('username', username, { maxAge: 900000, httpOnly: true });
-
-            res.status(200).send('Login successful');
+            res.status(200).send({ loginStatus: 'success', message: 'Login successful', authority: authority });
         } else {
-            res.status(401).send('Invalid username or password');
+            res.status(401).send({ loginStatus: 'error', message: 'Invalid username or password' });
         }
     });
 });
@@ -129,17 +127,15 @@ app.post('/createAccount', (req, res) => {
     const user = req.body.user;
     const pass = req.body.pass;
 
-    // Check if the username already exists in the database
-    db.query('SELECT * FROM users WHERE username = ?', [user], (err, results) => {
+    db.query('SELECT * FROM admin WHERE name = ?', [user], (err, results) => {
         if (err) {
             console.error('Error executing database query:', err);
             return res.status(500).send(err.message);
         }
-        // If username already exists
         if (results.length > 0) {
             return res.status(409).send('Username already exists');
         } else {
-            db.query('INSERT INTO users (username, password) VALUES (?, ?)', [user, pass], (err, result) => {
+            db.query('INSERT INTO admin (name, password, authority) VALUES (?, ?, 1)', [user, pass], (err, result) => {
                 if (err) {
                     console.error('Error executing database query:', err);
                     return res.status(500).send(err.message);
@@ -805,6 +801,43 @@ app.get('/history/:id', (req, res) => {
             return res.status(404).json({ error: 'History not found' });
         }
     });
+});
+
+
+app.get('/pdf/:id', async (req, res) => {
+    const { id } = req.params;
+
+    const rawCookies = req.headers.cookie;
+    if (!rawCookies) {
+        return res.status(401).send('No cookies found');
+    }
+
+    const cookies = rawCookies.split(';').map(cookie => {
+        const [name, value] = cookie.trim().split('=');
+        return {
+            name: name.trim(),
+            value: decodeURIComponent(value.trim()),
+            domain: 'localhost',
+            path: '/historyDetailPage',
+        };
+    });
+n
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.setCookie(...cookies);
+
+    console.log(await page.cookies());
+
+    await page.goto(`http://localhost:5001/historyDetailPage?id=${id}`, { waitUntil: 'networkidle2' });
+
+    const pdf = await page.pdf({ format: 'A4' });
+
+    await browser.close();
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename=history-details.pdf');
+    res.send(pdf);
 });
 
 app.use((error, req, res, next) => {

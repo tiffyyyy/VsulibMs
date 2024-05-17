@@ -37,7 +37,7 @@ body {
     width:46px;
 	  height:46px;
     color: grey;
-    background-image: url(/VsulibMs/public/images/user-gear.png);
+    background-image: url(/images/user-gear.png);
     background-repeat:no-repeat;
     background-size:cover;
 }

@@ -103,7 +103,7 @@ months.forEach((month, index) => {
     option.value = index + 1;
     option.text = month;
     if (index + 1 === currentMonth) {
-        option.selected = true; // Set the current month as selected
+        option.selected = true;
     }
     monthSelect.appendChild(option);
 });
@@ -152,10 +152,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     yearSelect.addEventListener('change', function() {
+        while(calendar.firstChild) {
+            calendar.removeChild(calendar.firstChild);
+        }
         generateCalendar(this.value, monthSelect.value);
     });
     
     monthSelect.addEventListener('change', function() {
+        while(calendar.firstChild) {
+            calendar.removeChild(calendar.firstChild);
+        }
         generateCalendar(yearSelect.value, this.value);
     });
     
@@ -301,6 +307,18 @@ function checkUserLoggedIn() {
     const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
     if (!usernameCookie) {
         window.location.href = '/';
+        return;
+    }
+    const authorityCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('authority='));
+    const authority = authorityCookie? authorityCookie.split('=')[1] : '0';
+    const inventoryLink = document.getElementById('inv');
+    const addAccountLink = document.getElementById('inv1');
+    const createAccountLink = document.getElementById('inv2');
+
+    if (authority === '1') {
+        inventoryLink.style.display = 'none';
+        addAccountLink.style.display = 'none';
+        createAccountLink.style.display = 'none';
     }
 }
 
