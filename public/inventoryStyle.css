@@ -26,18 +26,18 @@ body {
   display: flex;
   flex-direction: row;
   width: 100%;
-  min-height: 50px;
+  min-height: 40px;
   background-color: light gray;
   line-height: 50px;
   padding-left: 2%;
   padding-right: 2%;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   align-items: center;
   background-image: url(images/VSU\ MS-Logo\ V1.png);
   background-repeat: no-repeat;
-  background-size: 50px 50px; 
+  background-size: 40px 40px; 
   margin-left: 1%;
-  margin-top: 1%;
+  margin-top: 0px;
 }
 
 .row1{
@@ -52,10 +52,13 @@ body {
   align-items: center;
   padding-right: 20px;
   margin-right: 10px;
-  background-color: lightgray;
+  background-color: rgb(250, 250, 250);
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Adjust values as needed */
 }
 
 .user-profile-name {
@@ -157,7 +160,7 @@ body {
   align-items: center;
   width: 100%;
   min-height: 510px;
-  background-color: rgb(225, 231, 221); /*E1E7DD*/
+  /*background-color: rgb(225, 231, 221); /*E1E7DD*/
   border-radius: 10px;
   color: #333;
 }
@@ -167,7 +170,9 @@ body {
 }
 
 .active{
-  background-color: #B49B44;
+  background: rgba(97, 121, 105, 0.355);
+  mix-blend-mode: normal;
+  border-bottom: 2px solid #617969;
   border-radius: 10px;
 }
 
@@ -188,8 +193,12 @@ li{
 }
 
 li:hover{
-  background-color: #B49B44;
+  background: rgba(97, 121, 105, 0.355);
+  mix-blend-mode: normal;
   border-radius: 10px;
+  border-radius: 10px;
+  /* background-color: #B49B44;
+  border-radius: 10px;*/
 }
 
 ul{
@@ -213,6 +222,7 @@ a{
   border-radius: 10px;
   align-items: center;
   padding-left: 10px;
+  border-bottom:  #3e4e43 solid 2px;
 }
 
 .nav-link {
@@ -261,6 +271,12 @@ a{
   background-color: #B49B44;
 }
 
+.sortContainer {
+  padding: 10px;
+  border: none;
+  font-size: 18px;
+}
+
 #body-area-div {
   display: flex;
   flex-direction: row;
@@ -270,21 +286,6 @@ a{
   gap: 20px;
   padding: 20px;
   flex-wrap: wrap;
-  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  border-top: 2px solid rgba(231, 231, 231, 0.742); /* Subtle white border at the top */
-  border-right: 2px solid rgba(0, 0, 0, 0.1); /* Subtle white border at the top */
-  border-left: 2px solid rgba(231, 231, 231, 0.742);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Subtle black border at the bottom */
-}
-
-#body-area-div-history {
-  width: 100%;
-  min-height: 410px;
-  overflow-y: auto;
-  gap: 20px;
-  padding: 20px;
   background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
   backdrop-filter: blur(12px);
   border-radius: 20px;
@@ -842,3 +843,26 @@ img {
   background-color: #f0f0f0;  
   cursor: not-allowed;
 }
+
+#body-area-div-history {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 410px;
+  overflow-y: auto;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border-top: 2px solid rgba(231, 231, 231, 0.742);
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgba(231, 231, 231, 0.742);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.labelsTable tr {
+  width: 100%;
+}
+
