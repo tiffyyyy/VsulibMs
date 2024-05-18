@@ -24,17 +24,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 const { historyDetails, equipmentDetails } = data;
 
                 const actualDate = new Date(historyDetails.actualDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-
-                document.querySelector('.row2c1').innerHTML = `
-                    <h3>${equipmentDetails.equip_name}</h3>
-                    <img src="${equipmentDetails.equip_pic}" alt="Equipment Picture">
-                    <p>Status: ${equipmentDetails.status}</p>
-                    <p>Equipment Number: ${equipmentDetails.equip_no}</p>
+            
+                document.getElementById('equip-img').innerHTML = `
+                    <img  src="${equipmentDetails.equip_pic}" alt="equipment-picure">
                 `;
 
-                document.querySelector('.row2c2').innerHTML = `
-                    <p>Remarks: ${historyDetails.remarks2}</p>
-                    <p>Actual Date: ${actualDate}</p>
+                document.getElementById('planned-date').innerHTML = `
+                    <p style="color: red;"><strong>Date Planned: ${actualDate}</strong></p>
+                    <p><strong>Activity:</strong> xd</p>
+                    <p><strong>Findings:</strong> xd</p>
+                    <p><strong>Identified Problem:</strong> xd</p>
+                    <p><strong>Replacement Parts:</strong> xd</p>
+                `;
+
+                document.getElementById('actual-date').innerHTML = `
+                    <p style="color: green;"><strong>Maintenance Date: ${actualDate}</strong></p>
+                    <p><strong>Activity:</strong> PC Monitor Replacement</p>
+                    <p><strong>Problem Fixed:</strong> xd</p>
+                    <p><strong>Performance:</strong> good</p>
+                `;
+        
+                document.getElementById('equip-details').innerHTML = `
+                    <p><strong>Equipment Name:</strong></p>
+                    <p><strong>Asset ID:</strong> Ceiling fan</p>
+                    <p><strong>Model No.:</strong> Ceiling fan</p>
+                    <p><strong>Serial Number:</strong> Ceiling fan</p>
+                    <p><strong>Floor:</strong> Ceiling fan</p>
+                    <p><strong>Area:</strong> Ceiling fan</p
                 `;
             })
             .catch(error => console.error('Error fetching data:', error));
