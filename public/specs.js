@@ -45,8 +45,8 @@ document.getElementById('specsForm').addEventListener('submit', function(event) 
 
 function fetchAndDisplaySpecs() {
     fetch('/getSpecs')
-        .then(response => response.json())
-        .then(specs => {
+       .then(response => response.json())
+       .then(specs => {
             const specsDisplayContainer = document.querySelector('.row2c2');
             specsDisplayContainer.innerHTML = '';
 
@@ -56,9 +56,11 @@ function fetchAndDisplaySpecs() {
                 const specNameElement = document.createElement('p');
                 specNameElement.textContent = `Spec Name: ${spec.name}`;
 
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.className = 'divStyle';
+
                 const editButton = document.createElement('button');
-                editButton.textContent = 'Edit';
-                editButton.className = 'editBtn';
+                editButton.className = 'editButton';
                 editButton.addEventListener('click', function() {
                     const editForm = document.createElement('form');
                     editForm.id = 'editSpecForm';
@@ -68,19 +70,18 @@ function fetchAndDisplaySpecs() {
                     `;
                     specContainer.innerHTML = '';
                     specContainer.appendChild(editForm);
-                
+
                     editForm.addEventListener('submit', function(event) {
                         event.preventDefault();
                         const updatedSpecName = document.getElementById('editSpecName').value;
-                
+
                         updateSpecInDatabase(spec.id, updatedSpecName);
                         fetchAndDisplaySpecs();
                     });
                 });
 
                 const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
-                deleteButton.className = 'deleteBtn';
+                deleteButton.className = 'deleteButton';
                 deleteButton.addEventListener('click', function() {
                     if (!confirm('Are you sure you want to delete this spec?')) {
                         return;
@@ -89,14 +90,17 @@ function fetchAndDisplaySpecs() {
                     deleteSpecFromDatabase(spec.id);
                     fetchAndDisplaySpecs();
                 });
+
+                buttonsContainer.appendChild(editButton);
+                buttonsContainer.appendChild(deleteButton);
                 specContainer.appendChild(specNameElement);
-                specContainer.appendChild(editButton);
-                specContainer.appendChild(deleteButton);
+                specContainer.appendChild(buttonsContainer);
                 specsDisplayContainer.appendChild(specContainer);
             });
         })
-        .catch(error => console.error('Error fetching specs:', error));
+       .catch(error => console.error('Error fetching specs:', error));
 }
+
 
 function deleteSpecFromDatabase(specId) {
     fetch(`/deleteSpec/${specId}`, {

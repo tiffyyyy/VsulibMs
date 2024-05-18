@@ -265,6 +265,27 @@ a{
   color: white;
   border: none;
   font-size: 18px;
+  background-image: url(images/stairs\ \(1\).png);
+  background-size: 20% 65%;
+  background-repeat:no-repeat;
+  background-position: 10% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 44px;
+}
+
+.addEquip{
+  border-radius: 10px;
+  background-color: rgb(97, 121, 105);
+  padding: 10px;
+  color: white;
+  border: none;
+  font-size: 18px;
+  background-image: url(images/stairs\ \(1\).png);
+  background-size: 14% 65%;
+  background-repeat:no-repeat;
+  background-position: 10% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 54px;
 }
 
 .addFloor:hover {
@@ -531,6 +552,7 @@ a{
   width: 28px;
   height: 28px;
   border-radius: 10px;
+  border:none;
 }
 
 .editButton:hover {
@@ -553,6 +575,7 @@ a{
   border-radius: 60px;
   color: #222222;
   background-color: #ccc;
+  border:none;
 }
 
 .deleteButton:hover {
@@ -560,7 +583,38 @@ a{
   color: #333;
 }
 
-
+#inv {
+  background-image:url(images/inventory-alt.png);
+  background-size: 9% 68%;
+  background-repeat:no-repeat;
+  background-position: 15% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 10px;
+}
+#sched {
+  background-image:url(images/calendar-silhouette.png);
+  background-size: 9% 68%;
+  background-repeat:no-repeat;
+  background-position: 15% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 10px;
+}
+#insp {
+  background-image:url(images/inspection.png);
+  background-size: 9% 68%;
+  background-repeat:no-repeat;
+  background-position: 15% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 10px;
+}
+#hist {
+  background-image:url(images/history.png);
+  background-size: 9% 68%;
+  background-repeat:no-repeat;
+  background-position: 15% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 10px;
+}
 
 /*Equipment*/
 .equipText{
@@ -871,3 +925,20 @@ tr{
   width: 100%;
 }
 
+.floorBox p a {
+  background-image: url(images/stairs\ \(1\).png);
+  background-size: 17% 65%;
+  background-repeat:no-repeat;
+  background-position: 10% 50%;
+  background-origin: padding-box;
+  padding-left: 44px;
+}
+
+.floorBox a {
+  background-image: url(images/stairs\ \(1\).png);
+  background-size: 17% 65%;
+  background-repeat:no-repeat;
+  background-position: 10% 50%;
+  background-origin: padding-box;
+  padding-left: 44px;
+}
