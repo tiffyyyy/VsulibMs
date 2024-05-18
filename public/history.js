@@ -48,12 +48,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     const row = document.createElement('tr');
                     const link = document.createElement('a');
                     link.href = `/historyDetailPage?id=${record.id}`;
-                    link.innerHTML = `
-                        <td>${record.equip_name}</td>
-                        <td>${record.equip_no}</td>
-                        <td>${formattedDate}</td>
-                    `;
+                    // Create td elements with inline styles
+                    const equipNameTd = document.createElement('td');
+                    equipNameTd.innerHTML = record.equip_name;
+                    equipNameTd.style.display = 'flex';  // Needed for flexbox within anchor tag
+                    equipNameTd.style.flex = '1';
+                    equipNameTd.style.textAlign = 'center';
+
+                    const equipNoTd = document.createElement('td');
+                    equipNoTd.innerHTML = record.equip_no;
+                    equipNameTd.style.display = 'flex';  // Needed for flexbox within anchor tag
+                    equipNoTd.style.flex = '1';
+                    equipNoTd.style.textAlign = 'center';
+
+                    const savedDateTd = document.createElement('td');
+                    savedDateTd.innerHTML = formattedDate;
+                    equipNameTd.style.display = 'flex';  // Needed for flexbox within anchor tag
+                    savedDateTd.style.flex = '1';
+                    savedDateTd.style.textAlign = 'center';
+
+                    // Add tds to link and link to row
+                    link.appendChild(equipNameTd);
+                    link.appendChild(equipNoTd);
+                    link.appendChild(savedDateTd);
                     row.appendChild(link);
+
                     labelsTable.appendChild(row);
                     console.log(record.id);
                 });
