@@ -6,96 +6,106 @@
 <link rel="stylesheet" href="inventoryStyle.css">
 <link rel="stylesheet" href="historyDetail.css">
 <title>History Details Page</title>
+<style>
+.signature-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.signature-section p {
+  margin: 10px 0; /* Adjusted margin for better spacing */
+  text-align: center;
+  align-items: center;
+}
+
+</style>
 </head>
 
 <body>
   <div id="wrapper-div">
 
-  <div id="nav-div">
-    <div id="logo-div">
-    </div>
-    <div class="user-profile">
-      <div class="user-profile-image">
-        <img src="/images/userIcon.png" alt="Profile Image">
-      </div>
-    </div>
-    <div class="user-profile-name">
-      <h2 id = "welcomeMessage"></h2>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn"><img src="/images/caret-down.png" alt="" style="width: 15px; height:15px"></button>	
-        <div class="dropdown-content">
-            <a href="#">View Profile</a>
-            <a onclick = "logout()">Logout</a>
+    <div id="nav-div">
+      <div id="logo-div"></div>
+      <div class="user-profile">
+        <div class="user-profile-image">
+          <img src="/images/userIcon.png" alt="Profile Image">
         </div>
-    </div>
-  </div>
-  </div>
-
-  <div id="main-div">
-    <div id="left-div">
-      <div id="sidebar-div">
-        <div class="sidebar-menu">
-        <ul>
-          <h3>MENU</h3>
-          <li id = "inv"><a href="/inventory">Inventory</a></li>
-          <li><a href="/scheduleFloorPage">Schedule</a></li>
-          <li><a href="/inspectionFloorPage">Inspection</a></li>
-          <li class="active"><a href="/historyPage">History</a></li>
-          <h3 id = "inv1">ADD ACOUNT</h3>
-          <li id="inv2"><a href="/createAccount" target="_blank">Create Account</a></li>
-        </ul>
       </div>
+      <div class="user-profile-name">
+        <h2 id="welcomeMessage"></h2>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">
+          <img src="/images/caret-down.png" alt="" style="width: 15px; height:15px">
+        </button>
+        <div class="dropdown-content">
+          <a href="#">View Profile</a>
+          <a onclick="logout()">Logout</a>
+        </div>
       </div>
     </div>
+    
+    <div id="main-div">
+      <div id="left-div">
+        <div id="sidebar-div">
+          <div class="sidebar-menu">
+            <ul>
+              <h3>MENU</h3>
+              <li id="inv"><a href="/inventory">Inventory</a></li>
+              <li><a href="/scheduleFloorPage">Schedule</a></li>
+              <li><a href="/inspectionFloorPage">Inspection</a></li>
+              <li class="active"><a href="/historyPage">History</a></li>
+              <h3 id="inv1">ADD ACCOUNT</h3>
+              <li id="inv2"><a href="/createAccount" target="_blank">Create Account</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-    <div id="right-div">
-      <div id="header-banner-div">
+      <div id="right-div">
+        <div id="header-banner-div">
           <div class="nav-link">
             <a href="/inventory" class="nav-link-active">Floor</a>
             <a href="/floorPage" class="nav-link-active">Area</a>
             <a href="/floorPage" class="nav-link-active">Equipment</a>
             <a href="/floorPage" class="nav-link-active">Specs</a>
           </div>
-      </div>
-      <div id="button-container-div">
-        <div id="addFloorBtn" class="sortContainer">
-          <button class="generate-btn" id="generate-pdf-btn">Generate PDF</button>
         </div>
-      </div>
-      
-    <div id="body-area-div">
-      <div class="contents">
-        <div class="top">
-          <p><strong>EQUIPMENT MAINTENANCE SUMMARY</strong></p>
-        </div>
-        <div class="bottom">
-          <div class="date">
-            <div id='equip-img' class="image-display">
-            </div>
-            <div id="planned-date" class="planned-date">
-              
-              
-            </div>
-            <div id="actual-date" class="actual-date">
-              
-            </div>
+        <div id="button-container-div">
+          <div id="addFloorBtn" class="sortContainer">
+            <button class="generate-btn" id="generate-pdf-btn">Generate PDF</button>
           </div>
-          <div id="equip-details" class="equip-details">
-            
+        </div>
+
+        <div id="body-area-div">
+          <div class="contents">
+            <div class="top">
+              <p><strong>EQUIPMENT MAINTENANCE SUMMARY</strong></p>
+            </div>
+            <div class="bottom">
+              <div class="date">
+                <div id='equip-img' class="image-display"></div>
+                <div id="planned-date" class="planned-date"></div>
+                <div id="actual-date" class="actual-date"></div>
+              </div>
+              <div id="equip-details" class="equip-details"></div>
+            </div>
+            <div class="signature-section">
+              <p>Prepared by: ____________________________  Date: ____________________</p>
+              <p>Verified by: ____________________________  Date: ____________________</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-  <div id="footer-div">
-    Footer
-  </div>
-</div>
 
-  
+    <div id="footer-div">Footer</div>
+  </div>
 
-<script src="historyDetails.js"></script>
+  <script src="historyDetails.js"></script>
 </body>
 </html>
