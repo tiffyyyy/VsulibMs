@@ -19,6 +19,13 @@
     border: none;
     font-size: 18px;
 }
+
+.generate-btn:hover{
+    cursor: pointer;
+    background-color: #B49B44;
+    transition: background-color 0.3s eas
+}
+
 .bottom > * {
     padding: 10px;
     display: flex;
@@ -82,5 +89,9 @@
     margin: 10px 0; /* Adjusted margin for better spacing */
     text-align: center;
     align-items: center;
+  }
+  
+  .white-background {
+    background-color: white !important;
   }
   

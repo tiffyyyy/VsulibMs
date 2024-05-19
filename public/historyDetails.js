@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('generate-pdf-btn').addEventListener('click', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const historyId = urlParams.get('id');
+    document.getElementById('body-area-div').classList.toggle('rmv');
 
     if (!historyId) {
         console.error('ID not found in the URL');

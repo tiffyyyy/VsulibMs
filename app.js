@@ -841,7 +841,16 @@ app.get('/pdf/:id', async (req, res) => {
     try {
         await page.waitForSelector('#body-area-div', { timeout: 120000 });
         await page.evaluate(() => {
+            document.body.style.background = 'white';
+            document.body.style.border = 'none';
+
+            document.getElementById('wrapper-div').style.background = 'white';
+            document.getElementById('main-div').style.background = 'white';
+
             const bodyAreaDiv = document.querySelector('#body-area-div');
+            bodyAreaDiv.style.background = 'white';
+            bodyAreaDiv.style.border = 'none';
+
             const parent = bodyAreaDiv.parentElement;
             Array.from(parent.children).forEach(child => {
                 if (child !== bodyAreaDiv) {

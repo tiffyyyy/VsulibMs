@@ -62,10 +62,7 @@ body {
   background-color: rgb(250, 250, 250);
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
-  position: fixed;
-  z-index: 1000;
-  top: 0;
+  margin-bottom: 40px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Adjust values as needed */
 }
 
@@ -389,6 +386,14 @@ a{
   border-right: 2px solid rgba(0, 0, 0, 0.1); /* Subtle white border at the top */
   border-left: 2px solid rgba(231, 231, 231, 0.742);
   border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Subtle black border at the bottom */
+}
+
+.rmv{
+  border:none;
+  border-bottom: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
 }
 
 .floorBox{
@@ -1030,6 +1035,7 @@ tr{
   flex-direction: row;
   width: 100%;
   min-height: 610px;
+  max-height: 610px;
   overflow-y: auto;
   gap: 20px;
   padding: 20px;
