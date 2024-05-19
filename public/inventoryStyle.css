@@ -298,6 +298,20 @@ a{
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 44px;
 }
+.addArea{
+  border-radius: 10px;
+  background-color: rgb(97, 121, 105);
+  padding: 10px;
+  color: white;
+  border: none;
+  font-size: 18px;
+  background-image: url(images/floor\ \(1\).png);
+  background-size: 20% 65%;
+  background-repeat:no-repeat;
+  background-position: 10% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 44px;
+}
 
 .addArea{
   border-radius: 10px;
@@ -344,6 +358,13 @@ a{
   background-color: #B49B44;
 }
 
+.addArea:hover {
+  background-color: #B49B44;
+}
+
+.addEquip:hover {
+  background-color: #B49B44;
+}
 .sortContainer {
   padding: 10px;
   border: none;
@@ -577,7 +598,6 @@ a{
   text-decoration: none;
   cursor: pointer;
 }
-
 .areaContent {
   display: flex;
   justify-content: space-between; 
@@ -1006,8 +1026,29 @@ tr{
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 
-.labelsTable tr {
+.labelsTable {
+  position: absolute;
+  height: 100%;
   width: 100%;
+  border-collapse: collapse;
+}
+
+.labelsTable tr {
+  display: flex; /* Make tr a block-level element */
+  width: 100%; /* Occupy full width of its container */
+}
+.labelsTable a {
+  display: flex;
+  width: 100%;
+}
+
+.labelsTable th, .labelsTable td, .labelsTable a {
+  flex: 1; /* Make all th elements have equal flex */
+  text-align: center; /* Center text in each header cell */
+}
+.labelsTable a > td {
+  flex: 1; /* Make all th elements have equal flex */
+  text-align: center;
 }
 
 .floorBox p a {
@@ -1026,4 +1067,30 @@ tr{
   background-position: 10% 50%;
   background-origin: padding-box;
   padding-left: 44px;
+}
+
+.histBox{
+  display: flex;
+  align-items: center;
+  text-align: center; 
+  flex-wrap:wrap;
+  border-radius: 10px;
+  border-width: 2px;
+  position: absolute;
+  width: 98%;
+  height: 99%;
+}
+
+.histBox a{
+  background-repeat: no-repeat;
+  background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 1%;
+  border-top: 2px solid rgba(255, 255, 255, 0.568); /* Subtle white border at the top */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  color: black;
 }

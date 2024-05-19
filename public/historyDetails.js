@@ -21,25 +21,37 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(`/history/${historyId}`)
             .then(response => response.json())
             .then(data => {
-                const { historyDetails, equipmentDetails } = data;
+                const { historyDetails, equipmentDetails, areaDetails } = data;
 
                 const actualDate = new Date(historyDetails.actualDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                const proposedDate = new Date(historyDetails.proposedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-                document.querySelector('.row2c1').innerHTML = `
-                    <h3>${equipmentDetails.equip_name}</h3>
-                    <img src="${equipmentDetails.equip_pic}" alt="Equipment Picture">
-                    <p>Status: ${equipmentDetails.status}</p>
-                    <p>Equipment Number: ${equipmentDetails.equip_no}</p>
+                document.getElementById('equip-img').innerHTML = `
+                    <img src="${equipmentDetails.equip_pic}" alt="equipment-picture">
                 `;
 
-                document.querySelector('.row2c2').innerHTML = `
-                    <p>Remarks: ${historyDetails.remarks2}</p>
-                    <p>Actual Date: ${actualDate}</p>
+                document.getElementById('planned-date').innerHTML = `
+                    <p style="color: red;"><strong>Date Planned: ${proposedDate}</strong></p>
+                    <p><strong>Remarks:</strong>${historyDetails.remarks1}</p>
+                `;
+
+                document.getElementById('actual-date').innerHTML = `
+                    <p style="color: green;"><strong>Maintenance Date: ${actualDate}</strong></p>
+                    <p><strong>Result:</strong> ${historyDetails.remarks2}</p>
+                `;
+
+                document.getElementById('equip-details').innerHTML = `
+                    <p><strong>Equipment Name:</strong> ${historyDetails.equip_name}</p>
+                    <p><strong>Equipment Status:</strong> ${historyDetails.status}</p>
+                    <p><strong>Serial No:</strong> ${historyDetails.equip_no}</p>
+                    <p><strong>Area:</strong> ${areaDetails.area_name}</p>
+                    <p><strong>Floor:</strong> ${areaDetails.floor_name}</p>
                 `;
             })
             .catch(error => console.error('Error fetching data:', error));
     }
 });
+
 
 function checkUserLoggedIn() {
     const cookies = document.cookie.split('; ');
@@ -80,6 +92,7 @@ document.getElementById('generate-pdf-btn').addEventListener('click', async () =
         console.error('ID not found in the URL');
         return;
     }
+
     const pdfUrl = `/pdf/${historyId}`;
 
     try {
@@ -93,7 +106,7 @@ document.getElementById('generate-pdf-btn').addEventListener('click', async () =
             link.setAttribute('download', 'history-details.pdf');
             document.body.appendChild(link);
             link.click();
-            link.parentNode.removeChild(link);
+            document.body.removeChild(link);
         } else {
             console.error('Failed to generate PDF.');
         }
@@ -101,6 +114,7 @@ document.getElementById('generate-pdf-btn').addEventListener('click', async () =
         console.error('Error generating PDF:', error);
     }
 });
+
 
 function logout() {
     const cookiePaths = [

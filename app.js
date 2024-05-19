@@ -775,9 +775,12 @@ app.get('/history/:id', (req, res) => {
     const historyId = req.params.id;
 
     const historyQuery = `
-        SELECT h.id, e.equip_name, e.equip_no, h.saved_at, h.remarks2, h.actualDate, e.equip_pic, e.status
+        SELECT h.id, e.equip_name, e.equip_no, h.saved_at, h.remarks1, h.remarks2, h.proposedDate, h.actualDate, 
+               e.equip_pic, e.status, a.name AS area_name, f.name AS floor_name
         FROM history h
         JOIN equipment e ON h.equip_id = e.equip_id
+        JOIN areas a ON e.areaId = a.id
+        JOIN floor f ON a.floorId = f.floorId
         WHERE h.id = ?
     `;
 
@@ -795,14 +798,17 @@ app.get('/history/:id', (req, res) => {
                 equip_pic: `data:image/jpeg;base64,${historyDetails.equip_pic}`,
                 status: historyDetails.status
             };
+            const areaDetails = {
+                area_name: historyDetails.area_name,
+                floor_name: historyDetails.floor_name
+            };
 
-            return res.json({ historyDetails, equipmentDetails });
+            return res.json({ historyDetails, equipmentDetails, areaDetails });
         } else {
             return res.status(404).json({ error: 'History not found' });
         }
     });
 });
-
 
 app.get('/pdf/:id', async (req, res) => {
     const { id } = req.params;
@@ -821,24 +827,55 @@ app.get('/pdf/:id', async (req, res) => {
             path: '/historyDetailPage',
         };
     });
-n
-    const browser = await puppeteer.launch();
+
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
 
     await page.setCookie(...cookies);
 
-    console.log(await page.cookies());
+    await page.goto(`http://localhost:5001/historyDetailPage?id=${id}`, { 
+        waitUntil: 'networkidle0', 
+        timeout: 60000
+    });
 
-    await page.goto(`http://localhost:5001/historyDetailPage?id=${id}`, { waitUntil: 'networkidle2' });
+    try {
+        await page.waitForSelector('#body-area-div', { timeout: 120000 });
+        await page.evaluate(() => {
+            const bodyAreaDiv = document.querySelector('#body-area-div');
+            const parent = bodyAreaDiv.parentElement;
+            Array.from(parent.children).forEach(child => {
+                if (child !== bodyAreaDiv) {
+                    child.style.display = 'none';
+                }
+            });
+            document.body.innerHTML = '';
+            document.body.appendChild(bodyAreaDiv);
+        });
 
-    const pdf = await page.pdf({ format: 'A4' });
+        const pdfBuffer = await page.pdf({
+            format: 'A4',
+            landscape: true,
+            printBackground: true,
+            margin: {
+                top: '20px',
+                bottom: '20px',
+                left: '20px',
+                right: '20px'
+            }
+        });
 
-    await browser.close();
+        await browser.close();
 
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'attachment; filename=history-details.pdf');
-    res.send(pdf);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=history-details.pdf');
+        res.send(pdfBuffer);
+    } catch (error) {
+        await browser.close();
+        console.error('Error generating PDF:', error);
+        res.status(500).send('Error generating PDF');
+    }
 });
+
 
 app.use((error, req, res, next) => {
 if (error instanceof multer.MulterError) {
