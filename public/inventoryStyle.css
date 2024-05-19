@@ -19,7 +19,7 @@ body {
   );
   backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
   -webkit-backdrop-filter: blur(10px); /* Blur effect for Safari */
-
+  overflow-y: hidden;
 }
 
 #wrapper-div {
@@ -27,7 +27,6 @@ body {
   flex-direction:column;
   width: 100%;
   min-height: 100px;
-  margin: auto;
 }
 
 #logo-div {
@@ -64,7 +63,8 @@ body {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  position: sticky;
+  position: fixed;
+  z-index: 1000;
   top: 0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Adjust values as needed */
 }
@@ -376,7 +376,8 @@ a{
   display: flex;
   flex-direction: row;
   width: 100%;
-  min-height: 410px;
+  min-height: 210px;
+  max-height: 610px;
   overflow-y: auto;
   gap: 20px;
   padding: 20px;
@@ -1028,18 +1029,18 @@ tr{
   display: flex;
   flex-direction: row;
   width: 100%;
-  min-height: 410px;
+  min-height: 610px;
   overflow-y: auto;
   gap: 20px;
   padding: 20px;
   flex-wrap: wrap;
-  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  background: radial-gradient(122.33% 121.65% at 57.5% 123.44%, rgba(97, 121, 105, 0.3) 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
   backdrop-filter: blur(12px);
   border-radius: 20px;
-  border-top: 2px solid rgba(231, 231, 231, 0.742);
-  border-right: 2px solid rgba(0, 0, 0, 0.1);
+  border-top: 2px solid rgba(231, 231, 231, 0.742); /* Subtle white border at the top */
+  border-right: 2px solid rgba(0, 0, 0, 0.1); /* Subtle white border at the top */
   border-left: 2px solid rgba(231, 231, 231, 0.742);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Subtle black border at the bottom */
 }
 
 .labelsTable {

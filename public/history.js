@@ -51,19 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Create td elements with inline styles
                     const equipNameTd = document.createElement('td');
                     equipNameTd.innerHTML = record.equip_name;
-                    equipNameTd.style.display = 'flex';  // Needed for flexbox within anchor tag
+                    equipNameTd.style.display = 'flex';
                     equipNameTd.style.flex = '1';
                     equipNameTd.style.textAlign = 'center';
 
                     const equipNoTd = document.createElement('td');
                     equipNoTd.innerHTML = record.equip_no;
-                    equipNameTd.style.display = 'flex';  // Needed for flexbox within anchor tag
+                    equipNameTd.style.display = 'flex';
                     equipNoTd.style.flex = '1';
                     equipNoTd.style.textAlign = 'center';
 
                     const savedDateTd = document.createElement('td');
                     savedDateTd.innerHTML = formattedDate;
-                    equipNameTd.style.display = 'flex';  // Needed for flexbox within anchor tag
+                    equipNameTd.style.display = 'flex';
                     savedDateTd.style.flex = '1';
                     savedDateTd.style.textAlign = 'center';
 
