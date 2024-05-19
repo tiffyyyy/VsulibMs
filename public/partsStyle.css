@@ -66,6 +66,10 @@ body {
   margin-right: 10px;
 }
 
+h2{
+  font-weight: 300;
+}
+
 .user-profile {
   display: flex;
   align-items: center;
@@ -189,7 +193,7 @@ li{
 }
 
 li:hover{
-  background-color: #B49B44;
+  background-color:   rgba(97, 121, 105, 0.355);
   border-radius: 10px;
 }
 
@@ -248,6 +252,12 @@ a{
   width: 100%;
   min-height: 50px;
   align-items: center;
+}
+
+.sortContainer {
+  padding: 0px;
+  border: none;
+  font-size: 18px;
 }
 
 .addFloor{
@@ -507,23 +517,29 @@ a{
 
 .editButton {
   margin-top: 10px;
-  background-color: #ccc; /* Green */
+  background-color: #456648; /* Green */
   color: white;
-  background-image:url(images/pencil.png);
+  background-image:url(images/pencil-white.png);
   background-repeat: no-repeat;
-  background-size: 18px 18px;
+  background-size: 14px 14px;
   background-position: center;
   width: 28px;
   height: 28px;
   border-radius: 10px;
+  border: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; 
 }
 
 .editButton:hover {
-  background-color: #B49B44;
+  background-color: #6c856d;
+  background-image:url(images/pencil-white.png);
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  background-position: center;
+
 }
 
 .deleteButton {
-  background-image: url(images/cross-circle.png); 
   background-repeat: no-repeat;
   background-position: center;
   margin-top: 10px;
@@ -533,14 +549,24 @@ a{
   width: 30px;
   height: 30px;
   border-radius: 60px;
-  color: #464545;
+  color: #ffffff;
+  background-color: #a82222;
+  transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; 
 }
 
 .deleteButton:hover {
-  background-color: #9a9a99;
-  color: #333;
+  background-color: rgb(173, 103, 103);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); 
+  color: white; 
+  font-size: 18px;
 }
 
+.deleteButton::before {
+  content: '×'; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 /*Equipment*/
@@ -697,7 +723,7 @@ img {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #f9f9f9;
   width: 100%;
   display: flex;
@@ -742,14 +768,15 @@ img {
 #updateBtn {
   margin-top: 10px;
   padding: 5px 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   font-size: 15px;
   border-radius: 10px;
   border: none;
   background-color: #617969;
   color: #fff;
   font-size: 20px;
+  transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; 
 }
 
 #updateBtn:hover{
@@ -781,15 +808,15 @@ background-color: #B49B44;
 
 #inv {
   background-image:url(images/inventory-alt.png);
-  background-size: 9% 68%;
+  background-size: 9% 50%;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 10px;
 }
 #sched {
-  background-image:url(images/calendar-silhouette.png);
-  background-size: 9% 68%;
+  background-image:url(images/calendar.png);
+  background-size: 9% 55%;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -797,7 +824,7 @@ background-color: #B49B44;
 }
 #insp {
   background-image:url(images/inspection.png);
-  background-size: 9% 68%;
+  background-size: 9% 50%;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -805,9 +832,18 @@ background-color: #B49B44;
 }
 #hist {
   background-image:url(images/history.png);
-  background-size: 9% 68%;
+  background-size: 9% 50%;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 10px;
+}
+#inv2 {
+  background-image:url(images/user-gear.png);
+  background-size: 9% 45%;
+  background-repeat:no-repeat;
+  background-position: 15% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 10px;
+  padding-right: 1px;
 }

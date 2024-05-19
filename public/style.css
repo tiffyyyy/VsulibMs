@@ -1,239 +1,130 @@
-*{
-    
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    background-color: rgb(225, 231, 221); /*E1E7DD*/
+body {
+    /*background-color: #E1E7DD;*/
+    background: linear-gradient(135deg, #E1E7DD, rgba(255, 255, 255, 0.3)), url('your-background-image.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-header {
-    
-}
-
-.left { 
-	transform: rotate(90deg);
-	width:400px;
-	height:400px;
-}
-
-.title{
-    transform: rotate(180deg) translate(-50%, -50%); /* Rotate and center */
-    color: rgb(70, 68, 68); /* Text color */
-    font-size: 20px; /* Font size */
+.container {
+    display: flex;
+    flex-direction: row;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    width: 300px;
-    height: 80px;
-    margin-left: -115px;
-    margin-top: -22px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    width: 80%;
+    max-width: 900px;
+    height: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.left {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.above-title-image {
+    width: 280px; 
+    height: 320px; 
+    margin-bottom: 0px;
+    background-image: url('images/wa30.png');
+    background-size: cover;
+}
+
+.title-container {
+    margin-bottom: 20px;
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    /*border: #4D7058 solid 1px;*/
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.container{
-    position: absolute;
-    background-color: rgb(225, 231, 221); 
-    border-radius: 40px;
-    height: 400px;
-    width: 800px;
-    left: 20%;
-    bottom: 20%
+.title {
+    color: #4D7058;
+    font-size: 24px;
 }
 
-.titleContainer {
-    position: absolute;
-    left: 2%;
-    bottom: 40%;
-    background-color: rgba(255, 255, 255, .2);
-    border-color: rgb(255, 255, 255);
-    border-radius: 15px;
-    height: 100px;
-    width: 360px;
-    border: 2px solid white;
-    z-index: 2; /* Higher z-index to place it in front */
-    transform: rotate(90deg);
-    backdrop-filter: blur(2px);
+.right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.circle1 {
-    position: absolute;
-    border-radius: 500px;
-    background-color: rgba(97, 121, 105, 1);
-    width: 60px;
-    height: 60px;
-    left: 52%; /* Adjust left position */
-    bottom: 70%; /* Adjust bottom position */
-    z-index: 1; /* Lower z-index to place it behind */
+.login-container {
+    width: 90%;
+    max-width: 300px;
+    height: auto;
+    border: #4D7058 solid 1px;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.circle2 {
-    position: absolute;
-    border-radius: 500px;
-    background-color: rgba(97, 121, 105, 1);
-    width: 100px;
-    height: 100px;
-    left: 43%; /* Adjust left position */
-    bottom: 10%; /* Adjust bottom position */
-    z-index: 1; /* Lower z-index to place it behind */
+.user-image {
+    margin-top: 20px;
+    background-image: url('images/VSU\ MS-Logo\ V1.png');
+    background-size: cover;
+    width: 40px;
+    height: 40px;
 }
 
-.circle3 {
-    position: absolute;
-    border-radius: 500px;
-    background-color: rgba(97, 121, 105, 1);
-    width: 80px;
-    height: 80px;
-    left: 100px; /* Adjust left position */
-    bottom: 50%; /* Adjust bottom position */
-    z-index: 1; /* Lower z-index to place it behind */
-}
-
-.loginContainer {
-    position: absolute;
-    left: 55%;
-    bottom: 6%;
-    background-color: rgba(255, 255, 255, .2);
-    border-color: rgb(255, 255, 255);
-    border-radius: 15px;
-    height: 350px;
-    width: 300px;
-    border: 2px solid white;
-    z-index: 2; /* Higher z-index to place it in front */
-    transform: rotate(0deg);
-}
-
-.userImage{
-    position: absolute;
-    left: 43%;
-    bottom: 78%;
-    width:46px;
-	height:46px;
-    color: grey;
-    background-image:url(images/userIcon.png);
-    background-repeat:no-repeat;
-	background-size:cover;
-    
-}
-
-.userText{
-    position: absolute;
-    bottom: 70%;
-    left: 42%;
+.user-text {
     font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(57, 57, 57);
+    color: #393939;
+    margin: 20px 0;
 }
 
-.userBox{
-    position: absolute;
-    bottom: 57%;
-    left: 20px;
-    font-size: 20px;
+.input-box {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #627A6A;
     border-radius: 10px;
-    border-color: RGB(98, 122, 106);
-    border-style: solid;
-    padding-left: 20px;
-    padding-bottom: 5px;
-    background-color: rgba(255, 255, 255, .2);
-    border-width: 1px;
-    width: 224px;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    color: #393939;
 }
 
-input[type="username"]{
-    font-size: 15px;
-    padding-left: 30px;
-    padding-top: 7px;
-    background-image: url(images/userIcon.png);
-    background-repeat: no-repeat;
-    background-size: 22px 22px; /* Adjust the size of the image */
-    background-position: 5px center;
-  }
-  
-  input[type="password"]{
-      font-size: 15px;
-      padding-left: 30px;
-      padding-top: 7px;
-      background-image: url(images/userPassword.png);
-      background-repeat: no-repeat;
-      background-size: 24px 24px; /* Adjust the size of the image */
-      background-position: 4px center;
-  }
-
-.passwordBox{
-    position: absolute;
-    bottom: 44%;
-    left: 20px;
-    font-size: 20px;
-    border-radius: 10px;
-    border-color: rgb(98, 122, 106);
-    border-style: solid;
-    background-color: rgba(255,255,255,0.2);
-    padding-left: 20px;
-    padding-bottom: 5px;
-    border-width: 1px;
-    width: 224px;
+.input-box::placeholder {
+    color: #aaa;
 }
 
-button {
-    position: absolute;
-    bottom: 50px;
-    left: 35%;
-    padding: 7px 30px;
-    background-color: rgb(77, 112, 88); /* Blue color for the button */
-    color: #fff; /* White text color */
+#loginBtn {
+    background-color: #4D7058;
+    color: #fff;
+    padding: 10px 30px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
 }
 
-button:hover {
-    background-color: #B49B44; /* Darker blue color on hover */
+#loginBtn:hover {
+    background-color: #B49B44;
 }
-
-/* Split the screen in half */
-.split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-/* Control the left side */
-.left {
-  left: 0;
-}
-
-/* Control the right side */
-.right {
-  right: 0;
-}
-
-#wrapper-div {
-    display:flex;
-    flex-direction:column;
-    width: 100%;
-    min-height: 100px;
-    margin: auto;
-}
-
-#logo-div {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    min-height: 50px;
-    background-color: light gray;
-    line-height: 50px;
-    padding-left: 2%;
-    padding-right: 2%;
-    margin-bottom: 10px;
-    align-items: center;
-    background-image: url(images/VSU\ MS-Logo\ V1.png);
-    background-repeat: no-repeat;
-    background-size: 50px 50px; 
-    margin-left: 1%;
-    margin-top: 1%;
-}
-

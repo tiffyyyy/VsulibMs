@@ -33,6 +33,7 @@ function displayAreas() {
                 areaBox.appendChild(areaLink);
 
                 const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
                 editButton.className = 'editButton';
                 editButton.addEventListener('click', function() {
 

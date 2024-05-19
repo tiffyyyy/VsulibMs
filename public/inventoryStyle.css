@@ -11,6 +11,14 @@ body {
   display: flex;
   flex-direction: column;
   /*background-color: #a6bfaf;*/
+  background: linear-gradient(
+    135deg, 
+    #f9f9f9,
+    rgba(120, 178, 141, 0.226) , 
+    rgba(96, 148, 115, 0.213)
+  );
+  backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+  -webkit-backdrop-filter: blur(10px); /* Blur effect for Safari */
 
 }
 
@@ -70,6 +78,9 @@ body {
   margin-right: 10px;
 }
 
+h2{
+  font-weight: 300;
+}
 .user-profile {
   display: flex;
   align-items: center;
@@ -109,11 +120,11 @@ body {
   padding: 10px 18px;
   text-decoration: none;
   display: block;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .dropdown-content a:hover {
-  background-color: #abaaa6;
+  background-color: rgba(97, 121, 105, 0.355);
   border-radius: 10px;
 }
 
@@ -163,6 +174,7 @@ body {
   /*background-color: rgb(225, 231, 221); /*E1E7DD*/
   border-radius: 10px;
   color: #333;
+  font-weight: 300;
 }
 
 .sidebar-menu a{
@@ -176,12 +188,26 @@ body {
   border-radius: 10px;
 }
 
-h3{
+h3 {
   text-align: center;
   padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 25px;
+  padding-bottom: 10px;
+  font-size: 24px;
+  font-weight: 500;
+  position: relative; /* Needed for positioning the pseudo-element */
 }
+
+h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%; /* Adjust the width as needed */
+  height: 1px; /* Thickness of the line */
+  background-color: #000; /* Color of the line */
+}
+
 
 li{
   list-style-type: none;
@@ -273,6 +299,22 @@ a{
   padding-left: 44px;
 }
 
+.addArea{
+  border-radius: 10px;
+  background-color: rgb(97, 121, 105);
+  padding: 10px;
+  color: white;
+  border: none;
+  font-size: 18px;
+  background-image: url(images/floor\ \(1\).png);
+  background-size: 20% 65%;
+  background-repeat:no-repeat;
+  background-position: 10% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 44px;
+  transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; 
+}
+
 .addEquip{
   border-radius: 10px;
   background-color: rgb(97, 121, 105);
@@ -280,15 +322,25 @@ a{
   color: white;
   border: none;
   font-size: 18px;
-  background-image: url(images/stairs\ \(1\).png);
+  background-image: url(images/toolbox.png);
   background-size: 14% 65%;
   background-repeat:no-repeat;
   background-position: 10% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 54px;
+  transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; 
 }
 
 .addFloor:hover {
+  background-color: #B49B44;
+  transition: background-color 0.3s ease;
+}
+
+.addArea:hover {
+  background-color: #B49B44;
+}
+
+.addEquip:hover {
   background-color: #B49B44;
 }
 
@@ -343,7 +395,7 @@ a{
   padding-bottom: 5px;
 }
 
-#footer-div {
+/*#footer-div {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -352,7 +404,7 @@ a{
   margin-top: 10px;
   justify-content: center;
   align-items: center;
-}
+}*/
 
 .modal {
   display: none;
@@ -494,7 +546,7 @@ a{
 
 .add {
   position: absolute;
-  bottom: 20px; /* Adjust this value to your desired distance from the bottom edge */
+  bottom: 20px; 
   left: 50%;
   transform: translateX(-50%);
   background-color: #617969;
@@ -507,12 +559,13 @@ a{
 
 .add:hover {
   background-color: #B49B44;
+  transition: background-color 0.3s ease;
 }
 
 .close {
   position: absolute;
-  top: 10px; /* Adjust this value to your desired distance from the top edge */
-  right: 15px; /* Adjust this value to your desired distance from the right edge */
+  top: 10px;
+  right: 15px; 
   color: #aaa;
   font-size: 24px;
   font-weight: bold;
@@ -527,73 +580,95 @@ a{
 
 .areaContent {
   display: flex;
-  justify-content: space-between; /* Aligns items to the left and right */
-  align-items: center; /* Centers items vertically */
+  justify-content: space-between; 
+  align-items: center; 
 }
 
-.editBtn, .deleteBtn {
-  margin-left: 10px; /* Add some space between the buttons */
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-}
 
 .editButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px; 
+  padding-left: 8px;
   margin-top: 10px;
-  background-color: #ccc; /* Green */
-  color: white;
+  background: rgba(255, 255, 255, 0.1); 
+  color:#247e3c;;
   position: absolute;
   top: 2px;
   right: 50px;
-  background-image:url(images/pencil.png);
+  background-image: url(images/pencil.png);
   background-repeat: no-repeat;
-  background-size: 18px 18px;
-  background-position: center;
-  width: 28px;
+  background-size: 12px 12px;
+  background-position: right 4px center; 
+  width: auto; 
   height: 28px;
   border-radius: 10px;
-  border:none;
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(10px); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: background 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .editButton:hover {
-  background-color: #B49B44;
+  background-color: #247e3c;
+  color: white;
+  background-image: url(images/pencil-white.png);
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
+  background-position: right 4px center; 
 }
+
+
 
 .deleteButton {
   position: absolute;
   top: 2px;
   right: 5px;
-  background-image: url(images/cross-circle.png); 
-  background-repeat: no-repeat;
-  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 10px;
-  background-repeat: no-repeat;
-  background-size: 20px 20px;
-  background-position: center;
   width: 30px;
   height: 30px;
-  border-radius: 60px;
-  color: #222222;
-  background-color: #ccc;
-  border:none;
+  border-radius: 50%; 
+  color: rgb(208, 52, 52);
+  background: rgba(255, 255, 255, 0.1); 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(10px); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  font-size: 18px;
+  font-weight: bold; 
+  transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; 
 }
 
 .deleteButton:hover {
-  background-color: #B49B44;
-  color: #333;
+  background-color: rgb(208, 52, 52);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); 
+  color: #ffffff; 
 }
+
+
+.deleteButton::before {
+  content: '×'; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 
 #inv {
   background-image:url(images/inventory-alt.png);
-  background-size: 9% 68%;
+  background-size: 9% 50%;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 10px;
 }
 #sched {
-  background-image:url(images/calendar-silhouette.png);
-  background-size: 9% 68%;
+  background-image:url(images/calendar.png);
+  background-size: 9% 55%;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -601,7 +676,7 @@ a{
 }
 #insp {
   background-image:url(images/inspection.png);
-  background-size: 9% 68%;
+  background-size: 9% 50%;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -609,12 +684,22 @@ a{
 }
 #hist {
   background-image:url(images/history.png);
-  background-size: 9% 68%;
+  background-size: 9% 50%;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 10px;
 }
+#inv2 {
+  background-image:url(images/user-gear.png);
+  background-size: 9% 45%;
+  background-repeat:no-repeat;
+  background-position: 15% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 10px;
+  padding-right: 1px;
+}
+
 
 /*Equipment*/
 .equipText{

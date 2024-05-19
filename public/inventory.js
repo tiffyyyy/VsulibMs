@@ -93,7 +93,7 @@ function fetchFloorsAndUpdateHTML() {
 
                 // Add Edit Button
                 const editButton = document.createElement('button');
-                editButton.textContent = '';
+                editButton.textContent = 'Edit';
                 editButton.className = 'editButton';
                 editButton.addEventListener('click', function() {
                     // Edit form
