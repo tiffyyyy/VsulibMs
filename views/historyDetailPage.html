@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="inventoryStyle.css">
+<link rel="stylesheet" href="historyDetail.css">
 <title>History Details Page</title>
 </head>
 
@@ -38,9 +39,9 @@
         <ul>
           <h3>MENU</h3>
           <li id = "inv"><a href="/inventory">Inventory</a></li>
-          <li id = "sched"><a href="/scheduleFloorPage">Schedule</a></li>
-          <li id = "insp"><a href="/inspectionFloorPage">Inspection</a></li>
-          <li id = "hist" class="active"><a href="/historyPage">History</a></li>
+          <li><a href="/scheduleFloorPage">Schedule</a></li>
+          <li><a href="/inspectionFloorPage">Inspection</a></li>
+          <li class="active"><a href="/historyPage">History</a></li>
           <h3 id = "inv1">ADD ACOUNT</h3>
           <li id="inv2"><a href="/createAccount" target="_blank">Create Account</a></li>
         </ul>
@@ -59,19 +60,31 @@
       </div>
       <div id="button-container-div">
         <div id="addFloorBtn" class="sortContainer">
-          
+          <button class="generate-btn" id="generate-pdf-btn">Generate PDF</button>
         </div>
       </div>
       
     <div id="body-area-div">
-      <div class="row1">
-          <div class = "row2c1">
-                   
-          </div>
-          <div class = "row2c2">
+      <div class="contents">
+        <div class="top">
+          <p><strong>EQUIPMENT MAINTENANCE SUMMARY</strong></p>
+        </div>
+        <div class="bottom">
+          <div class="date">
+            <div id='equip-img' class="image-display">
+            </div>
+            <div id="planned-date" class="planned-date">
               
-          </div>  
-          <button id="generate-pdf-btn">Generate PDF</button> 
+              
+            </div>
+            <div id="actual-date" class="actual-date">
+              
+            </div>
+          </div>
+          <div id="equip-details" class="equip-details">
+            
+          </div>
+        </div>
       </div>
     </div>
   </div>
