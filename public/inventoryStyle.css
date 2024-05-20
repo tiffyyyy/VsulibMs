@@ -749,8 +749,8 @@ a{
   padding-right: 1px;
 }
 
-#inv2 {
-  background-image:url(images/user-gear.png);
+#pend {
+  background-image:url(images/file.png);
   background-size: 9% 45%;
   background-repeat:no-repeat;
   background-position: 15% 50%;
