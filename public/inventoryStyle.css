@@ -894,8 +894,9 @@ img {
   background-image:url(images/calendar-silhouette.png);
   background-repeat:no-repeat;
 	background-size:cover;
-  height: 24px;
-  width: 24px;
+  height: 28px;
+  width: 28px;
+  padding: 2px;
 }
 
 .calendarDisplay {

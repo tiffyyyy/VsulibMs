@@ -224,7 +224,7 @@ function fetchFloorsAndUpdateHTML() {
         .then(response => response.json())
         .then(floorsData => {
             const bodyAreaDiv = document.getElementById('body-area-div');
-            bodyAreaDiv.innerHTML = ''; // Clear existing content
+            bodyAreaDiv.innerHTML = '';
 
             floorsData.forEach(floor => {
                 const floorBox = document.createElement('div');
