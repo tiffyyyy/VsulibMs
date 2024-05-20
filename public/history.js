@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to fetch and display all history data
     function fetchAndDisplayAllHistory() {
         fetch('/history')
             .then(response => {
@@ -48,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const row = document.createElement('tr');
                     const link = document.createElement('a');
                     link.href = `/historyDetailPage?id=${record.id}`;
-                    // Create td elements with inline styles
                     const equipNameTd = document.createElement('td');
                     equipNameTd.innerHTML = record.equip_name;
                     equipNameTd.style.display = 'flex';
@@ -67,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     savedDateTd.style.flex = '1';
                     savedDateTd.style.textAlign = 'center';
 
-                    // Add tds to link and link to row
                     link.appendChild(equipNameTd);
                     link.appendChild(equipNoTd);
                     link.appendChild(savedDateTd);
@@ -83,6 +80,86 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     fetchAndDisplayAllHistory();
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const labelsTable = document.querySelector('.labelsTable');
+    const searchBox = document.getElementById('searchBox');
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    }
+
+    function fetchAndDisplayHistory(searchTerm) {
+        fetch(`/searchHistory?term=${encodeURIComponent(searchTerm)}`)
+           .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+           .then(data => {
+                labelsTable.innerHTML = `
+                    <tr>
+                        <th>Equipment Name</th>
+                        <th>Equipment Number</th>
+                        <th>Saved Date</th>
+                    </tr>
+                `;
+
+                data.forEach(record => {
+                    const formattedDate = formatDate(record.saved_at);
+                    const row = document.createElement('tr');
+                    const link = document.createElement('a');
+                    link.href = `/historyDetailPage?id=${record.id}`;
+
+                    const equipNameTd = document.createElement('td');
+                    equipNameTd.innerHTML = record.equip_name;
+                    equipNameTd.style.display = 'flex';
+                    equipNameTd.style.flex = '1';
+                    equipNameTd.style.textAlign = 'center';
+
+                    const equipNoTd = document.createElement('td');
+                    equipNoTd.innerHTML = record.equip_no;
+                    equipNameTd.style.display = 'flex';
+                    equipNameTd.style.flex = '1';
+                    equipNameTd.style.textAlign = 'center';
+
+                    const savedDateTd = document.createElement('td');
+                    savedDateTd.innerHTML = formattedDate;
+                    equipNameTd.style.display = 'flex';
+                    equipNameTd.style.flex = '1';
+                    equipNameTd.style.textAlign = 'center';
+
+                    link.appendChild(equipNameTd);
+                    link.appendChild(equipNoTd);
+                    link.appendChild(savedDateTd);
+                    row.appendChild(link);
+
+                    labelsTable.appendChild(row);
+                });
+            })
+           .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+    }
+
+    fetchAndDisplayHistory('');
+
+    searchBox.addEventListener('input', function() {
+        const searchTerm = this.value.trim();
+        if (searchTerm!== '') {
+            fetchAndDisplayHistory(searchTerm);
+        } else {
+            fetchAndDisplayHistory('');
+        }
+    });
+});
+
 
 function checkUserLoggedIn() {
     const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
@@ -112,11 +189,12 @@ function logout() {
         '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
         '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
         '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
-        '/historyPage', '/historyDetailPage'
+        '/historyPage', '/historyDetailPage', '/pending'
     ];
 
     cookiePaths.forEach(path => {
         document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
+        document.cookie = `authority=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
     });
 
     window.location.href = '/';
