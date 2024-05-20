@@ -9,10 +9,10 @@
 
 <body>
   <div id="wrapper-div">
-    <div id="logo-div">
-    </div>
   
     <div id="nav-div">
+      <div id="logo-div">
+      </div>
       <div class="user-profile">
         <div class="user-profile-image">
           <img src="/images/userIcon.png" alt="Profile Image">
@@ -37,9 +37,10 @@
           <ul>
             <h3>MENU</h3>
             <li id = "inv"><a href="/inventory">Inventory</a></li>
-            <li class="active"><a href="/scheduleFloorPage">Schedule</a></li>
-            <li><a href="/inspectionFloorPage">Inspection</a></li>
-            <li><a href="/historyPage">History</a></li>
+            <li id = "sched"><a href="/scheduleFloorPage">Schedule</a></li>
+            <li id = "insp"><a href="/inspectionFloorPage">Inspection</a></li>
+            <li id = "hist"><a href="/historyPage">History</a></li>
+            <li id = "pend" class="active"><a href="/pending">Pending</a></li>
             <h3 id = "inv1">ADD ACOUNT</h3>
             <li id="inv2"><a href="/createAccount" target="_blank">Create Account</a></li>
           </ul>
@@ -50,15 +51,13 @@
       <div id="right-div">
         <div id="header-banner-div">
             <div class="nav-link">
-              <a href="/scheduleFloorPage" class="nav-link-active">Floor</a>
-              <a href="/scheduleAreaPage" class="nav-link-active">Area</a>
-              <a href="/scheduleEquipmentPage" class="nav-link-active">Equipment</a>
+              <a href="/pending" class="nav-link-active">Pending</a>
             </div>
         </div>
 
         <div id="button-container-div">
-          <button id="addFloorBtn" class="addFloor">
-            Add floor
+          <button id="addFloorBtn" class="sortContainer">
+            
           </button>
         </div>
 
@@ -72,8 +71,6 @@
                 <img alt="Equipment Image">
                 <p>Serial Number: 12345</p>
                 <div class="button-container">
-                    <a href="page1.html" class="button">Button 1</a>
-                    <a href="page2.html" class="button">Button 2</a>
                 </div>
             </div>
           </div>    

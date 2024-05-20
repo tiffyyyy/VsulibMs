@@ -110,11 +110,12 @@ function logout() {
         '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
         '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
         '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
-        '/historyPage', '/historyDetailPage'
+        '/historyPage', '/historyDetailPage', '/pending'
     ];
 
     cookiePaths.forEach(path => {
         document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
+        document.cookie = `authority=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
     });
 
     window.location.href = '/';

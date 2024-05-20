@@ -11,7 +11,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
                 const response = JSON.parse(xhr.responseText);
                 if (response.loginStatus === 'success') {
                     const authority = response.authority;
-                    const paths = ['/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage', '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage', '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage', '/historyPage', '/historyDetailPage', '/pdf/:id'];
+                    const paths = ['/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage', '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage', '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage', '/historyPage', '/historyDetailPage', '/pdf/:id', '/pending'];
                     paths.forEach(path => {
                         document.cookie = `username=${encodeURIComponent(username)}; path=${path};`;
                         document.cookie = `authority=${encodeURIComponent(authority)}; path=${path};`;

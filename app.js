@@ -103,6 +103,10 @@ app.get('/historyDetailPage', (req,res) => {
     res.sendFile(path.join(__dirname, 'views', 'historyDetailPage.html'));
 })
 
+app.get('/pending', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'pending.html'));
+})
+
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
@@ -885,6 +889,50 @@ app.get('/pdf/:id', async (req, res) => {
     }
 });
 
+app.get('/fetchEquipments', (req, res) => {
+    const searchTerm = req.query.term || '';
+    const sqlQuery = `
+        SELECT * FROM equipment 
+        WHERE equip_name LIKE? OR equip_no LIKE?
+    `;
+
+    db.query(sqlQuery, [`%${searchTerm}%`, `%${searchTerm}%`], (err, results) => {
+        if (err) throw err;
+        res.json(results);
+    });
+});
+
+app.get('/searchHistory', (req, res) => {
+    const searchTerm = req.query.term || '';
+
+    const sqlQuery = `
+        SELECT h.id, e.equip_name, h.equip_id, h.actualDate, h.saved_at, h.remarks1, h.remarks2
+        FROM history h
+        JOIN equipment e ON h.equip_id = e.equip_id
+        WHERE (e.equip_name LIKE? OR e.equip_no LIKE?)
+        ORDER BY h.saved_at DESC
+    `;
+
+    db.query(sqlQuery, [`%${searchTerm}%`, `%${searchTerm}%`], (err, results) => {
+        if (err) throw err;
+        res.json(results);
+    });
+});
+
+app.get('/fetchPending', (req, res) => {
+    const sqlQuery = `
+        SELECT e.*, s.proposedDate
+        FROM equipment e
+        LEFT JOIN schedule s ON e.equip_id = s.equip_id
+        WHERE s.proposedDate IS NOT NULL AND s.actualDate IS NULL
+        ORDER BY e.equip_name ASC
+    `;
+
+    db.query(sqlQuery, (err, results) => {
+        if (err) throw err;
+        res.json(results);
+    });
+});
 
 app.use((error, req, res, next) => {
 if (error instanceof multer.MulterError) {
