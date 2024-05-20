@@ -281,7 +281,22 @@ a{
   align-items: center;
 }
 
-.addFloor{
+#searchBox {
+  margin-right: auto; /* Pushes search box to the left */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #617969;
+  border-radius: 10px;
+  width: 260px; /* Adjust the width as needed */
+  background-color: #dae2dd6a;
+  background-image: url(images/search.png);
+  background-size: 7% 40%;
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+}
+
+.addFloor {
   border-radius: 10px;
   background-color: rgb(97, 121, 105);
   padding: 10px;
@@ -290,11 +305,13 @@ a{
   font-size: 18px;
   background-image: url(images/stairs\ \(1\).png);
   background-size: 20% 65%;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   background-position: 10% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 44px;
+  cursor: pointer;
 }
+
 .addArea{
   border-radius: 10px;
   background-color: rgb(97, 121, 105);
@@ -1164,3 +1181,4 @@ tr{
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   color: black;
 }
+

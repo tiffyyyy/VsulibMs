@@ -642,6 +642,21 @@ img {
   gap:20px;
 }
 
+#searchBox {
+  margin-right: auto; /* Pushes search box to the left */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #617969;
+  border-radius: 10px;
+  width: 260px; /* Adjust the width as needed */
+  background-color: #dae2dd6a;
+  background-image: url(images/search.png);
+  background-size: 7% 40%;
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+}
+
 
 .row2 {
   display: flex;
@@ -746,7 +761,7 @@ img {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
-  background-color: #f9f9f9;
+  background-color:#9bb69c2a;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -755,6 +770,7 @@ img {
   display: flex; /* Use Flexbox */
   justify-content: space-between; /* Align items to the left and right */
   align-items: center;
+  border: #456648 solid 1px;
 }
 
 .equipDetails{
