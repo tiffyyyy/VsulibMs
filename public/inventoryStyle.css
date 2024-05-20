@@ -883,19 +883,19 @@ img {
 
 .schedBtn {
   position: absolute;
-  top: 1px;
+  top: 8px;
   right: 10px;
-  background-color: black;
+  background-color: #3e4e43;
   color: black;
   border: none;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 10px;
   cursor: pointer;
   background-image:url(images/calendar-silhouette.png);
   background-repeat:no-repeat;
 	background-size:cover;
-  height: 30px;
-  width: 30px;
+  height: 24px;
+  width: 24px;
 }
 
 .calendarDisplay {
