@@ -885,3 +885,13 @@ background-color: #B49B44;
   padding-left: 10px;
   padding-right: 1px;
 }
+
+#pend {
+  background-image:url(images/file.png);
+  background-size: 9% 45%;
+  background-repeat:no-repeat;
+  background-position: 15% 50%;
+  background-origin: padding-box; /* Ensures the background image is within the padding area */
+  padding-left: 10px;
+  padding-right: 1px;
+}
