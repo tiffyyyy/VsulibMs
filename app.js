@@ -955,6 +955,29 @@ app.get('/fetchPending', (req, res) => {
     });
 });
 
+app.get('/searchEquipmentInspection', (req, res) => {
+    const areaId = req.query.areaId;
+    const search = req.query.search;
+
+    let query = 'SELECT * FROM equipment WHERE areaId = ?';
+    const queryParams = [areaId];
+    console.log(search);
+    console.log(areaId);
+
+        query += ' AND (equip_name LIKE ? OR equip_no LIKE ?)';
+        queryParams.push(`%${search}%`, `%${search}%`);
+    
+
+    db.query(query, queryParams, (err, results) => {
+        if (err) {
+            console.error('Error fetching equipment:', err);
+            res.status(500).send('Server error');
+            return;
+        }
+        res.json(results);
+    });
+});
+
 app.use((error, req, res, next) => {
 if (error instanceof multer.MulterError) {
     console.log('This is the rejected field ->', error.field);

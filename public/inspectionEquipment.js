@@ -75,6 +75,83 @@ function fetchAndDisplayEquipment() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    const searchBox = document.getElementById('searchBox');
+
+    searchBox.addEventListener('input', function() {
+        if (searchBox.value.trim() === '') {
+            fetchAndDisplayEquipment();
+        } else {
+            fetchAndDisplayEquipments(searchBox.value);
+        }
+    });
+});
+
+function fetchAndDisplayEquipments(search) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const floorId = urlParams.get('floorId');
+    const areaId = urlParams.get('areaId');
+    let fetchUrl = `/searchEquipmentInspection?areaId=${areaId}`;
+    if (search) {
+        fetchUrl += `&search=${search}`;
+    }
+    console.log(search);
+    console.log(areaId);
+    fetch(fetchUrl)
+        .then(response => response.json())
+        .then(data => {
+            const row2 = document.querySelector('.row2');
+            row2.innerHTML = '';
+            let entityNumber = 1;
+
+            data.forEach(item => {
+                const equipBox = document.createElement('div');
+                equipBox.className = 'equipBox';
+
+                const entityNumberContainer = document.createElement('div');
+                entityNumberContainer.className = 'entityNumber';
+
+                const numberP = document.createElement('h3');
+                numberP.textContent = entityNumber;
+                entityNumberContainer.appendChild(numberP);
+
+                equipBox.appendChild(entityNumberContainer);
+
+                const nameP = document.createElement('p');
+                nameP.textContent = `${item.equip_name}`;
+                nameP.className = 'equipText';
+                equipBox.appendChild(nameP);
+
+                const img = document.createElement('img');
+                img.src = `data:image/jpeg;base64,${item.equip_pic}`;
+                img.alt = `${item.equip_name} Image`;
+                equipBox.appendChild(img);
+
+                const statusP = document.createElement('p');
+                statusP.textContent = `Status: ${item.status}`;
+                equipBox.appendChild(statusP);
+
+                const equipNoP = document.createElement('p');
+                equipNoP.textContent = `Serial Number: ${item.equip_no}`;
+                equipBox.appendChild(equipNoP);
+
+                const buttonContainer = document.createElement('div');
+                buttonContainer.className = 'button-container';
+
+                const button1 = document.createElement('a');
+                button1.href = `/inspectionPage?floorId=${floorId}&areaId=${areaId}&equip_id=${item.equip_id}`;
+                button1.textContent = 'Parts';
+                button1.className = 'button';
+                buttonContainer.appendChild(button1);
+
+                equipBox.appendChild(buttonContainer);
+                row2.appendChild(equipBox);
+                entityNumber++;
+            });
+        })
+        .catch(error => console.error('Error fetching equipment data:', error));
+}
+
+document.addEventListener("DOMContentLoaded", function() {
     fetchAndDisplayEquipment();
 });
 

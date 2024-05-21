@@ -199,7 +199,6 @@ document.addEventListener('DOMContentLoaded', function equipStats() {
         .catch(error => console.error('Error fetching parts:', error));
 });
 
-
 function checkUserLoggedIn() {
     const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
     if (!usernameCookie) {
