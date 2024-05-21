@@ -902,6 +902,27 @@ app.get('/fetchEquipments', (req, res) => {
     });
 });
 
+app.get('/fetchEquipmentsinArea', (req, res) => {
+    const url = require('url');
+    const referer = req.headers.referer;
+
+    const parsedUrl = url.parse(referer, true);
+
+    const areaId = parsedUrl.query.areaId;
+    const searchTerm = req.query.term || '';
+    const sqlQuery = `
+        SELECT * FROM equipment 
+        WHERE equip_name LIKE? AND areaId =?
+        OR equip_no LIKE? AND areaId =?
+    `;
+
+    db.query(sqlQuery, [`%${searchTerm}%`, areaId, `%${searchTerm}%`, areaId], (err, results) => {
+        if (err) throw err;
+        res.json(results);
+    });
+});
+
+
 app.get('/searchHistory', (req, res) => {
     const searchTerm = req.query.term || '';
 
