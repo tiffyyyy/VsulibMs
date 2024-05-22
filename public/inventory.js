@@ -24,18 +24,18 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function updateWelcomeMessage() {
-    // Get the username from the cookie
     const usernameCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('username='));
     if (usernameCookie) {
         const usernameValue = usernameCookie.split('=')[1];
-        const username = decodeURIComponent(usernameValue);
+        let username = decodeURIComponent(usernameValue);
 
-        // Display the username in the welcome message
+        username = username.charAt(0).toUpperCase() + username.slice(1);
         document.getElementById('welcomeMessage').innerText = username;
     } else {
         console.log('Username cookie not found');
     }
 }
+
 
 window.addEventListener('load', updateWelcomeMessage);
 

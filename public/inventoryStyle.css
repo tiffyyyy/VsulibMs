@@ -738,7 +738,6 @@ a{
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 10px;
-  padding-right: 1px;
 }
 
 #pend {
@@ -748,7 +747,6 @@ a{
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 10px;
-  padding-right: 1px;
 }
 
 .sortOption {

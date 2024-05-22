@@ -299,7 +299,8 @@ a{
     display: flex;
     flex-direction: row;
     width: 100%;
-    min-height: 410px;
+    min-height: 610px;
+    max-height: 610px;
     overflow-y: auto;
     gap: 20px;
     padding: 20px;
