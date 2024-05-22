@@ -7,6 +7,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
+  "bin": {
+    "vsums": "./app.js"
+    },
+  "pkg": {
+    "targets": [
+        "node14-win-x64"
+      ],
+    "assets": [
+    "views/**/*",
+    "public/**/*"
+    ]
+    },          
   "keywords": [],
   "author": "",
   "license": "ISC",
