@@ -6,7 +6,7 @@ const crypto = require("crypto");
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const upload = multer({ storage:multer.memoryStorage()});
-const puppeteer = require('puppeteer');
+const { chromium } = require('playwright');
 
 dotenv.config({ path: './.env'})
 
@@ -832,10 +832,11 @@ app.get('/pdf/:id', async (req, res) => {
         };
     });
 
-    const browser = await puppeteer.launch({ headless: true });
-    const page = await browser.newPage();
+    const browser = await chromium.launch({ headless: true });
+    const context = await browser.newContext();
+    const page = await context.newPage();
 
-    await page.setCookie(...cookies);
+    await context.addCookies(cookies);
 
     await page.goto(`http://localhost:5001/historyDetailPage?id=${id}`, { 
         waitUntil: 'networkidle0', 
@@ -857,7 +858,7 @@ app.get('/pdf/:id', async (req, res) => {
 
             const parent = bodyAreaDiv.parentElement;
             Array.from(parent.children).forEach(child => {
-                if (child !== bodyAreaDiv) {
+                if (child!== bodyAreaDiv) {
                     child.style.display = 'none';
                 }
             });
