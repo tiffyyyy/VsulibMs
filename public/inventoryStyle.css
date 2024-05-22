@@ -386,7 +386,7 @@ a{
   display: flex;
   flex-direction: row;
   width: 100%;
-  min-height: 398px;
+  min-height: 610px;
   max-height: 610px;
   overflow-y: auto;
   gap: 20px;
@@ -700,8 +700,8 @@ a{
 
 #inv {
   background-image:url(images/inventory-alt.png);
-  background-size: 9% 50%;
-  background-size: 9% 50%;
+  background-size: 30px 50%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -709,9 +709,7 @@ a{
 }
 #sched {
   background-image:url(images/calendar.png);
-  background-size: 9% 55%;
-  background-image:url(images/calendar.png);
-  background-size: 9% 55%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -719,8 +717,7 @@ a{
 }
 #insp {
   background-image:url(images/inspection.png);
-  background-size: 9% 50%;
-  background-size: 9% 50%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -728,8 +725,7 @@ a{
 }
 #hist {
   background-image:url(images/history.png);
-  background-size: 9% 50%;
-  background-size: 9% 50%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -737,7 +733,7 @@ a{
 }
 #inv2 {
   background-image:url(images/user-gear.png);
-  background-size: 9% 45%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -747,7 +743,7 @@ a{
 
 #pend {
   background-image:url(images/file.png);
-  background-size: 9% 45%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */

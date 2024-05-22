@@ -125,13 +125,13 @@ function fetchAndDisplayEquipment() {
             buttonContainer.className = 'button-container';
 
             const button1 = document.createElement('a');
-            button1.href = `/specsPage?floorId=${areaId}&areaId=${areaId}&equip_id=${item.equip_id}`;
+            button1.href = `/specsPage?floorId=${floorId}&areaId=${areaId}&equip_id=${item.equip_id}`;
             button1.textContent = 'Specs';
             button1.className = 'button';
             buttonContainer.appendChild(button1);
 
             const button2 = document.createElement('a');
-            button2.href = `/partsPage?floorId=${areaId}&areaId=${areaId}&equip_id=${item.equip_id}`;
+            button2.href = `/partsPage?floorId=${floorId}&areaId=${areaId}&equip_id=${item.equip_id}`;
             button2.textContent = 'Parts';
             button2.className = 'button';
             buttonContainer.appendChild(button2);
@@ -289,13 +289,13 @@ function fetchAndDisplayEquipments(searchTerm = '') {
             buttonContainer.className = 'button-container';
 
             const button1 = document.createElement('a');
-            button1.href = `/specsPage?floorId=${areaId}&areaId=${areaId}&equip_id=${item.equip_id}`;
+            button1.href = `/specsPage?floorId=${floorId}&areaId=${areaId}&equip_id=${item.equip_id}`;
             button1.textContent = 'Specs';
             button1.className = 'button';
             buttonContainer.appendChild(button1);
 
             const button2 = document.createElement('a');
-            button2.href = `/partsPage?floorId=${areaId}&areaId=${areaId}&equip_id=${item.equip_id}`;
+            button2.href = `/partsPage?floorId=${floorId}&areaId=${areaId}&equip_id=${item.equip_id}`;
             button2.textContent = 'Parts';
             button2.className = 'button';
             buttonContainer.appendChild(button2);

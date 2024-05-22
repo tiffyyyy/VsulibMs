@@ -846,7 +846,7 @@ background-color: #B49B44;
 
 #inv {
   background-image:url(images/inventory-alt.png);
-  background-size: 9% 50%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -854,7 +854,7 @@ background-color: #B49B44;
 }
 #sched {
   background-image:url(images/calendar.png);
-  background-size: 9% 55%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -862,7 +862,7 @@ background-color: #B49B44;
 }
 #insp {
   background-image:url(images/inspection.png);
-  background-size: 9% 50%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -870,7 +870,7 @@ background-color: #B49B44;
 }
 #hist {
   background-image:url(images/history.png);
-  background-size: 9% 50%;
+  background-size:27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -878,7 +878,7 @@ background-color: #B49B44;
 }
 #inv2 {
   background-image:url(images/user-gear.png);
-  background-size: 9% 45%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -888,7 +888,7 @@ background-color: #B49B44;
 
 #pend {
   background-image:url(images/file.png);
-  background-size: 9% 45%;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
