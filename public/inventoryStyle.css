@@ -1097,21 +1097,20 @@ tr{
   width: 100%;
 }
 
-.labelsTable th, .labelsTable td, .labelsTable a {
-  flex: 1; /* Make all th elements have equal flex */
-  text-align: center; /* Center text in each header cell */
-}
-.labelsTable a > td {
-  flex: 1; /* Make all th elements have equal flex */
-  text-align: center;
-}
 
 .labelsTable th, .labelsTable td, .labelsTable a {
   flex: 1; /* Make all th elements have equal flex */
   text-align: center; /* Center text in each header cell */
 }
 .labelsTable a > td {
-  flex: 1; /* Make all th elements have equal flex */
+  text-align: center;
+}
+
+
+.labelsTable th, .labelsTable td, .labelsTable a {
+  text-align: center; /* Center text in each header cell */
+}
+.labelsTable a > td {
   text-align: center;
 }
 
