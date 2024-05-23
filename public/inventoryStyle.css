@@ -812,15 +812,6 @@ img {
   gap:20px;
 }
 
-
-.row2 {
-  display: flex;
-  flex-direction: row; /* Change this from column to row */
-  flex-wrap: wrap;
-  gap: 10px;
-  overflow-y: auto;
-}
-
 .button {
   display: inline-block;
   padding: 5px 10px;
@@ -836,15 +827,25 @@ img {
   background-color: #B49B44; 
 }
 
+.row2 {
+  display: flex;
+  flex-direction: row; /* Change this from column to row */
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .row2c1 {
   width: 30%;
-  border: 2px solid black;
+  border: none;
+  border-radius: 20px;
 }
 
 .row2c2 {
-  padding: 10px;
+  padding:40px;
   width: 65%;
-  height: 70%;
+  height: 100%;
+  border: 1px solid #617969;
+  border-radius: 20px;
 }
 
 .addPartsBox {
@@ -1096,21 +1097,20 @@ tr{
   width: 100%;
 }
 
-.labelsTable th, .labelsTable td, .labelsTable a {
-  flex: 1; /* Make all th elements have equal flex */
-  text-align: center; /* Center text in each header cell */
-}
-.labelsTable a > td {
-  flex: 1; /* Make all th elements have equal flex */
-  text-align: center;
-}
 
 .labelsTable th, .labelsTable td, .labelsTable a {
   flex: 1; /* Make all th elements have equal flex */
   text-align: center; /* Center text in each header cell */
 }
 .labelsTable a > td {
-  flex: 1; /* Make all th elements have equal flex */
+  text-align: center;
+}
+
+
+.labelsTable th, .labelsTable td, .labelsTable a {
+  text-align: center; /* Center text in each header cell */
+}
+.labelsTable a > td {
   text-align: center;
 }
 

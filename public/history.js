@@ -118,20 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const equipNameTd = document.createElement('td');
                     equipNameTd.innerHTML = record.equip_name;
-                    equipNameTd.style.display = 'flex';
-                    equipNameTd.style.flex = '1';
                     equipNameTd.style.textAlign = 'center';
 
                     const equipNoTd = document.createElement('td');
                     equipNoTd.innerHTML = record.equip_no;
-                    equipNameTd.style.display = 'flex';
-                    equipNameTd.style.flex = '1';
                     equipNameTd.style.textAlign = 'center';
 
                     const savedDateTd = document.createElement('td');
                     savedDateTd.innerHTML = formattedDate;
-                    equipNameTd.style.display = 'flex';
-                    equipNameTd.style.flex = '1';
                     equipNameTd.style.textAlign = 'center';
 
                     link.appendChild(equipNameTd);
