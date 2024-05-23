@@ -108,7 +108,7 @@ function logout() {
         '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
         '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
         '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
-        '/historyPage', '/historyDetailPage', '/pending'
+        '/historyPage', '/historyDetailPage', '/pending','/createAccount'
     ];
 
     cookiePaths.forEach(path => {

@@ -107,21 +107,21 @@ document.getElementById('generate-pdf-btn').addEventListener('click', async () =
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            window.open(url, '_blank');
         } else {
-            console.error('Failed to generate PDF.');
-        }
+            alert('Failed to generate PDF.');
+        }        
     } catch (error) {
         console.error('Error generating PDF:', error);
     }
 });
-
 
 function logout() {
     const cookiePaths = [
         '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
         '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
         '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
-        '/historyPage', '/historyDetailPage', '/pending'
+        '/historyPage', '/historyDetailPage', '/pending','/createAccount'
     ];
 
     cookiePaths.forEach(path => {

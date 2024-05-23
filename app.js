@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const upload = multer({ storage:multer.memoryStorage()});
 const { chromium } = require('playwright');
+const bcrypt = require('bcrypt');
 
 dotenv.config({ path: './.env'})
 
@@ -43,7 +44,7 @@ app.get("/createAccount", (req, res) => {
 });
 
 app.get('/inventory', (req, res) => {
-    const username = req.query.username; // Assuming username is passed as a query parameter
+    const username = req.query.username;
     res.sendFile(path.join(__dirname, 'views', 'inventory.html'));
 });
 
@@ -107,31 +108,45 @@ app.get('/pending', (req,res) => {
     res.sendFile(path.join(__dirname, 'views', 'pending.html'));
 })
 
-app.post('/login', (req, res) => {
+app.get('/summary', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'summary.html'));
+})
+
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
-    db.query('SELECT * FROM admin WHERE name =? AND password =?', [username, password], (err, results) => {
+    db.query('SELECT * FROM admin WHERE name =?', [username], async (err, results) => {
         if (err) {
             console.error('Error executing database query:', err);
             res.status(500).send({ error: 'Internal Server Error' });
             return;
         }
-        if (results.length > 0) {
-            const authority = results[0].authority;
-            res.cookie('username', username, { maxAge: 900000, httpOnly: true });
-            res.status(200).send({ loginStatus: 'success', message: 'Login successful', authority: authority });
-        } else {
+        if (results.length === 0) {
             res.status(401).send({ loginStatus: 'error', message: 'Invalid username or password' });
+            return;
         }
+
+        const hashedPasswordFromDB = results[0].password;
+        const isValid = await bcrypt.compare(password, hashedPasswordFromDB);
+
+        if (!isValid) {
+            res.status(401).send({ loginStatus: 'error', message: 'Invalid username or password' });
+            return;
+        }
+
+        const authority = results[0].authority;
+        res.cookie('username', username, { maxAge: 900000, httpOnly: true });
+        res.status(200).send({ loginStatus: 'success', message: 'Login successful', authority: authority });
     });
 });
 
-
-app.post('/createAccount', (req, res) => {
+app.post('/createAccount', async (req, res) => {
     const user = req.body.user;
     const pass = req.body.pass;
 
-    db.query('SELECT * FROM admin WHERE name = ?', [user], (err, results) => {
+    const hashedPassword = await bcrypt.hash(pass, 10);
+
+    db.query('SELECT * FROM admin WHERE name =?', [user], (err, results) => {
         if (err) {
             console.error('Error executing database query:', err);
             return res.status(500).send(err.message);
@@ -139,7 +154,7 @@ app.post('/createAccount', (req, res) => {
         if (results.length > 0) {
             return res.status(409).send('Username already exists');
         } else {
-            db.query('INSERT INTO admin (name, password, authority) VALUES (?, ?, 1)', [user, pass], (err, result) => {
+            db.query('INSERT INTO admin (name, password, authority) VALUES (?,?, 1)', [user, hashedPassword], (err, result) => {
                 if (err) {
                     console.error('Error executing database query:', err);
                     return res.status(500).send(err.message);
@@ -890,6 +905,27 @@ app.get('/pdf/:id', async (req, res) => {
     }
 });
 
+app.post('/generate-pdf', async (req, res) => {
+    const htmlContent = req.body.htmlContent;
+
+    const browser = await chromium.launch();
+    const page = await browser.newPage();
+    await page.setContent(htmlContent);
+
+    const pdf = await page.pdf({ format: 'A4' });
+
+    await browser.close();
+
+    // Set the response headers to prompt the browser to download the PDF
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename="generated-pdf.pdf"');
+
+    // Send the PDF buffer as response
+    res.send(pdf);
+});
+
+
+
 app.get('/fetchEquipments', (req, res) => {
     const searchTerm = req.query.term || '';
     const sqlQuery = `
@@ -978,6 +1014,79 @@ app.get('/searchEquipmentInspection', (req, res) => {
         res.json(results);
     });
 });
+
+app.get('/get-floors', (req, res) => {
+    db.query('SELECT floorId, name FROM floor', (err, results) => {
+        if (err) {
+            console.error('Error fetching floors:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+        res.json(results);
+    });
+});
+
+// Endpoint to generate report
+app.get('/generate-report', (req, res) => {
+    const { floor, year } = req.query;
+
+    // SQL query to retrieve report data grouped by area and equipment
+    const query = `
+        SELECT a.name as area_name, e.equip_no, e.equip_name,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 1 THEN DAY(h.proposedDate) END) AS P_january,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 1 THEN DAY(h.actualDate) END) AS A_january,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 2 THEN DAY(h.proposedDate) END) AS P_february,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 2 THEN DAY(h.actualDate) END) AS A_february,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 3 THEN DAY(h.proposedDate) END) AS P_march,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 3 THEN DAY(h.actualDate) END) AS A_march,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 4 THEN DAY(h.proposedDate) END) AS P_april,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 4 THEN DAY(h.actualDate) END) AS A_april,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 5 THEN DAY(h.proposedDate) END) AS P_may,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 5 THEN DAY(h.actualDate) END) AS A_may,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 6 THEN DAY(h.proposedDate) END) AS P_june,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 6 THEN DAY(h.actualDate) END) AS A_june,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 7 THEN DAY(h.proposedDate) END) AS P_july,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 7 THEN DAY(h.actualDate) END) AS A_july,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 8 THEN DAY(h.proposedDate) END) AS P_august,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 8 THEN DAY(h.actualDate) END) AS A_august,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 9 THEN DAY(h.proposedDate) END) AS P_september,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 9 THEN DAY(h.actualDate) END) AS A_september,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 10 THEN DAY(h.proposedDate) END) AS P_october,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 10 THEN DAY(h.actualDate) END) AS A_october,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 11 THEN DAY(h.proposedDate) END) AS P_november,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 11 THEN DAY(h.actualDate) END) AS A_november,
+            GROUP_CONCAT(CASE WHEN MONTH(h.proposedDate) = 12 THEN DAY(h.proposedDate) END) AS P_december,
+            GROUP_CONCAT(CASE WHEN MONTH(h.actualDate) = 12 THEN DAY(h.actualDate) END) AS A_december
+        FROM equipment e
+        JOIN areas a ON e.areaId = a.id
+        JOIN floor f ON a.floorId = f.floorId
+        LEFT JOIN history h ON e.equip_id = h.equip_id AND YEAR(h.actualDate) = ?
+        WHERE f.floorId = ?
+        GROUP BY a.name, e.equip_no, e.equip_name
+        ORDER BY a.name, e.equip_no;
+    `;
+
+    db.query(query, [year, floor], (err, results) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        // Group the results by area
+        const groupedResults = results.reduce((acc, row) => {
+            if (!acc[row.area_name]) {
+                acc[row.area_name] = [];
+            }
+            acc[row.area_name].push(row);
+            return acc;
+        }, {});
+
+        res.json(groupedResults);
+    });
+});
+
+
 
 app.use((error, req, res, next) => {
 if (error instanceof multer.MulterError) {

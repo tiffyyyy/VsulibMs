@@ -71,15 +71,17 @@ input[type="user"]{
   background-position: 5px center;
 }
 
-input[type="pass"]{
-    font-size: 15px;
-    padding-left: 30px;
-    padding-top: 7px;
-    background-image: url(images/userPassword.png);
-    background-repeat: no-repeat;
-    background-size: 24px 24px; /* Adjust the size of the image */
-    background-position: 4px center;
+input[type="password"] {
+  font-size: 15px;
+  padding-left: 30px;
+  padding-top: 7px;
+  background-image: url(images/userPassword.png);
+  background-repeat: no-repeat;
+  background-size: 24px 24px; /* Adjust the size of the image */
+  background-position: 4px center;
+  background-color: white; /* Hides the text */
 }
+
 
 .userTxtbox{
     position: absolute;
