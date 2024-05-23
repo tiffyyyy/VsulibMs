@@ -176,6 +176,9 @@ h2{
 
 .sidebar-menu a{
   color: black;
+  align-items: flex-start;
+  display: flex;
+  padding-left: 110px;
 }
 
 .active{

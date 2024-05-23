@@ -116,17 +116,36 @@ document.getElementById('generate-pdf-btn').addEventListener('click', async () =
     }
 });
 
+document.getElementById('viewProfile').addEventListener('click', function(event) {
+    const cookies = document.cookie.split('; ');
+    let id = '';
+
+    cookies.forEach(cookie => {
+        const [key, value] = cookie.split('=');
+        if (key.trim() === 'id') {
+            id = decodeURIComponent(value);
+        }
+    });
+
+    if (id) {
+        window.open(`/changePass?id=${id}`, '_blank'); 
+    } else {
+        alert('ID not found in the cookies');
+    }
+});
+
 function logout() {
     const cookiePaths = [
         '/inventory', '/floorPage', '/areaPage', '/equipmentPage', '/partsPage', '/specsPage',
         '/scheduleFloorPage', '/scheduleAreaPage', '/scheduleEquipmentPage', '/calendarPage',
         '/inspectionFloorPage', '/inspectionAreaPage', '/inspectionEquipmentPage', '/inspectionPage',
-        '/historyPage', '/historyDetailPage', '/pending','/createAccount'
+        '/historyPage', '/historyDetailPage', '/pending','/createAccount', '/changePass', '/summary'
     ];
 
     cookiePaths.forEach(path => {
         document.cookie = `username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
         document.cookie = `authority=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
+        document.cookie = `id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}`;
     });
 
     window.location.href = '/';
