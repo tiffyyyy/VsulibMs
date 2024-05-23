@@ -7,7 +7,6 @@
 
 body {
     /*background-color: #E1E7DD;*/
-    background: linear-gradient(135deg, #E1E7DD, rgba(255, 255, 255, 0.3)), url('your-background-image.jpg');
     background-size: cover;
     display: flex;
     justify-content: center;

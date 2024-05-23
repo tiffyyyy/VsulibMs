@@ -47,31 +47,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     const link = document.createElement('a');
                     link.href = `/historyDetailPage?id=${record.id}`;
                     const equipNameTd = document.createElement('td');
-                    equipNameTd.innerHTML = record.equip_name;
+                    equipNameTd.textContent = record.equip_name; // Use textContent for better readability
                     equipNameTd.style.display = 'flex';
                     equipNameTd.style.flex = '1';
                     equipNameTd.style.textAlign = 'center';
-
+                    console.log(record.equip_no); // Logs the correct value
                     const equipNoTd = document.createElement('td');
-                    equipNoTd.innerHTML = record.equip_no;
-                    equipNameTd.style.display = 'flex';
+                    equipNoTd.textContent = record.equip_no; // Use textContent for better readability
+                    equipNoTd.style.display = 'flex';
                     equipNoTd.style.flex = '1';
                     equipNoTd.style.textAlign = 'center';
-
+                
                     const savedDateTd = document.createElement('td');
-                    savedDateTd.innerHTML = formattedDate;
-                    equipNameTd.style.display = 'flex';
+                    savedDateTd.textContent = formattedDate; // Use textContent for better readability
+                    savedDateTd.style.display = 'flex';
                     savedDateTd.style.flex = '1';
                     savedDateTd.style.textAlign = 'center';
-
+                
                     link.appendChild(equipNameTd);
                     link.appendChild(equipNoTd);
                     link.appendChild(savedDateTd);
                     row.appendChild(link);
-
+                
                     labelsTable.appendChild(row);
                     console.log(record.id);
-                });
+                }); 
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
