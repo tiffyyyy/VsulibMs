@@ -59,7 +59,7 @@ body {
   align-items: center;
   padding-right: 20px;
   margin-right: 10px;
-  background-color: rgb(250, 250, 250);
+  background-color: rgba(249, 248, 237, 0.56);
   width: 100%;
   padding: 10px;
   margin-bottom: 40px;
@@ -165,6 +165,7 @@ h2{
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   min-height: 510px;
   /*background-color: rgb(225, 231, 221); /*E1E7DD*/
@@ -175,9 +176,6 @@ h2{
 
 .sidebar-menu a{
   color: black;
-  align-items: flex-start;
-  display: flex;
-  padding-left: 110px;
 }
 
 .active{
@@ -812,15 +810,6 @@ img {
   gap:20px;
 }
 
-
-.row2 {
-  display: flex;
-  flex-direction: row; /* Change this from column to row */
-  flex-wrap: wrap;
-  gap: 10px;
-  overflow-y: auto;
-}
-
 .button {
   display: inline-block;
   padding: 5px 10px;
@@ -836,15 +825,25 @@ img {
   background-color: #B49B44; 
 }
 
+.row2 {
+  display: flex;
+  flex-direction: row; /* Change this from column to row */
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .row2c1 {
   width: 30%;
-  border: 2px solid black;
+  border: none;
+  border-radius: 20px;
 }
 
 .row2c2 {
-  padding: 10px;
+  padding:40px;
   width: 65%;
-  height: 70%;
+  height: 100%;
+  border: 1px solid #617969;
+  border-radius: 20px;
 }
 
 .addPartsBox {
@@ -1184,6 +1183,3 @@ tr{
   color: black;
 }
 
-.gen {
-  padding-left: 700px;
-}
