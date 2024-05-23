@@ -112,6 +112,10 @@ app.get('/summary', (req,res) => {
     res.sendFile(path.join(__dirname, 'views', 'summary.html'));
 })
 
+app.get('/changePass', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', 'changePass.html'));
+})
+
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
@@ -135,10 +139,12 @@ app.post('/login', async (req, res) => {
         }
 
         const authority = results[0].authority;
+        const id = results[0].id;
         res.cookie('username', username, { maxAge: 900000, httpOnly: true });
-        res.status(200).send({ loginStatus: 'success', message: 'Login successful', authority: authority });
+        res.status(200).send({ loginStatus: 'success', message: 'Login successful', authority: authority, id: id });
     });
 });
+
 
 app.post('/createAccount', async (req, res) => {
     const user = req.body.user;
@@ -912,15 +918,18 @@ app.post('/generate-pdf', async (req, res) => {
     const page = await browser.newPage();
     await page.setContent(htmlContent);
 
-    const pdf = await page.pdf({ format: 'A4' });
+    // Generate the PDF in landscape orientation
+    const pdf = await page.pdf({ 
+        format: 'A4',
+        landscape: true, // Set landscape orientation
+        margin: { top: '20px', right: '20px', bottom: '20px', left: '20px' } // Optional: Set margins
+    });
 
     await browser.close();
 
-    // Set the response headers to prompt the browser to download the PDF
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'attachment; filename="generated-pdf.pdf"');
 
-    // Send the PDF buffer as response
     res.send(pdf);
 });
 
@@ -1086,7 +1095,32 @@ app.get('/generate-report', (req, res) => {
     });
 });
 
+app.post('/updateAccount', async (req, res) => {
+    const { id, username, password } = req.body;
 
+    try {
+        // Hash the new password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Update the user information in the database
+        const query = 'UPDATE admin SET name = ?, password = ? WHERE id = ?';
+        db.query(query, [username, hashedPassword, id], (err, result) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                return res.status(500).send({ status: 'error', message: 'Database error' });
+            }
+
+            if (result.affectedRows === 0) {
+                return res.status(404).send({ status: 'error', message: 'User not found' });
+            }
+
+            res.send({ status: 'success', message: 'Account updated successfully' });
+        });
+    } catch (error) {
+        console.error('Error updating account:', error);
+        res.status(500).send({ status: 'error', message: 'Internal server error' });
+    }
+});
 
 app.use((error, req, res, next) => {
 if (error instanceof multer.MulterError) {
