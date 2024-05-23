@@ -165,7 +165,6 @@ h2{
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
   min-height: 510px;
   /*background-color: rgb(225, 231, 221); /*E1E7DD*/
@@ -176,6 +175,9 @@ h2{
 
 .sidebar-menu a{
   color: black;
+  align-items: flex-start;
+  display: flex;
+  padding-left: 110px;
 }
 
 .active{
@@ -847,6 +849,7 @@ background-color: #B49B44;
 
 #inv {
   background-image:url(images/inventory-alt.png);
+  background-size: 30px 50%;
   background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
@@ -871,7 +874,7 @@ background-color: #B49B44;
 }
 #hist {
   background-image:url(images/history.png);
-  background-size:27px 28px;
+  background-size: 27px 28px;
   background-repeat:no-repeat;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
@@ -884,7 +887,6 @@ background-color: #B49B44;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 10px;
-  padding-right: 1px;
 }
 
 #pend {
@@ -894,6 +896,5 @@ background-color: #B49B44;
   background-position: 15% 50%;
   background-origin: padding-box; /* Ensures the background image is within the padding area */
   padding-left: 10px;
-  padding-right: 1px;
 }
 
