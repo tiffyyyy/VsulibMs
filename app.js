@@ -928,7 +928,7 @@ app.get('/searchHistory', (req, res) => {
     const searchTerm = req.query.term || '';
 
     const sqlQuery = `
-        SELECT h.id, e.equip_name, h.equip_id, h.actualDate, h.saved_at, h.remarks1, h.remarks2
+        SELECT h.id, e.equip_name, h.equip_id, h.actualDate, h.saved_at, h.remarks1, h.remarks2, e.equip_no
         FROM history h
         JOIN equipment e ON h.equip_id = e.equip_id
         WHERE (e.equip_name LIKE? OR e.equip_no LIKE?)
