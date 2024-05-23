@@ -9,16 +9,16 @@
   },
   "bin": {
     "vsums": "./app.js"
-    },
+  },
   "pkg": {
     "targets": [
-        "node14-win-x64"
-      ],
+      "node14-win-x64"
+    ],
     "assets": [
-    "views/**/*",
-    "public/**/*"
+      "views/**/*",
+      "public/**/*"
     ]
-    },          
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
